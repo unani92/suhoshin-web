@@ -1,0 +1,288 @@
+.user-profile {
+    .section {
+        padding: 32px 0;
+        z-index: 4;
+        margin: 16px;
+
+        &.self-introduction {
+            padding-bottom: 16px;
+        }
+
+        &.basic-profile {
+            padding-bottom: 32px;
+        }
+        .title {
+            display: flex;
+        align-items: center;
+        color: #111111;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 28px;
+        }
+    }
+   
+    .name-age {
+        padding: 32px 0 0 ;
+        margin:  0 16px 0;
+    }
+    hr {
+        border-bottom: none;
+    }
+}
+.basic-profile:nth-child(2) {
+    margin-top: 0;
+}
+.basic-profile {
+    z-index: 2;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid $grey-02;
+
+    .items {
+        margin-bottom: 24px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .title {
+        margin-bottom: 24px;
+        color: black;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 28px;
+        .material-icons {
+            color: black;
+        }
+
+        @include f-medium;
+        display: flex;
+        align-items: center;
+        
+    }
+
+    .group-divider {
+        border-color: $grey-01;
+        margin-bottom: 28px;
+    }
+
+    .item {
+        display: flex;
+        align-items: flex-start;
+        &.need-sub {
+            align-items: unset;
+        }
+    }
+
+    .key {
+        font-size: 15px;
+        color: $grey-06;
+        min-width: 120px;
+
+        // @include flex-wrap;
+    }
+    
+    .value {
+        width: 100%;
+        $content-line-height: 17.25px;
+        display: flex;
+        flex-direction: column;
+        line-height: $content-line-height;
+       
+        .content {
+            color: black;
+            display: flex;
+            align-items: center;
+        }
+
+        .verified-badge {
+            display: flex;
+            align-self: flex-start;
+            align-items: center;
+            margin-left: 8px;
+            color: $blue-primary;
+            font-size: 12px;
+
+            @include flex-wrap;
+            @include f-medium;
+
+            .material-icons {
+                font-size: 10px;
+                border-radius: 50%;
+                border: solid 1px $blue-primary;
+                margin-right: 2px;
+            }
+        }
+    }
+    .sub {
+        font-size: 13px;
+        color: $grey-06;
+    }
+
+    .job-description {
+        margin-top: -12px;
+        margin-left: 82px;
+        padding: 12px 14px;
+        width: 100%;
+        border: solid 1px $grey-02;
+        border-radius: 0 12px 12px;
+        font-size: 14px;
+        line-height: normal;
+        letter-spacing: -0.2px;
+        align-items: flex-end;
+        white-space: pre-line;
+        @include flex;
+
+        .desc {
+            color: $grey-09;
+            align-self: flex-start;
+        }
+
+        .more {
+            color: $blue-primary;
+            text-decoration: underline;
+        }
+    }
+}
+
+
+
+
+.family-detail-profile,
+.education-detail-profile,
+.career-detail-profile {
+    border-bottom: solid 1px $grey-02;
+    .wrapper {
+        
+        padding: 0;
+        .title {
+            margin: 16px 0;
+            color: black;
+            font-size: 18px;
+            font-weight: 500;
+            height: fit-content;
+            display: flex;
+            align-items: center;
+            display: flex;
+            line-height: 28px;
+
+            i {
+                color: black;
+            }
+
+            @include spoqa-f-medium;
+        }
+        .profile-item {
+            display: flex;
+
+            &.family-list {
+                display: block;
+            }
+
+            .intro-wrapper {
+
+                .label {
+                    width: 100% !important;
+                    @include between;
+                }
+                .intro {
+                    line-height: 24px;
+                    border: 1px solid $grey-03;
+                    padding: 12px;
+                    border-radius: 8px;
+                }
+            }
+
+            .label {
+                font-size: 16px;
+                line-height: 26px;
+                color: $grey-06;
+                width: 144px !important;
+
+                &.required::after {
+                    content: ' *';
+                    color: $blue-primary;
+                }
+            }
+            margin-bottom: 24px;
+        }
+        .career-items,
+        .education-items,
+        .family-items {
+            // border: none;
+            .item-wrapper {
+                padding: 0;
+                display: flex;
+                .job-wrapper {
+                    border: 1px solid #E9E9ED;
+                    width: 100%;
+                    font-size: 16px;
+                    color: $grey-06;
+                    border-radius: 8px;
+                    margin: 4px 0px;
+                    padding: 12px 16px;
+                    color: #111111;
+
+                    .job-status {
+                        font-weight: bold;
+                        font-size: 12px;
+                        line-height: 20px;
+                        color : #94999E;
+                    }
+                    .job-title {
+                        font-size: 16px;
+                        line-height: 26px;
+
+                    }
+                    .job-description {
+                        font-size: 14px;
+                        line-height: 24px;
+                    }
+                  
+                }
+            }
+        }
+
+        .item {
+            width: calc(100% - 144px);
+            display: flex;
+        }
+
+        .textarea-wrapper {
+            display: flex;
+
+            &:focus-within {
+                border: solid 1px $blue-primary;
+            }
+
+            .textarea {
+                margin-right: 8px;
+                padding: 0;
+                font-size: 15px;
+                color: black;
+                line-height: 1.6;
+            }
+
+            .material-icons {
+                font-size: 16px;
+                color: $grey-06;
+            }
+        }
+    }
+}
+
+
+.manager-only {
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 20px;
+    color: #FFFFFF;
+    background-color: #94999E;
+    border-radius: 100px;
+    padding: 0px 4px;
+    height: 20px;
+    margin: 0px 4px;
+    white-space: nowrap;
+}
+

@@ -1,0 +1,44 @@
+.notices {
+    .banner {
+        img {
+            width: 100%;
+        }        
+    }
+    
+    .notice-list {
+        overflow-y: auto;
+    }
+
+    .notice {
+        padding: 16px;
+        border-bottom: 1px solid $grey-02;
+
+        .timestamp {
+            font-size: 12px;
+            color: $grey-05;
+            @include f-medium;
+        }
+
+        .title {
+            margin-top: 8px;
+            margin-right: 8px;
+            font-size: 16px;
+            color: $grey-09;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .material-icons {
+            font-size: $icon-size;
+        }
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .badge:not(:first-child) {
+            margin-left: 4px;
+        }
+    }
+}

@@ -1,0 +1,22 @@
+.force-app-update {
+  padding: 64px 20px;
+
+  .title {
+    margin: 0 0 24px;
+    color: black;
+    font-size: 22px;
+    font-weight: normal;
+    @include f-bold;
+  }
+
+  .description {
+    margin: 0 0 48px;
+    line-height: normal;
+    font-size: 15px;
+    color: $grey-09;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

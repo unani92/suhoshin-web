@@ -1,0 +1,50 @@
+.refund-1 {
+    .details {
+        padding: 0 16px;
+
+        .detail-top {
+            line-height: 24px;
+            color: black;
+            font-size: 15px;
+
+            &:not(:last-child) {
+                margin-bottom: 16px;
+            }
+        }
+
+        .detail-middle {
+            @extend .detail-top;
+            .detail-exclude {
+                color: $grey-07;
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+.detail-bottom, {
+    padding: 16px;
+    background: $grey-01;
+    border-radius: 16px;
+
+    .refund-count-procedure {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+        &:nth-child(3) {
+            margin-bottom: 0;
+        }
+        .circle {
+            background: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            @include center;
+        }
+        .procedure {
+            font-size: 14px;
+            color: $grey-09;
+        }
+    }
+}

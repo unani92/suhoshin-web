@@ -1,0 +1,14 @@
+.material-icons {
+    text-align: center;
+    color: $grey-07;
+    cursor: pointer;
+
+    &.active {
+        color: $blue-primary;
+    }
+}
+
+.zmdi-close {
+    font-size: $icon-size;
+    @include center;
+}

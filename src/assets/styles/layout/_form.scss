@@ -1,0 +1,143 @@
+$checkbox-size: 18px;
+
+.checkbox {
+    border-radius: 2px;
+    width: $checkbox-size;
+    height: $checkbox-size;
+    border: 1.5px solid $grey-05;
+    transition: all 0.25s ease;
+    @include center;
+
+    .material-icons {
+        font-size: $checkbox-size - 2px;
+        font-weight: 700;
+        color: white;
+        transition: all 0.25s ease;
+    }
+
+    &.checked {
+        border: none;
+        background: $blue-primary;
+    }
+
+    &.white {
+        border: 2px solid white;
+
+        &.checked {
+            background: white;
+
+            .material-icons {
+                color: $blue-primary;
+            }
+        }
+    }
+}
+
+.toggler {
+    $size: 14px;
+    background: $grey-04;
+    border-radius: $size / 2;
+    width: $size * 2;
+    height: $size;
+    position: relative;
+
+    .handle {
+        position: absolute;
+        width: $size + 4;
+        height: $size + 4;
+        border-radius: 50%;
+        left: -2px;
+        top: -2px;
+        background: white;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.15);
+        transition: all 0.1s ease;
+    }
+
+
+    &.on {
+        background: $blue-primary;
+
+        .handle {
+            transition: all 0.1s ease;
+            transform: translateX($size + 2);
+        }
+    }
+}
+
+input,
+textarea {
+    border-radius: 8px;
+    border: 1px solid $grey-02;
+    font-size: 15px;
+
+    &::placeholder {
+        color: $grey-05;
+    }
+
+    &:active,
+    &:focus {
+        border: 1px solid $blue-primary;
+        box-shadow: 0 0px 6px rgba(138, 116, 255, 0.1);
+    }
+
+    &.image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+}
+
+.input-wrapper,
+.textarea-wrapper {
+    border: 1px solid $grey-03;
+    border-radius: 8px;
+
+    input,
+    textarea {
+        width: 100%;
+        border: none;
+        background: none;
+
+        &:active,
+        &:focus {
+            border: none;
+            box-shadow: none;
+        }
+    }
+
+    &.focus {
+        border: 1px solid $blue-primary;
+    }
+}
+
+.textarea-wrapper {
+    border-radius: 12px;
+    padding: 16px;
+    background: white;
+
+    textarea {
+        padding: 0;
+        font-size: 15px;
+    }
+}
+
+.input-wrapper,
+.textarea-wrapper,
+.textarea-with-x {
+
+    &.isInputMode {
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        height: 48px;
+    }
+    .material-icons {
+        font-size: 18px;
+        color: $grey-05;
+    }
+}
+
+.form-control {
+    margin-bottom: 16px;
+}

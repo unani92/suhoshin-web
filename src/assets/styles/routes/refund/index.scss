@@ -1,0 +1,30 @@
+@import 'refund-policy';
+@import 'refund-1';
+@import 'refund-2';
+@import 'refund-3-dating';
+@import 'refund-4-reason';
+@import 'refund-5-exclude';
+@import 'refund-6-description';
+@import 'refund-7-photos';
+@import 'refund-8-confirm';
+@import 'refund-9-refunded';
+
+.center-refund {
+    padding-bottom: 80px;
+
+    .page-header > .title {
+        margin-bottom: 8px;
+    }
+
+    .next-btn {
+        @extend .btn;
+        height: 40px;
+        position: fixed;
+        width: calc(100vw - 32px);
+        bottom: 32px;
+
+        &:not(.disabled) {
+            @extend .btn-primary;
+        }
+    }
+}

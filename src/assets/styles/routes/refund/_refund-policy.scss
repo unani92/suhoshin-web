@@ -1,0 +1,231 @@
+.brand-primary {
+    color: $blue-primary;
+}
+
+.brand-success {
+    color: $brand-success;
+}
+
+.brand-danger {
+    color: $brand-danger;
+}
+
+.gray-dark {
+    color: $grey-09;
+}
+
+.space {
+    padding-right: 1ex;
+}
+
+.refund-policy {
+    .policy-header {
+        padding: 0 20px;
+
+        .title {
+            font-family: NotoSans-Medium;
+            font-size: 24px;
+            font-weight: 500;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: -0.22px;
+            color: black;
+        }
+    }
+
+    .policy-body {
+
+        &-content {
+            margin-top: 40px;
+            padding: 0 20px 40px 20px;
+            border-bottom: 8px solid $grey-02;
+
+            &:nth-child(3) {
+                border: none;
+                padding-bottom: 0;
+            }
+            &:nth-child(4) {
+                @extend :nth-child(3);
+            }
+        }
+
+        &-bottom {
+            @extend .detail-bottom;
+
+            .desc-imgs {
+                @include between;
+                height: 100px;
+
+                .desc {
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    img {
+                        margin: auto;
+                        height: auto;
+
+                        &:nth-child(2) {
+                            width: 100%;
+                        }
+                    }
+                    div {
+                        text-align: center;
+                        font-size: 12px;
+
+                        span { color: $grey-06; }
+                    }
+                }
+
+            }
+        }
+
+        &-small {
+            margin-bottom: 32px;
+        }
+
+        &-title {
+            margin-bottom: 20px;
+
+            font-family: NotoSans-Medium;
+            font-size: 20px;
+            font-weight: 500;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: normal;
+            letter-spacing: -0.4px;
+            color: black;
+
+            &-small {
+                margin-bottom: 12px;
+
+                font-family: NotoSans-Medium;
+                font-size: 18px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: -0.2px;
+            }
+
+            &-wrapper {
+                display: flex;
+                flex-flow: row wrap;
+            }
+        }
+
+        &-abusing {
+            width: 100%;
+            height: 100px;
+            border-radius: 9px;
+            background-color: $grey-01;
+
+            margin-bottom: 28px;
+
+            &-text-wrapper {
+                padding: 12px;
+
+                .title {
+                    padding-bottom: 8px;
+
+                    font-family: NotoSans-Medium;
+                    font-size: 16px;
+                    font-weight: 500;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: normal;
+                    letter-spacing: -0.34px;
+                    color: black;
+                }
+
+                .text {
+                    font-family: NotoSans-Regular;
+                    font-size: 13px;
+                    font-weight: normal;
+                    font-stretch: normal;
+                    font-style: normal;
+                    line-height: normal;
+                    letter-spacing: -0.2px;
+                    color: $grey-09;
+                }
+            }
+        }
+
+        &-wrapper {
+            display: flex;
+            margin-bottom: 16px;
+
+            &-small {
+                display: flex;
+                margin-bottom: 8px;
+            }
+
+            &-small::before {content: "•"; color: $blue-primary}
+
+            &-small-red::before {content: "•"; color: $pink-deep}
+
+            &-small-brand::before {content: "•"; color: #8a74ff}
+        }
+
+        &-wrapper::before {content: "•"; color: #8a74ff}
+
+
+        &-text-wrapper {
+            &.detail-page {
+                padding: 0 20px;
+                border-bottom: 8px solid $grey-02;
+            }
+
+            margin-left: 12px;
+            display: flex;
+            flex-direction: column;
+
+            .text, &-text {
+                margin-bottom: 2px;
+
+                font-family: NotoSans-Regular;
+                font-size: 14px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.5;
+                letter-spacing: -0.2px;
+                color: $grey-09;
+
+                &-small {
+                    line-height: normal;
+                }
+            }
+
+            &-text {
+                margin-top: 14px;
+                margin-bottom: 40px;
+            }
+
+            .desc {
+                font-family: NotoSans-Regular;
+                font-size: 12px;
+                font-weight: normal;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: normal;
+                letter-spacing: -0.2px;
+                color: $grey-07;
+
+                &-small {
+                    line-height: 1.42;
+                }
+
+                .medium {
+                    font-family: NotoSans-Medium;
+                }
+            }
+        }
+
+        .detail-page {
+            color: $blue-primary;
+        }
+    }
+}

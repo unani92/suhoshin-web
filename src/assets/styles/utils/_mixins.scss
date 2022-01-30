@@ -1,0 +1,156 @@
+/*
+ *  fonts
+ */
+
+@mixin f-bold {
+    font-family: NotoSans-Bold;
+}
+
+@mixin f-medium {
+    font-family: NotoSans-Medium;
+}
+
+@mixin f-regular {
+    font-family: NotoSans-Regular;
+}
+
+@mixin f-light {
+    font-family: NotoSans-Light;
+}
+
+@mixin f-demilight {
+    font-family: NotoSans-DemiLight;
+}
+
+@mixin spoqa-f-bold {
+    font-family: SpoqaHanSansNeo-Bold;
+}
+
+@mixin spoqa-f-medium {
+    font-family: SpoqaHanSansNeo-Medium;
+}
+
+@mixin spoqa-f-regular {
+    font-family: SpoqaHanSansNeo-Regular;
+}
+
+@mixin spoqa-f-light {
+    font-family: SpoqaHanSansNeo-Light;
+}
+
+/*
+ *  flex
+ */
+
+@mixin flex {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin flex-wrap {
+    flex: 0 0 auto;
+}
+
+@mixin flex-row {
+    display: flex;
+    flex-flow: row nowrap;
+
+    &.reverse {
+        flex-direction: row-reverse;
+    }
+}
+
+@mixin flex-fill {
+    flex: 1 1 0 !important;
+    min-height: 0px;
+}
+
+@mixin flex-between {
+    justify-content: space-between;
+
+    & > * {
+        flex: 0 0 auto;
+    }
+}
+
+@mixin items-center {
+    display: flex;
+    align-items: center;
+}
+
+@mixin items-start {
+    align-items: flex-start;
+}
+
+/*
+ *  images
+ */
+
+@mixin img-cover {
+    display: block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/*
+ *  lines
+ */
+
+@mixin lines-1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+@mixin lines-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+@mixin lines-3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+@mixin lines-4 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}
+
+
+@mixin modal-fullscreen {
+    padding: 0 0 40px !important;
+    border-radius: 0 !important;
+    width: 100vw;
+    height: 100vh;
+
+    .material-icons {
+        font-size: 24px;
+        margin: 16px 20px;
+        @include center;
+    }
+}

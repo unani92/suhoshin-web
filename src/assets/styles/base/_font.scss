@@ -1,0 +1,75 @@
+/*
+ * Font Face
+ */
+ @mixin font-face($family, $name, $weight: 300, $style: normal){
+    @font-face {
+        font-family: $family;
+        src:
+            url('../fonts/NotoSans/#{$name}.woff2') format('woff2'),
+            url('../fonts/NotoSans/#{$name}.woff') format('woff'),
+            url('../fonts/NotoSans/#{$name}.otf') format('opentype'),
+            url('../fonts/NotoSans/#{$name}.eot') format('embedded-opentype');
+        font-weight: $weight;
+        font-style: $style;
+    }
+}
+
+@mixin font-face-spoqa($family, $name, $weight: 300, $style: normal){
+    @font-face {
+        font-family: $family;
+        src:
+            url('../fonts/SpoqaHanSansNeo/#{$name}.woff2') format('woff2'),
+            url('../fonts/SpoqaHanSansNeo/#{$name}.woff') format('woff'),
+            url('../fonts/SpoqaHanSansNeo/#{$name}.otf') format('opentype'),
+            url('../fonts/SpoqaHanSansNeo/#{$name}.eot') format('embedded-opentype');
+        font-weight: $weight;
+        font-style: $style;
+    }
+}
+
+@include font-face(NotoSans-Bold, 'NotoSans-Bold');
+@include font-face(NotoSans-Medium, 'NotoSans-Medium');
+@include font-face(NotoSans-Regular, 'NotoSans-Regular');
+@include font-face(NotoSans-Light, 'NotoSans-Light');
+@include font-face(NotoSans-DemiLight, 'NotoSans-DemiLight');
+
+@include font-face-spoqa(SpoqaHanSansNeo-Bold, 'SpoqaHanSansNeo-Bold');
+@include font-face-spoqa(SpoqaHanSansNeo-Medium, 'SpoqaHanSansNeo-Medium');
+@include font-face-spoqa(SpoqaHanSansNeo-Regular, 'SpoqaHanSansNeo-Regular');
+@include font-face-spoqa(SpoqaHanSansNeo-Light, 'SpoqaHanSansNeo-Light');
+
+.f-bold {
+    font-family: NotoSans-Bold;
+}
+
+.f-medium {
+    font-family: NotoSans-Medium;
+}
+
+.f-regular {
+    font-family: NotoSans-Regular;
+}
+
+.f-light {
+    font-family: NotoSans-Light;
+}
+
+.f-demilight {
+    font-family: NotoSans-DemiLight;
+}
+
+.spoqa-f-bold {
+    font-family: SpoqaHanSansNeo-Bold;
+}
+
+.spoqa-f-medium {
+    font-family: SpoqaHanSansNeo-Medium;
+}
+
+.spoqa-f-regular {
+    font-family: SpoqaHanSansNeo-Regular;
+}
+
+.spoqa-f-light {
+    font-family: SpoqaHanSansNeo-Light;
+}

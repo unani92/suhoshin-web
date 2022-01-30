@@ -1,0 +1,37 @@
+.signup.consent {
+
+  .body {
+
+    .consent-items {
+      .consent-item {
+        align-items: center;
+
+        .checkbox {
+          width: 18px;
+          height: 18px;
+          margin-right: 16px;
+        }
+
+        &.all {
+          margin-bottom: 20px;
+
+          span {
+            font-size: 16px;
+            line-height: 1.5;
+            color: $grey-09;
+          }
+        }
+
+        &:not(.all) {
+          margin: 0 0 12px 36px;
+
+          span {
+            font-size: 14px;
+            line-height: 1.43;
+            color: $grey-08;
+          }
+        }
+      }
+    }
+  }
+}

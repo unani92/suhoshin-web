@@ -1,0 +1,35 @@
+.refund-9-refunded {
+    .refund-process {
+        display: flex;
+        flex-direction: column;
+        margin: 0 20px;
+        font-size: 15px;
+        line-height: normal;
+
+        .step {
+            margin-bottom: 32px;
+
+            .title {
+                white-space: nowrap;
+                background: $grey-01;
+                color: $grey-07;
+                padding: 3px 10px;
+                margin-bottom: 8px;
+                font-size: 12px;
+                width: fit-content;
+                border-radius: 8px;
+                @include f-medium;
+            }
+            .content {
+                color: $grey-09;
+                font-size: 14px;
+                @include f-regular;
+            }
+        }
+
+    }
+
+    .desc {
+        margin: 0 20px;
+    }
+}

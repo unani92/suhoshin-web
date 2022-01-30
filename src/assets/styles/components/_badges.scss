@@ -1,0 +1,190 @@
+$badge-size: 18px;
+$badge-font-size: $badge-size - 8px;
+
+// Default style for badge
+.badge {
+    display: flex;
+    padding: 0 ($badge-size - $badge-font-size) / 2;
+    border-radius: 6px;
+    font-size: $badge-font-size;
+    line-height: $badge-size;
+    font-weight: normal;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background-color: $blue-primary;
+
+    &.badge-count {
+        $badge-size-count: 20px;
+        border-radius: $badge-size-count / 2;
+        min-width: $badge-size-count;
+        height: $badge-size-count;
+        line-height: $badge-size-count;
+        background: $brand-red;
+        @include f-bold;
+    }
+
+    &.badge-distorted {
+        width: 21px;
+        height: 16px;
+        border-radius: 8px;
+    }
+
+    &.badge-brd {
+        background: none;
+        border: 1px solid $grey-05;
+        border-radius: 6px;
+        color: $grey-05;
+        height: 18px;
+
+        &.primary,
+        &.normal {
+            border: 1px solid $blue-primary;
+            color: $blue-primary;
+        }
+
+        &.red,
+        &.daily {
+            border: 1px solid $brand-red;
+            color: $brand-red;
+        }
+
+        &.recommended {
+            border: 1px solid $brand-recommended;
+            color: $brand-recommended;
+        }
+
+        &.accent {
+            border: 1px solid $brand-accent;
+            color: $brand-accent;
+        }
+
+        &.green {
+            border: 1px solid $brand-success;
+            color: $brand-success;
+        }
+
+        &.orange {
+            border: 1px solid $brand-warning;
+            color: $brand-warning;
+        }
+
+        &.gray {
+            border: 1px solid $grey-05;
+            color: $grey-05
+        }
+
+        &.active {
+            color: white;
+
+            &.green {
+                background: $brand-success;
+            }
+
+            &.orange {
+                background: $brand-warning;
+            }
+
+            &.gray {
+                background: $grey-05;
+            }
+        }
+    }
+
+    &.badge-verified {
+        background: $grey-08;
+        font-size: 8px !important;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        @extend .material-icons;
+
+        &,
+        &:hover {
+            color: white;
+        }
+    }
+}
+
+.badge {
+    .message-action & {
+        $badge-size: 48px;
+        min-width: 48px;
+        text-align: center;
+        padding: 2px 12px;
+        display: table;
+        border-radius: $badge-size / 2;
+    }
+
+    .chat-item & {
+        min-width: 30px;
+        font-size: $badge-font-size;
+    }
+}
+
+.badge-on,
+.badge-off {
+    background: white;
+    border-radius: 6px;
+    transform: scale(0.9);
+    font-size: 10px;
+    line-height: 10px;
+    height: 12px;
+    width: 20px;
+    text-align: center;
+    letter-spacing: -0.2px;
+    @include f-medium;
+}
+
+.badge-on {
+    box-shadow: 0 0 0 1px $blue-primary;
+    color: $blue-primary;
+
+    &:hover {
+        box-shadow: 0 0 0 1px $brand-accent;
+        color: $brand-accent;
+    }
+}
+
+.badge-off {
+    width: 22px;
+    box-shadow: 0 0 0 1px $grey-05;
+    color: $grey-05;
+
+    &:hover {
+        box-shadow: 0 0 0 1px $grey-08;
+        color: $grey-08;
+    }
+}
+
+.badge-product {
+    border-radius: 6px;
+    padding: 0 8px;
+
+    .items {
+        width: 100%;
+    }
+
+    .key {
+        @include f-medium;
+    }
+
+    .value {
+        @include f-bold;
+    }
+
+    &:not(:last-child) {
+        margin-top: 4px;
+    }
+}
+
+.badge-tips {
+    display: table;
+    color: $blue-primary;
+    font-size: 11px;
+    padding: 2px 6px;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 6px;
+    @include f-bold;
+}

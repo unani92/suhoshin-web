@@ -1,0 +1,40 @@
+@import 'customer-center/index';
+@import 'refund/index';
+@import 'signup/index';
+@import 'store/index';
+@import 'agent-detail';
+@import 'agent-friends';
+@import 'change-password';
+@import 'dormant';
+@import 'notices';
+@import 'notifications';
+@import 'profile-verification';
+@import 'refund-histories';
+@import 'settings';
+@import 'profile-update-request';
+@import 'force-app-update';
+@import 'verification-codes';
+@import 'report-agent';
+@import 'block';
+@import "user-detail";
+@import "my-page";
+
+.page-header {
+    margin: 12px 16px 32px;
+
+    .title {
+        color: black;
+        font-size: 24px;
+        line-height: 28px;
+        @include f-medium;
+    }
+
+    .desc {
+        margin-top: 8px;
+        font-size: 15px;
+    }
+
+    .stack-router-header-bar {
+        padding: 0
+    }
+}

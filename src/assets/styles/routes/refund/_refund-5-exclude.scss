@@ -1,0 +1,38 @@
+.refund-5-exclude {
+    .exclusions {
+        padding: 0 20px;
+        margin-top: 24px;
+        margin-bottom: 40px;
+
+        .exclusion {
+            padding: 16px 0;
+            border-bottom: solid 1px $grey-01;
+            @include flex-row;
+
+            .contents {
+                padding-right: 20px;
+                @include flex-fill;
+
+                .title {
+                    color: $grey-09;
+                }
+
+                .description {
+                    margin-top: 4px;
+                    font-size: 12px;
+                    color: $grey-06;
+                }
+            }
+
+            .material-icons {
+                color: $gray-divider;
+                @include flex-wrap;
+            }
+
+            &.checked
+            .material-icons {
+                color: $blue-primary;
+            }
+        }
+    }
+}

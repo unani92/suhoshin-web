@@ -4,21 +4,57 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
+    "serve-test": "vue-cli-service serve --mode test",
+    "build-test": "vue-cli-service build --mode test",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "@hackler/js-client-sdk": "^1.0.12",
+    "@sentry/browser": "^5.25.0",
+    "@sentry/integrations": "^5.25.0",
+    "@vue/composition-api": "^1.0.0-rc.7",
+    "axios": "^0.19.2",
+    "core-js": "^2.6.11",
+    "cropperjs": "^1.5.7",
+    "dayjs": "^1.10.7",
+    "swiper": "^4.4.1",
+    "vue": "^2.6.12",
+    "vue-awesome-swiper": "^3.1.3",
+    "vue-carousel": "^0.18.0",
+    "vue-clipboard2": "^0.3.1",
+    "vue-lazyload": "^1.3.3",
+    "vue-moment": "^4.1.0",
+    "vue-router": "^3.4.6",
+    "vue-slider-component": "^3.2.5",
+    "vue2-timepicker": "^1.1.6",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-plugin-babel": "^3.12.1",
+    "@vue/cli-plugin-eslint": "^3.12.1",
+    "@vue/cli-service": "^4.5.7",
+    "await-exec": "^0.1.2",
+    "aws-sdk": "^2.771.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
+    "chalk": "^2.4.2",
+    "eslint": "^7.11.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
+    "husky": "^4.3.0",
+    "lint-staged": "^10.4.0",
+    "node-sass": "^4.14.1",
+    "prettier": "2.1.2",
+    "prompt-confirm": "^2.0.4",
+    "sass-loader": "^9.0.3",
+    "vue-analytics": "^5.22.1",
+    "vue-template-compiler": "^2.6.12"
   },
   "eslintConfig": {
     "root": true,
@@ -27,16 +63,34 @@
     },
     "extends": [
       "plugin:vue/essential",
-      "eslint:recommended"
+      "eslint:recommended",
+      "plugin:prettier/recommend"
     ],
+    "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
-    },
-    "rules": {}
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not dead"
-  ]
+    "not ie <= 8"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,vue}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  }
 }

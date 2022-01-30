@@ -1,0 +1,39 @@
+.refund-4-reason {
+    .reasons {
+        padding: 0 20px 40px 20px;
+
+        .reason {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: solid 1px $grey-03;
+
+            &.selected {
+                border-color: $blue-primary;
+                
+                @include f-medium;
+
+                .title {
+                    color: $blue-primary;
+                }
+            }
+
+            &:not(:last-child) {
+                margin-bottom: 12px;
+            }
+
+            .title {
+                color: black;
+                font-size: 15px;
+            }
+
+            .description {
+                font-size: 12px;
+                color: $grey-06;
+    
+                span {
+                    @include f-bold;
+                }
+            }
+        }
+    }
+}

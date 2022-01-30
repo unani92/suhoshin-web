@@ -1,0 +1,247 @@
+/*
+ * Generate Margin, Padding, Font class
+ * $max is the max limit of size
+ * $offset is the increment of each loop
+ * $unit should always be 'px'
+ */
+$max: 40;
+$offset: 1;
+$unit: 'px';
+
+@mixin list-loop($className, $styleName) {
+    $i: 0;
+    @while ($i <= $max) {
+        #{$className + $i} {
+            #{$styleName}: #{$i + $unit} !important;
+        }
+        $i: $i + $offset;
+    }
+}
+
+@include list-loop('.m-', 'margin');
+@include list-loop('.m-t-', 'margin-top');
+@include list-loop('.m-r-', 'margin-right');
+@include list-loop('.m-b-', 'margin-bottom');
+@include list-loop('.m-l-', 'margin-left');
+@include list-loop('.p-', 'padding');
+@include list-loop('.p-t-', 'padding-top');
+@include list-loop('.p-r-', 'padding-right');
+@include list-loop('.p-b-', 'padding-bottom');
+@include list-loop('.p-l-', 'padding-left');
+@include list-loop('.f-', 'font-size');
+
+.m-a { margin: auto; }
+.m-t-a { margin-top: auto !important }
+.m-b-a { margin-bottom: auto !important }
+.m-l-a { margin-left: auto !important }
+.m-r-a { margin-right: auto !important }
+
+/*
+ * Position Classes
+ */
+.p-relative { position: relative !important; }
+.p-absolute { position: absolute !important; }
+
+/*
+ * Overflow
+ */
+.o-hidden { overflow: hidden !important; }
+.o-visible { overflow: visible !important; }
+.o-auto { overflow: auto !important; }
+
+/*
+ * Material Background Colors
+ */
+$array: (
+    c-text-dark bg-dark $grey-09,
+    c-text bg-dark $grey-08,
+    c-text-light bg-light $grey-07,
+    c-text-lighter bg-lighter $grey-06,
+    c-text-lightest bg-lightest $grey-05,
+    c-text-very-light bg-very-light $grey-04,
+    c-divider bg-divider $gray-divider,
+    c-danger bg-danger $brand-danger,
+    c-primary bg-primary $blue-primary,
+    c-accent bg-accent $brand-accent,
+    c-purple-dark bg-purple-dark $purple-dark,
+    c-success bg-success $brand-success,
+    c-warning bg-warning $brand-warning,
+    c-info bg-info $brand-info,
+    c-male bg-male $blue-man,
+    c-female bg-female $pink-woman,
+    c-red bg-red $brand-red,
+    c-almost-white bg-almost-white $grey-01,
+    c-black bg-black #111111,
+    c-white bg-white white,
+    c-daily bg-daily $brand-daily,
+    c-recommended bg-recommended $brand-recommended,
+    c-gold bg-gold $brand-gold,
+    c-silver bg-silver $grey-05,
+    c-bronze bg-bronze $brand-bronze,
+    c-yellow bg-yellow $brand-gold,
+    c-pink-deep bg-pink-deep $pink-deep,
+    c-blue-suggest bg-blue-suggest $blue-suggest,
+    c-blue-facebook bg-blue-facebook $blue-facebook,
+    c-social bg-social $social,
+);
+
+@each $list in $array {
+    $text: nth($list, 1);
+    $bg: nth($list, 2);
+    $var: nth($list, 3);
+
+    .#{$text} {
+        color: $var !important;
+    }
+
+    .#{$bg} {
+        background-color: $var !important;
+    }
+}
+
+.bg-red-grad {
+    background: $brand-red-grad !important;
+}
+
+.bg-blue-grad {
+    background: $brand-blue-grad !important;
+}
+.bg-black {
+    background: #111111;
+    color: white;
+}
+
+/*
+ * Border
+ */
+.b-50 {
+    border-radius: 50%;
+}
+
+/*
+ * width
+ */
+.w-100 { width: 100% !important; }
+
+/* Gray Border Left */
+.g-b-l {
+    border-left: 1px solid $grey-02;
+}
+
+/* Gray Border Bottom */
+.g-b-b {
+    border-bottom: 1px solid $grey-02;
+}
+
+/*
+ * Component Display Type
+ */
+.display-inline-block {
+    display: inline-block !important;
+}
+
+.display-block {
+    display: block !important;
+}
+
+.display-table {
+    display: table !important;
+}
+
+.display-none {
+    display: none !important;
+}
+
+.vertical-middle {
+    vertical-align: middle;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.no-select {
+    user-select: none;
+}
+
+.img-profile {
+    &.male {
+        border: 1px solid $blue-man;
+    }
+
+    &.female {
+        border: 1px solid $pink-woman;
+    }
+}
+
+.ver-scroll {
+    overflow-y: auto;
+}
+
+.img-cover {
+    display: block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.img-contain {
+    @include img-cover;
+    background-size: contain;
+}
+
+.no-touch {
+    pointer-events: none;
+}
+
+.overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.card {
+    background: white;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12), 0 1px 6px rgba(78, 68, 182, 0.16);
+
+    .top {
+        padding: 20px 20px 24px;
+        color: black;
+
+        .title {
+            font-size: 16px;
+            @include f-medium;
+        }
+    }
+}
+
+.o-0 {
+    opacity: 0 !important;
+}
+
+.c-facebook {
+    color: $blue-facebook !important;
+}
+
+.c-pink-deep {
+    color: $pink-deep !important;
+}
+.c-grey-05 {
+    color: $grey-05 !important;
+}
+.c-grey-06 {
+    color: $grey-06 !important;
+}
+.c-grey-07 {
+    color: $grey-07 !important;
+}
+.c-black {
+    color: black !important;
+}
+.c-white {
+    color: white !important;
+}

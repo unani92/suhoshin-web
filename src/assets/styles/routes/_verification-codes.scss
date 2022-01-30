@@ -1,0 +1,116 @@
+.find-email,
+.find-password,
+.reset-password {
+    .body {
+        padding: 0 16px;
+    }
+
+    input {
+        width: 100%;
+        padding: 0 8px;
+        font-size: 16px;
+        -webkit-appearance: none;
+    }
+
+    input,
+    button {
+        height: 48px;
+    }
+
+    .bottom {
+        .error {
+            width: 100%;
+            color: $grey-07;
+            font-size: 12px;
+            letter-spacing: -0.2px;
+            @include center;
+
+            span {
+                margin-left: 4px;
+                color: $blue-primary;
+                @include f-bold;
+            }
+        }
+
+        color: $blue-primary;
+        position: fixed;
+        bottom: 0;
+        padding-bottom: 28px;
+        left: 16px;
+        right: 16px;
+    }
+}
+
+.find-email {
+    .page-header .desc {
+        line-height: 22px;
+    }
+
+    .body {
+        button {
+            padding: 0 !important;
+            width: 80px;
+        }
+
+        .require-verification-code {
+            margin-top: 16px;
+        }
+
+        .sent {
+            margin-top: 16px;
+        }
+
+        .left-seconds {
+            margin-top: 16px;
+            font-size: 13px;
+
+            span {
+                margin-left: 8px;
+                color: $blue-primary;
+                @include f-bold;
+            }
+        }
+    }
+}
+
+.find-password {
+    .form-control label {
+        font-size: 12px;
+        display: block;
+        color: $grey-07;
+        margin-bottom: 4px;
+        @include f-medium;
+    }
+
+    .fb-desc {
+        margin-top: 40px;
+        border-radius: 8px;
+        padding: 16px;
+        background: $grey-01;
+        font-size: 12px;
+
+        div:not(:last-child) {
+            margin-bottom: 12px;
+        }
+    }
+}
+
+.reset-password {
+    .email {
+        color: black;
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 20px;
+    }
+
+    .error {
+        font-size: 13px;
+        color: $brand-danger;
+
+        i {
+            font-size: 13px;
+            color: $brand-danger;
+            margin-right: 4px;
+        }
+    }
+}

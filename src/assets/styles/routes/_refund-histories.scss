@@ -1,0 +1,96 @@
+.refund-histories {
+
+    .page-header {
+        margin-bottom: 16px;
+    }
+
+    .refund-process {
+        display: flex;
+        flex-direction: column;
+        margin-top: 16px;
+        font-size: 13px;
+        line-height: normal;
+
+        .process-notices {
+            background: $grey-01;
+            border-radius: 12px;
+            padding: 12px;
+            font-size: 12px;
+
+            .notice {
+                margin-bottom: 10px;
+
+                &:nth-child(3) {
+                    margin-bottom: 0;
+                }
+            }
+
+            span {
+                @include f-bold;
+            }
+        }
+
+    }
+
+    table {
+        margin-top: 20px;
+        width: 100%;
+        border-spacing: 0;
+    }
+
+    thead {
+        tr {
+            height: 40px;
+        }
+
+        th {
+            color: $grey-06;
+            font-size: 13px;
+            border-bottom: 1px solid $grey-02;
+            @include f-regular;
+            font-weight: normal;
+        }
+    }
+
+    td,
+    th {
+        width: 25%;
+        text-align: center;
+    }
+
+    tbody {
+        td {
+            font-size: 14px;
+            color: black;
+            @include f-regular;
+
+            &.created-at {
+                color: $grey-07;
+            }
+            &.status {
+                &.c-primary { color: $blue-primary !important; }
+                &.c-danger { color: $red-chai !important; }
+            }
+        }
+    
+        tr {
+            height: 54px;
+
+            &:nth-child(odd) {
+                background: white;
+            }
+    
+            &:nth-child(even) {
+                background: $grey-01;
+            }
+
+            &.empty {
+                height: 144px;
+
+                td {
+                    color: $grey-08;
+                }
+            }
+        }
+    }
+}
