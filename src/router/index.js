@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import { store as $store } from '@/store'
 import NotFoundPage from '@/routes/NotFoundPage'
 import HomePage from '@/routes/HomePage'
+import FrontPage from '@/routes/frontpage/FrontPage'
 
 Vue.use(Router)
 
@@ -11,6 +12,11 @@ const routes = [
         path: '/',
         name: 'HomePage',
         component: HomePage,
+    },
+    {
+        path: '/front',
+        name: 'FrontPage',
+        component: FrontPage,
     },
     {
         path: '/not-found',

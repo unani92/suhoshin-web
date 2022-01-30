@@ -1,18 +1,22 @@
 <template>
     <div class="home">
-        <!--        <Loading :loading="true" />-->
+        <RootHeaderBar />
     </div>
 </template>
 <script>
-import commonService from '@/services/common'
+import RootHeaderBar from '@/components/app/RootHeaderBar'
 
 export default {
     name: 'HomePage',
-    data: () => ({
-        me: null,
-        terms: null,
-        idx: 0,
-    }),
+    data: () => ({}),
+    computed: {
+        me() {
+            return this.$store.getters.me
+        },
+    },
+    components: {
+        RootHeaderBar,
+    },
     mounted() {
         this.init()
     },
@@ -27,10 +31,6 @@ export default {
         },
         async initMe() {
             try {
-                const { data } = await commonService.test()
-                console.log(data)
-                // await this.$store.dispatch('loadMe')
-                // this.me = this.$store.getters.me || {}
             } catch (e) {
                 return Promise.reject()
             }
