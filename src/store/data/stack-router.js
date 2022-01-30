@@ -16,23 +16,9 @@ const getters = {
 
 const actions = {
     stackRouterPush({ commit }, pageObj) {
-        // 현재 루트 라우트여도 onpopstate가 실행되기 위해서는 setCanGoBack 값을 true로 해주어야함
-        Vue.prototype.$nativeBridge.postMessage({
-            action: 'setCanGoBack',
-            value: true,
-        })
-
         commit('pushPageStack', pageObj)
     },
     stackRouterPop({ commit, getters }) {
-        // 현재 스택에 하나만 쌓여있으면 현재 라우트가 rootRoute면 setCanGoBack 값을 false로
-        if (getters.pageStack.length === 1) {
-            Vue.prototype.$nativeBridge.postMessage({
-                action: 'setCanGoBack',
-                value: !Vue.prototype.$isRootRoute(),
-            })
-        }
-
         const currentStack = getters.pageStack[getters.pageStack.length - 1] || {}
         const currentBackHandler = Vue.prototype.$backHandlers[currentStack.name]
         let pop = true

@@ -21,11 +21,6 @@ export default {
     },
     created() {
         document.addEventListener('keydown', this.onKeydown)
-
-        this.$nativeBridge.postMessage({
-            action: 'setCanGoBack',
-            value: true,
-        })
     },
     beforeDestroy() {
         this.modal.resolve()

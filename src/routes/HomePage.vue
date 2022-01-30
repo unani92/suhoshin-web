@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <Loading :loading="true" />
+        <!--        <Loading :loading="true" />-->
     </div>
 </template>
 <script>
@@ -27,72 +27,12 @@ export default {
         },
         async initMe() {
             try {
-                await this.$store.dispatch('loadMe')
-                await this.$store.dispatch('loadMyVerificationBadges')
-                this.me = this.$store.getters.me || {}
+                const { data } = await commonService.test()
+                console.log(data)
+                // await this.$store.dispatch('loadMe')
+                // this.me = this.$store.getters.me || {}
             } catch (e) {
                 return Promise.reject()
-            }
-        },
-        async initTerms() {
-            await this.$store.dispatch('loadTerms')
-            const { terms } = this.$store.getters.terms || {}
-            this.terms = terms
-        },
-        checkTerms() {
-            return (
-                this.me.service_terms_version < this.terms.service.version ||
-                this.me.privacy_terms_version < this.terms.privacy.version ||
-                this.me.privacy_third_terms_version < this.terms.privacy_third.version
-            )
-        },
-        async loadRewards() {
-            try {
-                const lastId = window.localStorage.getItem('lastRewardId') || null
-                const rewards = await commonService.rewards(lastId)
-
-                rewards.forEach(reward => {
-                    this.$nativeBridge.postMessage({
-                        action: 'sendAirbridgeEvent',
-                        value: {
-                            category: 'match_success_cnt_as_dating_target',
-                        },
-                    })
-                })
-
-                if (rewards.length > 0) {
-                    window.localStorage.setItem('lastRewardId', `${rewards[0]}`)
-                }
-            } catch (e) {
-                console.error(e)
-            }
-        },
-        checkNPS() {
-            const { nps_on: npsOn } = this.me
-
-            if (npsOn) {
-                const date = new Date()
-                const userId = this.me.id
-                if (this.$isIOS()) {
-                    const alreadySeenToday = window.localStorage.getItem(
-                        `nts${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}${userId}`
-                    )
-                    if (!alreadySeenToday) {
-                        this.$router.push({ name: 'NTSMainPage' })
-
-                        throw new Error()
-                    }
-                } else {
-                    const alreadySeenToday = window.localStorage.getItem(
-                        `nps${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}${userId}`
-                    )
-
-                    if (!alreadySeenToday) {
-                        this.$router.push({ name: 'NPSMainPage' })
-
-                        throw new Error()
-                    }
-                }
             }
         },
     },

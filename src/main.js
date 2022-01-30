@@ -14,6 +14,7 @@ import * as Global from '@/plugins/global'
 import * as directives from '@/directives'
 import { store } from '@/store'
 
+import Loading from '@/components/app/Loading'
 import Snackbar from '@/components/app/Snackbar'
 import BottomButton from '@/components/app/BottomButton'
 import TextareaWithX from '@/components/app/TextareaWithX'
@@ -46,6 +47,7 @@ Vue.component('BottomButton', BottomButton)
 Vue.component('TextareaWithX', TextareaWithX)
 Vue.component('StackRouterView', StackRouterView)
 Vue.component('StackRouterHeaderBar', StackRouterHeaderBar)
+Vue.component('Loading', Loading)
 
 require('@/assets/styles/index.scss')
 

@@ -43,12 +43,6 @@ export default {
                 {
                     action: () => {
                         this.navigate('InvitationFriendPage')
-                        this.$nativeBridge.postMessage({
-                            action: 'sendFirebaseEvent',
-                            value: {
-                                category: 'BottomNav_Click_Invitation',
-                            },
-                        })
                     },
                     label: '초대 리워드',
                     selected: this.$route.name === 'InvitationFriendPage',
@@ -56,12 +50,6 @@ export default {
                 {
                     action: () => {
                         this.navigate('MyPage')
-                        this.$nativeBridge.postMessage({
-                            action: 'sendFirebaseEvent',
-                            value: {
-                                category: 'BottomNav_Click_ProfileMenu',
-                            },
-                        })
                     },
                     label: '마이페이지',
                     selected: this.$route.name === 'MyPage',

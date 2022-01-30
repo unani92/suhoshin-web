@@ -68,11 +68,6 @@ router.beforeEach((to, from, next) => {
     next()
 })
 
-router.afterEach(() => {
-    Vue.prototype.$nativeBridge.postMessage({
-        action: 'setCanGoBack',
-        value: !Vue.prototype.$isRootRoute(),
-    })
-})
+router.afterEach(() => {})
 
 export default router

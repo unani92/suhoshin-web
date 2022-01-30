@@ -8,7 +8,7 @@
         </div>
         <StackRouterView />
         <Toast />
-        <!--        <Loading :loading="$store.getters.loading.global" />-->
+        <Loading :loading="$store.getters.loading.global" />
         <Modal :key="idx" :modal="modal" v-for="(modal, idx) in $store.getters.modals" />
     </div>
 </template>
