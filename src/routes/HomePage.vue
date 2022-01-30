@@ -21,33 +21,6 @@ export default {
             try {
                 // me가 없다라는것은 로그인하지 않았다는 의미이기 때문에 logout 로직 수행
                 await this.initMe()
-                await this.initTerms()
-
-                const registerDevice = () => {
-                    setTimeout(() => {
-                        // device id 있는지 5번까지 체크
-                        if (this.$store.getters.device) {
-                            this.$store.dispatch('registerDeviceId')
-                        } else if (this.idx < 5) {
-                            this.idx += 1
-                            registerDevice()
-                        }
-                    }, 500)
-                }
-                registerDevice()
-                // this.checkNPS()
-                // if (this.me.profile.status.includes('waitlist')) {
-                if (this.me.profile.status === 'waitlist_marry' || this.me.profile.status === 'waitlist_age') {
-                    this.$router.push({
-                        name: 'WaitlistPage',
-                        params: {
-                            user: this.me,
-                        },
-                    })
-                    // } else if () {
-                } else {
-                    this.$router.push({ name: 'ChatsPage', params: { preventSetChatNull: true } })
-                }
             } catch (e) {
                 console.log(e)
             }

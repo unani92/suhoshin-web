@@ -8,8 +8,6 @@ import VueLazyLoad from 'vue-lazyload'
 import { Carousel, Slide } from 'vue-carousel'
 import VueSlider from 'vue-slider-component'
 import VueClipboard from 'vue-clipboard2'
-import * as Sentry from '@sentry/browser'
-import { Vue as VueIntegration } from '@sentry/integrations'
 
 import * as filter from '@/filters'
 import * as Global from '@/plugins/global'
@@ -58,10 +56,3 @@ new Vue({
     router,
     store,
 }).$mount('#app')
-
-if (process.env.NODE_ENV === 'test') {
-    Sentry.init({
-        dsn: 'https://f6c4e4a2ba9f4ed4bc6e1660c5dd269a@o205628.ingest.sentry.io/1435637',
-        integrations: [new VueIntegration({ Vue, attachProps: true })],
-    })
-}

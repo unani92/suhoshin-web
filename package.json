@@ -10,6 +10,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/preset-env": "^7.16.11",
     "@hackler/js-client-sdk": "^1.0.12",
     "@sentry/browser": "^5.25.0",
     "@sentry/integrations": "^5.25.0",

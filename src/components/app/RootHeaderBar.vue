@@ -1,22 +1,5 @@
 <template>
-    <header class="root-header-bar" v-if="$isRootRoute()">
-        <div class=""></div>
-        <div class="right">
-            <img
-                @click="onClickHowToUsePoint"
-                class="m-r-2"
-                src="@/assets/images/point.png"
-                width="24px"
-                height="24px"
-            />
-            <div class="invitation-point p-relative" v-html="badges.invite_point" />
-            <div class="bell p-relative" @click="onClickNotification">
-                <img class="m-r-2" src="@/assets/images/alarm.png" width="24px" height="24px" />
-                <!-- <i class="material-icons">notifications_none</i> -->
-                <div v-if="showUnreadNotifications" class="badge" />
-            </div>
-        </div>
-    </header>
+    <div class="root-header-bar"></div>
 </template>
 
 <script>
@@ -26,32 +9,8 @@ export default {
         me() {
             return this.$store.getters.me
         },
-        badges() {
-            return this.$store.getters.badges || {}
-        },
-        photo_url() {
-            if (!this.me) return ''
-            if (!this.me.photos.length) return ''
-
-            return this.me.photos[0].url
-        },
-        showUnreadNotifications() {
-            return (this.$store.getters.notifications || []).filter(n => !n.read).length > 0
-        },
     },
-    methods: {
-        onClickNotification() {
-            this.$router.push({ name: 'NotificationsPage' })
-        },
-        async onClickHowToUsePoint() {
-            const idx = await this.$modal.custom({
-                component: 'ModalHowToUsePoint',
-                options: {},
-            })
-
-            if (idx) this.$router.push({ name: 'InvitationFriendPage' })
-        },
-    },
+    methods: {},
 }
 </script>
 

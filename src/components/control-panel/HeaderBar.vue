@@ -1,7 +1,6 @@
 <template>
     <div class="header-bar flex-row">
         <div @click="onClickLeftButton" class="left flex-row flex-wrap center">
-            <img class="m-r-2" :src="require(`@/assets/images/icons/back.png`)" width="24px" height="24px" />
             <div class="title f-medium center" v-html="$translate(hideTitle ? '' : title)" />
         </div>
         <div class="right flex-wrap"></div>
@@ -48,10 +47,6 @@ export default {
             }
             this.title = this.customTitle || this.$case.toSnake(this.$route.name).toUpperCase()
             this.customTitle = ''
-            this.$nativeBridge.postMessage({
-                action: 'setBackgroundColor',
-                value: '#FFFFFF',
-            })
         },
         onClickLeftButton() {
             // 여기에 직접 로직이 들어가는게 좀 그렇긴 하지만 다른 방법이...?
@@ -66,12 +61,7 @@ export default {
     mounted() {
         this.initTitle()
     },
-    beforeDestroy() {
-        this.$nativeBridge.postMessage({
-            action: 'setBackgroundColor',
-            value: '#FFFFFF',
-        })
-    },
+    beforeDestroy() {},
 }
 </script>
 

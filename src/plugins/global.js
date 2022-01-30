@@ -1,6 +1,5 @@
 import { store as $store } from '@/store'
 import './modal'
-import './profile'
 import router from '@/router'
 
 export const Shortcuts = {

@@ -1,16 +1,6 @@
 <template>
     <div class="stack-router-header-bar" :class="{ 'bg-black': mode === 'dark' }">
         <div class="left-btn">
-            <!-- <i v-show="showLeftButton" class="material-icons">{{ leftButtonIcon }}</i> -->
-            <img
-                v-show="showLeftButton"
-                class="m-r-2"
-                :src="require(`@/assets/images/icons/${leftButtonIcon}.png`)"
-                width="24px"
-                height="24px"
-                @click="onClickLeftButton"
-            />
-
             <transition name="fade">
                 <div class="title-wrapper" v-show="showTitle">
                     <div class="title" v-html="$translate(title)" />
@@ -19,7 +9,6 @@
         </div>
         <div class="right-btn flex-wrap">
             <i v-show="showRightButton" @click="onClickRightBtn" class="material-icons">{{ rightButtonIcon }}</i>
-            <!-- <img v-show="showRightButton" @click="onClickRightBtn" :src="require(`@/assets/images/icons/${rightButtonIcon}.png`)" width="16px" height="16px" /> -->
         </div>
     </div>
 </template>

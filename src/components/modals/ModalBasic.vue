@@ -2,14 +2,6 @@
     <div class="modal-basic">
         <div v-if="options.title" class="head">
             <div class="title" :class="options.titleClass" v-html="$translate(title)" />
-            <img
-                v-if="showCloseButton"
-                @click="$emit('close')"
-                :src="require(`@/assets/images/icons/close.png`)"
-                width="24px"
-                height="24px"
-                class="m-r-10"
-            />
         </div>
         <div class="body" :class="{ 'm-t-0': options.hideHeader }">
             <div v-html="body" />

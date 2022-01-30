@@ -22,21 +22,13 @@
             @blur="onBlur"
             @input="onKeyUp"
         />
-        <!-- <i
+        <i
             v-if="(text || '').length > 0"
             @click="clear"
             class="material-icons flex-wrap"
             style="height: 18px; display: block !important"
             >cancel</i
-        > -->
-        <img
-            v-if="(text || '').length > 0"
-            @click="clear"
-            class="flex-wrap"
-            :src="require(`@/assets/images/icons/delete.png`)"
-            width="24px"
-            height="24px"
-        />
+        >
     </div>
 </template>
 

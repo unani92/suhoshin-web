@@ -8,10 +8,8 @@
         </div>
         <StackRouterView />
         <Toast />
-        <Loading :loading="$store.getters.loading.global" />
+        <!--        <Loading :loading="$store.getters.loading.global" />-->
         <Modal :key="idx" :modal="modal" v-for="(modal, idx) in $store.getters.modals" />
-        <HealthCheck />
-        <ChatPump v-if="chatConnectionAllowed" />
     </div>
 </template>
 
@@ -21,7 +19,6 @@ import HeaderBar from '@/components/control-panel/HeaderBar'
 import ControlPanel from '@/components/control-panel/ControlPanel'
 import Toast from '@/components/app/Toast'
 import Modal from '@/components/app/Modal'
-import HealthCheck from '@/components/app/HealthCheck'
 import StackRouterView from '@/components/app/StackRouterView'
 
 export default {
@@ -30,7 +27,6 @@ export default {
         ControlPanel,
         Toast,
         Modal,
-        HealthCheck,
         StackRouterView,
         RootHeaderBar,
     },
@@ -48,64 +44,10 @@ export default {
         },
     },
     methods: {
-        async init() {
-            try {
-                this.$store.dispatch('loadConstants')
-                await this.$store.dispatch('loadAuthToken')
-                await this.$store.dispatch('afterAuthCallbacks', { isSignIn: false })
-            } catch (e) {
-                if (e.status === 401) {
-                    if (localStorage.getItem('tempSignupPayload')) {
-                        this.$goOnboardProfile()
-
-                        return
-                    }
-                    this.$store.dispatch('signOut')
-                }
-            }
-        },
-        initHackle() {
-            this.$hackleClient.onReady(() => {
-                const device = this.$store.getters.device
-
-                const { id, ...rest } = device
-                const user = {
-                    id: device.id,
-                    properties: { ...rest },
-                }
-
-                this.$store.commit('setHackleUser', user)
-            })
-        },
+        async init() {},
     },
     created() {
         this.init()
-        // 프로필 미완료 사람들 팝업 --> 추후 삭제
-    },
-    async mounted() {
-        this.$nativeBridge.postMessage({
-            action: 'onMountWebView',
-        })
-        this.$store.commit('setIsAppFirstLoaded', true)
-
-        if (this.$store.getters.me && this.$store.getters.submitAllRequired === false) {
-            this.$modal.custom({
-                component: 'ModalVerticalButtons',
-                options: {
-                    title: '프로필 입력을 완료해주세요!',
-                    body: `서비스 이용을 위해서는 <b>반드시 프로필 입력이 완료</b>되어야 합니다.`,
-                    buttons: [
-                        {
-                            label: '프로필 입력하기',
-                        },
-                    ],
-                    height: '48px',
-                    bgColor: '#111',
-                    onClick: this.moveToEdit,
-                    showCloseButton: true,
-                },
-            })
-        }
     },
 }
 </script>

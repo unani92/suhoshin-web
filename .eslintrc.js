@@ -11,8 +11,6 @@ module.exports = {
     globals: {
         Atomics: 'readonly',
         SharedArrayBuffer: 'readonly',
-        kakao: false,
-        showPlace: false,
     },
     parserOptions: {
         ecmaVersion: 11,

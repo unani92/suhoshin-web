@@ -36,25 +36,10 @@ export default {
             const btns = [
                 {
                     action: () => this.navigate('ChatsPage'),
-                    icon: this.icon('message'),
                     label: '대화방',
                     badgeCount: this.numUnreads,
                     selected: this.$route.name === 'ChatsPage',
                 },
-                // {
-                //     action: () => {
-                //         this.navigate('SchedulePage')
-                //         this.$nativeBridge.postMessage({
-                //             action: 'sendFirebaseEvent',
-                //             value: {
-                //                 category: 'BottomNav_Click_Schedule',
-                //             },
-                //         })
-                //     },
-                //     icon: this.icon('date'),
-                //     label: 'SCHEDULE',
-                //     selected: this.$route.name === 'SchedulePage',
-                // },
                 {
                     action: () => {
                         this.navigate('InvitationFriendPage')
@@ -65,24 +50,9 @@ export default {
                             },
                         })
                     },
-                    icon: this.icon('invite'),
                     label: '초대 리워드',
                     selected: this.$route.name === 'InvitationFriendPage',
                 },
-                /* {
-                    action: () => {
-                        this.navigate('CommunicationPage')
-                        this.$nativeBridge.postMessage({
-                            action: 'sendFirebaseEvent',
-                            value: {
-                                category: 'BottomNav_Click_Communication',
-                            },
-                        })
-                    },
-                    icon: this.icon('noti'),
-                    label: '소통',
-                    selected: this.$route.name === 'CommunicationPage',
-                }, */
                 {
                     action: () => {
                         this.navigate('MyPage')
@@ -93,7 +63,6 @@ export default {
                             },
                         })
                     },
-                    icon: this.icon('my'),
                     label: '마이페이지',
                     selected: this.$route.name === 'MyPage',
                 },
@@ -107,10 +76,7 @@ export default {
             this.$router.push({ name }).catch(e => {})
         },
         icon(icon) {
-            return {
-                active: require(`@/assets/images/tab/icon_${icon}_active@2x.png`),
-                inactive: require(`@/assets/images/tab/icon_${icon}_inactive@2x.png`),
-            }
+            return {}
         },
     },
 }
