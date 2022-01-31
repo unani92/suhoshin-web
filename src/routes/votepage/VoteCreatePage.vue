@@ -4,13 +4,32 @@
         <div class="content">
             <div class="title">투표 생성</div>
             <div class="section">
-                <div class="item m-b-32">
+                <div class="item">
                     <div class="section-title">제목</div>
                     <TextareaWithX v-model="title" :is-input-mode="true" />
                 </div>
                 <div class="item">
                     <div class="section-title">내용</div>
                     <TextareaWithX v-model="content" />
+                </div>
+                <div class="item between">
+                    <div class="section-title">마감기한</div>
+                    <div class="expire-at between">
+                        <span class="spoqa-f-medium" v-if="expire_at" v-html="expire_at" />
+                        <i @click="onClickDatePicker" class="material-icons">chevron_right</i>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="between">
+                        <div class="section-title">항목</div>
+                        <i @click="onClickTextArea" class="material-icons">chevron_right</i>
+                    </div>
+                    <div class="vote-items" v-if="voteContents.length">
+                        <div class="vote-item" v-for="(content, idx) in voteContents" :key="idx">
+                            <i class="material-icons">check</i>
+                            <span v-html="content" />
+                        </div>
+                    </div>
                 </div>
                 <div class="item">
                     <PhotoInputArea
@@ -22,32 +41,70 @@
                 </div>
             </div>
         </div>
-        <BottomButton :label="$translate('SUBMIT')" />
+        <BottomButton @click="submit" :label="$translate('SUBMIT')" />
     </div>
 </template>
 
 <script>
 import PhotoInputArea from '@/components/app/PhotoInputArea'
+import voteService from '@/services/vote'
+
 export default {
     name: 'VoteCreatePage',
     components: {
         PhotoInputArea,
     },
     data: () => ({
-        customPhoto: null,
+        thumbnail: null,
         title: null,
         content: null,
         voteContents: [],
+        expire_at: null,
     }),
     methods: {
         updatePhoto(photo) {
-            this.customPhoto = photo
+            this.thumbnail = photo
         },
         clearPhoto() {
-            this.customPhoto = {
+            this.thumbnail = {
                 blob: null,
                 url: null,
             }
+        },
+        async onClickDatePicker() {
+            const date = await this.$modal.custom({
+                component: 'ModalDatePicker',
+                options: {},
+            })
+            if (date) this.expire_at = date
+        },
+        async onClickTextArea() {
+            const res = await this.$modal.custom({
+                component: 'ModalTextArea',
+                options: {
+                    content: this.voteContents.length ? this.voteContents.join('\n') : '',
+                },
+            })
+            console.log(res)
+            if (res) this.voteContents = res
+        },
+        async submit() {
+            const payload = {
+                title: this.title,
+                content: this.content,
+            }
+            if (this.thumbnail) payload.thumbnail = this.thumbnail.blob
+
+            const res = await voteService.createVote(this.preparePayload(payload))
+            console.log(res)
+        },
+        preparePayload(payload) {
+            const formData = new FormData()
+            Object.entries(payload).forEach(([key, value]) => {
+                formData.append(key, value)
+            })
+
+            return formData
         },
     },
 }
@@ -72,6 +129,25 @@ export default {
             .section-title {
                 font-size: 14px;
                 margin-bottom: 8px;
+            }
+            .item {
+                margin-bottom: 32px;
+            }
+            .between {
+                @include between;
+            }
+            .vote-items {
+                .vote-item {
+                    display: flex;
+                    align-items: center;
+                    i {
+                        font-size: 16px;
+                        margin-right: 8px;
+                    }
+                    span {
+                        font-size: 14px;
+                    }
+                }
             }
         }
     }

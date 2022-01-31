@@ -27,6 +27,8 @@ export default {
         ModalBasic: () => import('@/components/modals/ModalBasic'),
         ModalActionSheet: () => import('@/components/modals/ModalActionSheet'),
         ModalCropper: () => import('@/components/modals/ModalCropper'),
+        ModalDatePicker: () => import('@/components/modals/ModalDatePicker'),
+        ModalTextArea: () => import('@/components/modals/ModalTextArea'),
     },
     created() {
         document.addEventListener('keydown', this.onKeydown)
