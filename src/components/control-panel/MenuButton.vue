@@ -1,11 +1,11 @@
 <template>
     <div class="menu-button" @click="$emit('click')">
-        <div class="img-container">
-            <img v-if="selected" :src="icon.active" />
-            <img v-else :src="icon.inactive" />
-            <div v-if="!showBadgeCountAsDot && badgeCount > 0" class="badge badge-count" v-html="displayCount" />
-            <div v-else-if="showBadgeCountAsDot && badgeCount > 0" class="badge badge-no-count" />
-        </div>
+        <!--        <div class="img-container">-->
+        <!--            <img v-if="selected" :src="icon.active" />-->
+        <!--            <img v-else :src="icon.inactive" />-->
+        <!--            <div v-if="!showBadgeCountAsDot && badgeCount > 0" class="badge badge-count" v-html="displayCount" />-->
+        <!--            <div v-else-if="showBadgeCountAsDot && badgeCount > 0" class="badge badge-no-count" />-->
+        <!--        </div>-->
         <div
             class="menu-label f-medium"
             :class="{ selected: selected, 'no-margin': label === 'PRO_AGENTS' }"

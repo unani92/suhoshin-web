@@ -1,7 +1,11 @@
 <template>
     <div class="root-header-bar">
-        <img :src="require('@/assets/images/suhoshin.jpeg')" alt="" />
-        <img :src="me.thumbnail" alt="" />
+        <div class="left">
+            <img :src="require('@/assets/images/suhoshin.jpeg')" alt="" />
+        </div>
+        <div class="right">
+            <img :src="me.thumbnail" alt="" />
+        </div>
     </div>
 </template>
 
@@ -20,9 +24,22 @@ export default {
 <style lang="scss" scoped>
 .root-header-bar {
     width: 100vw;
-    //height: 48px;
-    //padding: 20px;
+    padding: 16px;
     display: flex;
     justify-content: space-between;
+
+    .left {
+        img {
+            width: 40px;
+            height: auto;
+        }
+    }
+    .right {
+        img {
+            width: 40px;
+            height: auto;
+            border-radius: 50%;
+        }
+    }
 }
 </style>

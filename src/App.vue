@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div class="flex">
-            <RootHeaderBar v-if="$isRootRoute() && !noheader" />
+            <RootHeaderBar v-if="!noheader" />
             <HeaderBar v-else-if="!noheader" class="flex-wrap" />
             <RouterView class="route" :class="{ root: $isRootRoute(), noheader: noheader, nonav: !$isRootRoute() }" />
             <ControlPanel v-if="$isRootRoute() && chatConnectionAllowed" class="flex-wrap" />
@@ -37,10 +37,7 @@ export default {
         },
         // 단순히 헤더가 정말로 필요 없거나, 커스텀 헤더를 쓰는 페이지들
         noheader() {
-            return (
-                ['FrontPage', 'HomePage'].indexOf(this.$route.name) !== -1 ||
-                this.$route.path.includes('/signup/verify/')
-            )
+            return ['FrontPage'].indexOf(this.$route.name) !== -1
         },
     },
     methods: {

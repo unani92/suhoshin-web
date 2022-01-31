@@ -50,11 +50,6 @@ router.beforeEach((to, from, next) => {
 
             // 등록된 핸들러가 True여서 라우트 이동을 해야하는데, 스택라우트면 pop
             if (!!allowBack && $store.getters.pageStack.length > 0) {
-                const isEditProfilePage =
-                    $store.getters.pageStack[$store.getters.pageStack - 1].name === 'EditProfilePage'
-                if (isEditProfilePage) {
-                    return next(false)
-                }
                 $store.dispatch('stackRouterPop')
                 return next(false)
             }

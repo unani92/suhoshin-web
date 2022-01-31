@@ -1,10 +1,10 @@
 <template>
     <div class="home">
-        <RootHeaderBar />
+        <ControlPanel />
     </div>
 </template>
 <script>
-import RootHeaderBar from '@/components/app/RootHeaderBar'
+import ControlPanel from '@/components/control-panel/ControlPanel'
 
 export default {
     name: 'HomePage',
@@ -15,24 +15,15 @@ export default {
         },
     },
     components: {
-        RootHeaderBar,
+        ControlPanel,
     },
     mounted() {
         this.init()
     },
     methods: {
         async init() {
-            try {
-                // me가 없다라는것은 로그인하지 않았다는 의미이기 때문에 logout 로직 수행
-                await this.initMe()
-            } catch (e) {
-                console.log(e)
-            }
-        },
-        async initMe() {
-            try {
-            } catch (e) {
-                return Promise.reject()
+            if (!this.me) {
+                this.$router.push({ name: 'FrontPage' })
             }
         },
     },

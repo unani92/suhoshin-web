@@ -35,23 +35,23 @@ export default {
         buttons() {
             const btns = [
                 {
-                    action: () => this.navigate('ChatsPage'),
-                    label: '대화방',
-                    badgeCount: this.numUnreads,
+                    action: () => {},
+                    label: '수호신 소개',
                     selected: this.$route.name === 'ChatsPage',
                 },
                 {
-                    action: () => {
-                        this.navigate('InvitationFriendPage')
-                    },
-                    label: '초대 리워드',
+                    action: () => {},
+                    label: '커뮤니티',
                     selected: this.$route.name === 'InvitationFriendPage',
                 },
                 {
-                    action: () => {
-                        this.navigate('MyPage')
-                    },
-                    label: '마이페이지',
+                    action: () => {},
+                    label: '투표 게시판',
+                    selected: this.$route.name === 'MyPage',
+                },
+                {
+                    action: () => {},
+                    label: '머테리얼',
                     selected: this.$route.name === 'MyPage',
                 },
             ]
@@ -73,11 +73,9 @@ export default {
 <style lang="scss" scoped>
 .control-panel {
     z-index: 1;
-    position: fixed;
+    //position: fixed;
     width: 100%;
-    bottom: 0;
-    background: white;
-    border-top: 1px solid $grey-02;
+    border-bottom: 1px solid $grey-02;
     height: $header-height;
 
     .menu-items {
