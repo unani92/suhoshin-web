@@ -45,7 +45,9 @@ export default {
                     selected: this.$route.name === 'InvitationFriendPage',
                 },
                 {
-                    action: () => {},
+                    action: () => {
+                        this.navigate('VotePage')
+                    },
                     label: '투표 게시판',
                     selected: this.$route.name === 'MyPage',
                 },

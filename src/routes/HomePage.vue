@@ -1,11 +1,7 @@
 <template>
-    <div class="home">
-        <ControlPanel />
-    </div>
+    <div class="home"></div>
 </template>
 <script>
-import ControlPanel from '@/components/control-panel/ControlPanel'
-
 export default {
     name: 'HomePage',
     data: () => ({}),
@@ -14,17 +10,15 @@ export default {
             return this.$store.getters.me
         },
     },
-    components: {
-        ControlPanel,
-    },
-    mounted() {
+    components: {},
+    created() {
         this.init()
     },
     methods: {
         async init() {
-            if (!this.me) {
-                this.$router.push({ name: 'FrontPage' })
-            }
+            // if (!this.me) {
+            //     this.$router.push({ name: 'FrontPage' })
+            // }
         },
     },
 }

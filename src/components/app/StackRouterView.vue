@@ -29,24 +29,6 @@ export default {
         },
     }),
     components: stackRouterComponents,
-    watch: {
-        pageStack(newVal) {
-            if (newVal.length === 0) {
-                this.setSwipeGesture(true)
-            } else {
-                this.setSwipeGesture(false)
-            }
-
-            if (newVal && newVal.length > 0) {
-                this.$ga.page(`/${newVal[newVal.length - 1].name}`)
-                setTimeout(() => {
-                    this.initEventListener()
-                }, 500)
-            } else {
-                this.$ga.page(this.$route.path)
-            }
-        },
-    },
     computed: {
         pageStack() {
             return this.$store.getters.pageStack || []
@@ -56,27 +38,6 @@ export default {
         },
         topComponent() {
             return this.$el.querySelector(`.component-${this.topComponentIndex}`)
-        },
-        hideSwipeLeftArea() {
-            return (
-                [
-                    'SearchKeywordsPage',
-                    'DatingStatusCheckPage',
-                    'ReportSubmitPage',
-                    'UserDetailPage',
-                    'EditStylePage',
-                    'SelectPersonalAgentsPage',
-                    'PremiumSurveyQuestionPage',
-                    'TodayMeetingPostMakePage',
-                    'TodayMeetingPostDetailPage',
-                    'SendContactPage',
-                    'RealFriendMeetingPostDetailPage',
-                    'RealFriendMeetingPostMakePage',
-                    'DatingReviewPostPage',
-                    'DatingCandidateSelectPage',
-                    'SettingsPage',
-                ].indexOf(this.pageStack[this.topComponentIndex].name) > -1
-            )
         },
     },
     methods: {
@@ -96,17 +57,6 @@ export default {
         },
         generateClassName(idx) {
             return `component-${idx}`
-        },
-        initEventListener() {
-            if (this.$isAndroid()) return
-
-            const elem = this.$el.querySelector('.swipe-left-area')
-
-            if (elem) {
-                elem.addEventListener('touchstart', this.touchStart)
-                elem.addEventListener('touchmove', this.touchMove)
-                elem.addEventListener('touchend', this.touchEnd)
-            }
         },
         translateX(idx) {
             if (idx !== this.topComponentIndex) return
@@ -148,12 +98,6 @@ export default {
             }
 
             this.locked = false
-        },
-        setSwipeGesture(allowed) {
-            this.$nativeBridge.postMessage({
-                action: 'allowSwipeGesture',
-                value: allowed,
-            })
         },
     },
 }

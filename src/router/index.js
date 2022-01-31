@@ -4,6 +4,7 @@ import { store as $store } from '@/store'
 import NotFoundPage from '@/routes/NotFoundPage'
 import HomePage from '@/routes/HomePage'
 import FrontPage from '@/routes/frontpage/FrontPage'
+import VotePage from '@/routes/votepage/VotePage'
 
 Vue.use(Router)
 
@@ -17,6 +18,11 @@ const routes = [
         path: '/front',
         name: 'FrontPage',
         component: FrontPage,
+    },
+    {
+        path: '/vote',
+        name: 'VotePage',
+        component: VotePage,
     },
     {
         path: '/not-found',
@@ -35,6 +41,9 @@ router.beforeEach((to, from, next) => {
     const found = router.options.routes.some(r => r.name === to.name)
     if (!found) {
         return next('/not-found')
+    }
+    if (to.name !== 'FrontPage' && !$store.getters.me) {
+        return next('/front')
     }
 
     window.onpopstate = () => {
@@ -69,6 +78,6 @@ router.beforeEach((to, from, next) => {
     next()
 })
 
-router.afterEach(() => {})
+router.afterEach((to, from) => {})
 
 export default router

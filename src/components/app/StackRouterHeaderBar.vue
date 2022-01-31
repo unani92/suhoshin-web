@@ -1,14 +1,15 @@
 <template>
-    <div class="stack-router-header-bar" :class="{ 'bg-black': mode === 'dark' }">
-        <div class="left-btn">
-            <transition name="fade">
-                <div class="title-wrapper" v-show="showTitle">
-                    <div class="title" v-html="$translate(title)" />
-                </div>
-            </transition>
+    <div class="stack-router-header-bar">
+        <div @click="onClickLeftButton" class="left-btn">
+            <i v-show="showLeftButton" class="material-icons">{{ leftButtonIcon }}</i>
         </div>
+        <transition name="fade">
+            <div class="title-wrapper" v-show="showTitle">
+                <div class="title" v-html="$translate(title)" />
+            </div>
+        </transition>
         <div class="right-btn flex-wrap">
-            <i v-show="showRightButton" @click="onClickRightBtn" class="material-icons">{{ rightButtonIcon }}</i>
+            <i v-show="showRightButton" class="material-icons">{{ rightButtonIcon }}</i>
         </div>
     </div>
 </template>
@@ -56,7 +57,7 @@ export default {
             return this.rightButton !== 'none'
         },
         leftButtonIcon() {
-            if (this.leftButton === 'back') return 'back'
+            if (this.leftButton === 'back') return 'arrow_back_ios'
             else if (this.leftButton === 'close') return 'close'
 
             return ''

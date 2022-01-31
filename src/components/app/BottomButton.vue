@@ -1,13 +1,5 @@
 <template>
     <div class="bottom-button" :class="{ nonFixed, bgTransparent, darkMode }">
-        <div v-if="needAddInfoTop" class="additional-info m-b-12">
-            <p>
-                *본인인증을 완료하면
-                <span class="c-primary text-underline" @click="openAppBrowser('service')">이용약관</span>,
-                <span class="c-primary text-underline" @click="openAppBrowser('privacy')">개인정보처리방침</span>에
-            </p>
-            <p>동의하는 것으로 간주합니다.</p>
-        </div>
         <button
             @click.stop="onClick"
             class="btn btn-block btn-primary"
@@ -26,10 +18,6 @@
             >
                 {{ btn.title }}
             </button>
-        </div>
-        <div class="additional-info m-t-12" v-if="needAddInfo">
-            <p><span class="c-primary f-medium">프로필에 표시되지 않아요</span></p>
-            <p>(매칭 참고용으로 매니저에게만 공유됩니다.)</p>
         </div>
     </div>
 </template>

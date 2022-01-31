@@ -1,10 +1,10 @@
 <template>
     <div id="app">
         <div class="flex">
-            <RootHeaderBar v-if="!noheader" />
-            <HeaderBar v-else-if="!noheader" class="flex-wrap" />
+            <RootHeaderBar v-if="!noheader && me" />
+            <ControlPanel />
             <RouterView class="route" :class="{ root: $isRootRoute(), noheader: noheader, nonav: !$isRootRoute() }" />
-            <ControlPanel v-if="$isRootRoute() && chatConnectionAllowed" class="flex-wrap" />
+            <ControlPanel v-if="$isRootRoute()" class="flex-wrap" />
         </div>
         <StackRouterView />
         <Toast />
@@ -15,7 +15,6 @@
 
 <script>
 import RootHeaderBar from '@/components/app/RootHeaderBar'
-import HeaderBar from '@/components/control-panel/HeaderBar'
 import ControlPanel from '@/components/control-panel/ControlPanel'
 import Toast from '@/components/app/Toast'
 import Modal from '@/components/app/Modal'
@@ -23,7 +22,6 @@ import StackRouterView from '@/components/app/StackRouterView'
 
 export default {
     components: {
-        HeaderBar,
         ControlPanel,
         Toast,
         Modal,
@@ -32,12 +30,12 @@ export default {
     },
     name: 'App',
     computed: {
-        chatConnectionAllowed() {
-            return ['FrontPage'].indexOf(this.$route.name) === -1 && !this.$route.path.includes('/signup/')
-        },
         // 단순히 헤더가 정말로 필요 없거나, 커스텀 헤더를 쓰는 페이지들
         noheader() {
             return ['FrontPage'].indexOf(this.$route.name) !== -1
+        },
+        me() {
+            return this.$store.getters.me
         },
     },
     methods: {
