@@ -2,6 +2,9 @@
   "CONFIRM": {
     "kr": "확인"
   },
+  "CANCEL": {
+    "kr": "취소"
+  },
   "SUBMIT": {
     "kr": "작성하기"
   }

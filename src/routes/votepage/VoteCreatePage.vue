@@ -13,7 +13,12 @@
                     <TextareaWithX v-model="content" />
                 </div>
                 <div class="item">
-                    <PhotoInputArea :isOption="true" @submitPhoto="updatePhoto" @clearPhoto="clearPhoto" />
+                    <PhotoInputArea
+                        mode="full-screen"
+                        :isOption="true"
+                        @submitPhoto="updatePhoto"
+                        @clearPhoto="clearPhoto"
+                    />
                 </div>
             </div>
         </div>

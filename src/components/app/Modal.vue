@@ -1,7 +1,15 @@
 <template>
     <transition name="modal">
-        <div class="modal" v-show="!transparent" @mousedown="closeOnMousedownMask">
-            <div :class="['ModalBasic'].includes(modal.component) ? 'modal-container-basic' : 'modal-container'">
+        <div class="modal" v-show="!transparent" v-if="!preventModal" @mousedown="closeOnMousedownMask">
+            <div
+                :class="
+                    modal.component === 'ModalBasic'
+                        ? 'modal-container-basic'
+                        : modal.component === 'ModalContact'
+                        ? 'modal-container-contact'
+                        : 'modal-container'
+                "
+            >
                 <component @close="onClose" :options="modal.options" :is="modal.component" />
             </div>
         </div>
@@ -18,6 +26,7 @@ export default {
     components: {
         ModalBasic: () => import('@/components/modals/ModalBasic'),
         ModalActionSheet: () => import('@/components/modals/ModalActionSheet'),
+        ModalCropper: () => import('@/components/modals/ModalCropper'),
     },
     created() {
         document.addEventListener('keydown', this.onKeydown)

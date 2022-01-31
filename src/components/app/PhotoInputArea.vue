@@ -33,6 +33,7 @@ export default {
     props: {
         from: String,
         isOption: Boolean,
+        mode: String,
     },
     data: () => ({
         customPhoto: {
@@ -66,6 +67,7 @@ export default {
                     component: 'ModalCropper',
                     options: {
                         imgFile: file,
+                        mode: this.mode,
                     },
                 })
                 .then(croppedFile => {
