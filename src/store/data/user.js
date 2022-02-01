@@ -20,7 +20,7 @@ const getters = {
 
 const actions = {
     async loadAuthToken({ commit, dispatch, getters }) {
-        const header = JSON.parse(window.localStorage.getItem('header'))
+        const header = JSON.parse(window.sessionStorage.getItem('header'))
         axios.setHeader(header)
         commit('setHeader', header)
     },
@@ -32,6 +32,7 @@ const actions = {
 
 const mutations = {
     setHeader(state, header) {
+        axios.setHeader(header)
         state.header = header
     },
     setMe(state, me) {

@@ -1,5 +1,6 @@
 import User from './user'
 import StackRouter from './stack-router'
+import Vote from './vote'
 
 const merged = {
     state: {},
@@ -8,7 +9,7 @@ const merged = {
     actions: {},
 }
 
-const objToMerge = [User, StackRouter]
+const objToMerge = [User, StackRouter, Vote]
 
 objToMerge.forEach(store => {
     ;['state', 'getters', 'mutations', 'actions'].forEach(storeKey => {

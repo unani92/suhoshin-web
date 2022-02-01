@@ -85,18 +85,32 @@ export default {
                     content: this.voteContents.length ? this.voteContents.join('\n') : '',
                 },
             })
-            console.log(res)
             if (res) this.voteContents = res
         },
         async submit() {
             const payload = {
                 title: this.title,
                 content: this.content,
+                expire_at: this.expire_at,
+                voteContents: this.voteContents,
             }
             if (this.thumbnail) payload.thumbnail = this.thumbnail.blob
 
-            const res = await voteService.createVote(this.preparePayload(payload))
-            console.log(res)
+            this.$loading(true)
+            try {
+                const {
+                    data: { status, msg },
+                } = await voteService.createVote(this.preparePayload(payload))
+                if (status === 200) {
+                    this.$toast.success(msg)
+                    this.$store.dispatch('loadVotes')
+                    this.$stackRouter.pop()
+                }
+            } catch (e) {
+                this.$toast.error(e.data.message)
+            } finally {
+                this.$loading(false)
+            }
         },
         preparePayload(payload) {
             const formData = new FormData()

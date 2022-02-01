@@ -7,7 +7,7 @@ const setHeader = header => {
     Object.keys(header).forEach(key => {
         axios.defaults.headers.common[key] = header[key]
     })
-    window.localStorage.setItem('header', JSON.stringify(header))
+    window.sessionStorage.setItem('header', JSON.stringify(header))
 }
 
 Vue.prototype.$http = axios

@@ -1,6 +1,8 @@
 <template>
     <div class="vote">
-        ajslkfasd
+        <main class="main" @scroll="onScroll">
+            <VoteItem :vote="vote" v-for="vote in votes" :key="vote.id" />
+        </main>
         <button class="btn" @click="onClickCreate">
             <i class="material-icons">add</i>
         </button>
@@ -8,22 +10,76 @@
 </template>
 
 <script>
+import VoteItem from '@/routes/votepage/components/VoteItem'
+
 export default {
     name: 'VotePage',
+    data: () => ({
+        lastScrollTop: 0,
+        page: 0,
+    }),
+    components: {
+        VoteItem,
+    },
+    computed: {
+        votes() {
+            return this.$store.getters.votes || []
+        },
+    },
     methods: {
         onClickCreate() {
             try {
-                console.log('click')
                 this.$stackRouter.push({ name: 'VoteCreatePage' })
             } catch (e) {
                 console.log(e)
             }
         },
+        async init() {
+            try {
+                this.$loading(true)
+                await this.$store.dispatch('loadVotes')
+            } catch (e) {
+                this.$toast.error(e.data)
+            } finally {
+                this.$loading(false)
+            }
+        },
+        async onScroll({ target }) {
+            if (this.votes.length < 10) return
+
+            const { scrollHeight, clientHeight, scrollTop } = target
+
+            // 스크롤 방향이 upwards면 리턴
+            if (scrollTop < this.lastScrollTop) return
+
+            this.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop
+
+            if (scrollTop + clientHeight > scrollHeight - 100) {
+                this.loading = true
+                await this.loadMore()
+                this.loading = false
+            }
+        },
+        async loadMore() {
+            try {
+                this.page += 1
+            } catch (e) {
+                this.$toast.error(e.data)
+            } finally {
+                this.$loading(false)
+            }
+        },
+    },
+    async mounted() {
+        await this.init()
     },
 }
 </script>
 
 <style scoped lang="scss">
+.vote {
+    padding: 16px;
+}
 .btn {
     position: absolute;
     bottom: calc(#{$header-height} + 16px);
