@@ -1,7 +1,7 @@
 <template>
     <div class="vote">
         <main class="main" @scroll="onScroll">
-            <VoteItem :vote="vote" v-for="vote in votes" :key="vote.id" />
+            <VoteItem @click.native="onClickDetail(vote)" :vote="vote" v-for="vote in votes" :key="vote.id" />
         </main>
         <button class="btn" @click="onClickCreate">
             <i class="material-icons">add</i>
@@ -34,6 +34,7 @@ export default {
                 console.log(e)
             }
         },
+        onClickDetail(vote) {},
         async init() {
             try {
                 this.$loading(true)
