@@ -1,10 +1,10 @@
 <template>
     <div class="vote-item">
-        <img :src="vote.thumbnail" alt="" />
+        <img class="m-r-8" :src="vote.thumbnail" alt="" />
         <div class="right">
             <div class="title">
                 <span v-html="vote.title" />
-                <div class="timeleft-badge" :class="expireAt.status" v-html="expireAt.text" />
+                <TimeLeft :vote="vote" />
             </div>
             <div class="content lines-2" v-html="vote.content" />
         </div>
@@ -12,11 +12,13 @@
 </template>
 
 <script>
+import TimeLeft from '@/routes/votepage/components/TimeLeft'
 export default {
     name: 'VoteItem',
     props: {
         vote: Object,
     },
+    components: { TimeLeft },
     computed: {
         expireAt() {
             const expireAt = this.vote.expire_at
@@ -49,22 +51,6 @@ export default {
     .right {
         width: calc(100% - 60px);
 
-        .timeleft-badge {
-            padding: 2px 4px;
-            color: white;
-            font-size: 8px;
-            background: #000000;
-            border-radius: 4px;
-            width: fit-content;
-
-            &.expired {
-                background: $grey-04;
-                color: black;
-            }
-            &.hour {
-                background: $suhoshin-red;
-            }
-        }
         .title {
             font-size: 15px;
             margin-bottom: 8px;

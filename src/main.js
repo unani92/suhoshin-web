@@ -21,6 +21,9 @@ import TextareaWithX from '@/components/app/TextareaWithX'
 import StackRouterView from '@/components/app/StackRouterView'
 import StackRouterHeaderBar from '@/components/app/StackRouterHeaderBar'
 import blankProfile from '@/assets/images/blank_profile.svg'
+import AdminUserComponent from '@/components/common/AdminUserComponent'
+
+// outer library
 import Calendar from 'v-calendar/lib/components/calendar.umd'
 import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 
@@ -52,6 +55,7 @@ Vue.component('StackRouterHeaderBar', StackRouterHeaderBar)
 Vue.component('Loading', Loading)
 Vue.component('Calendar', Calendar)
 Vue.component('DatePicker', DatePicker)
+Vue.component('AdminUserComponent', AdminUserComponent)
 
 require('@/assets/styles/index.scss')
 

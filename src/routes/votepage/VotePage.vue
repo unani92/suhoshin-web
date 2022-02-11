@@ -34,7 +34,9 @@ export default {
                 console.log(e)
             }
         },
-        onClickDetail(vote) {},
+        onClickDetail(vote) {
+            this.$stackRouter.push({ name: 'VoteDetailPage', props: { vote } })
+        },
         async init() {
             try {
                 this.$loading(true)
