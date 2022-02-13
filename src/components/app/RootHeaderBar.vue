@@ -1,7 +1,7 @@
 <template>
     <div class="root-header-bar">
         <div class="left">
-            <img :src="require('@/assets/images/suhoshin.jpeg')" alt="" />
+            <img @click="$router.push('/')" :src="require('@/assets/images/suhoshin.jpeg')" alt="" />
         </div>
         <div class="right">
             <img :src="me.thumbnail" alt="" />
@@ -32,6 +32,7 @@ export default {
         img {
             width: 40px;
             height: auto;
+            cursor: pointer;
         }
     }
     .right {
@@ -39,6 +40,7 @@ export default {
             width: 40px;
             height: auto;
             border-radius: 50%;
+            cursor: pointer;
         }
     }
 }
