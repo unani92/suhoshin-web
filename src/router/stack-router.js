@@ -1,6 +1,6 @@
 export const stackRouterComponents = {
-    VoteCreatePage: () => import('@/routes/votepage/VoteCreatePage'),
-    VoteDetailPage: () => import('@/routes/votepage/VoteDetailPage'),
+    VoteCreatePage: () => import('@/routes/vote/VoteCreatePage'),
+    VoteDetailPage: () => import('@/routes/vote/VoteDetailPage'),
 }
 
 export function isStackRoute(name) {

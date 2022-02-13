@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import VoteItem from '@/routes/votepage/components/VoteItem'
+import VoteItem from '@/routes/vote/components/VoteItem'
 
 export default {
     name: 'VotePage',

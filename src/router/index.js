@@ -3,8 +3,9 @@ import Router from 'vue-router'
 import { store as $store } from '@/store'
 import NotFoundPage from '@/routes/NotFoundPage'
 import HomePage from '@/routes/HomePage'
-import FrontPage from '@/routes/frontpage/FrontPage'
-import VotePage from '@/routes/votepage/VotePage'
+import FrontPage from '@/routes/front/FrontPage'
+import VotePage from '@/routes/vote/VotePage'
+import IntroducePage from '@/routes/introduce/IntroducePage'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ const routes = [
         path: '/vote',
         name: 'VotePage',
         component: VotePage,
+    },
+    {
+        path: '/intro',
+        name: 'IntroducePage',
+        component: IntroducePage,
     },
     {
         path: '/not-found',

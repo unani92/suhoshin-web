@@ -6,7 +6,7 @@ export default async (to, from, next) => {
             await $store.dispatch('loadAuthToken')
             next()
         } catch (err) {
-            next('/frontpage')
+            next('/front')
         }
     } else {
         next()

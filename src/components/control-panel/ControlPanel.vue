@@ -35,9 +35,11 @@ export default {
         buttons() {
             const btns = [
                 {
-                    action: () => {},
+                    action: () => {
+                        this.navigate('IntroducePage')
+                    },
                     label: '수호신 소개',
-                    selected: this.$route.name === 'ChatsPage',
+                    selected: this.$route.name === 'IntroducePage',
                 },
                 {
                     action: () => {},
@@ -49,7 +51,7 @@ export default {
                         this.navigate('VotePage')
                     },
                     label: '투표 게시판',
-                    selected: this.$route.name === 'MyPage',
+                    selected: this.$route.name === 'VotePage',
                 },
                 {
                     action: () => {},
@@ -81,7 +83,7 @@ export default {
     height: $header-height;
 
     .menu-items {
-        padding: 6px 0px;
+        //padding: 6px 0;
         height: 100%;
         width: 100%;
         display: flex;

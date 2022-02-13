@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import TimeLeft from '@/routes/votepage/components/TimeLeft'
+import TimeLeft from '@/routes/vote/components/TimeLeft'
 export default {
     name: 'VoteItem',
     props: {
