@@ -157,9 +157,7 @@ const deletePreviousDistribution = async (bucketName) => {
   s3.listObjectsV2({ Bucket: bucketName }, (err, data) => {
     const contents = data.Contents
     contents.forEach(content => {
-      s3.deleteObject({ Bucket: bucketName, Key: content.key }, (err,data) => {
-        return Promise.reject(err)
-      } )
+      s3.deleteObject({ Bucket: bucketName, Key: content.key })
     })
   })
   success('Bucket successfully got emptied!')

@@ -1,9 +1,6 @@
 <template>
-    <div class="front-page">
-        <img :src="require('@/assets/images/suhoshin.jpeg')" alt="" />
-        <div class="buttons">
-            <div @click="login" class="btn btn-kakao">카카오톡 시작하기</div>
-        </div>
+    <div class="front-page" v-lazy:background-image="require('@/assets/images/suhoshin-front.png')">
+        <BottomButton @click="login" :label="$translate('START_WITH_KAKAO')" />
     </div>
 </template>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -43,16 +40,19 @@ export default {
 <style scoped lang="scss">
 .front-page {
     @include between;
+    height: 100vh !important;
     flex-direction: column;
     padding: 16px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: auto 100vh;
 
-    img {
-        margin-top: 120px;
-        width: 120px;
-        height: auto;
-    }
-    .buttons {
-        width: 100%;
+    ::v-deep .bottom-button {
+        background: transparent;
+        button {
+            background: $yellow-kakao;
+            color: black;
+        }
     }
 }
 </style>
