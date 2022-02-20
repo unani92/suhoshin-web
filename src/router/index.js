@@ -39,6 +39,7 @@ const routes = [
 
 const createRouter = () =>
     new Router({
+        mode: 'history',
         routes: [...routes],
     })
 const router = createRouter()
@@ -59,17 +60,11 @@ router.beforeEach((to, from, next) => {
             $store.commit('popModal')
             return next(false)
         }
-        const currentCustomBackHandler = Vue.prototype.$backHandlers[to.name]
-        if (currentCustomBackHandler) {
-            const allowBack = currentCustomBackHandler()
+        console.log('1')
 
-            // 등록된 핸들러가 True여서 라우트 이동을 해야하는데, 스택라우트면 pop
-            if (!!allowBack && $store.getters.pageStack.length > 0) {
-                $store.dispatch('stackRouterPop')
-                return next(false)
-            }
-
-            return next(!!allowBack)
+        if ($store.getters.pageStack.length > 0) {
+            $store.dispatch('stackRouterPop')
+            return next(false)
         }
 
         // 스택 라우터에 등록되있으면
@@ -83,7 +78,5 @@ router.beforeEach((to, from, next) => {
 
     next()
 })
-
-router.afterEach((to, from) => {})
 
 export default router

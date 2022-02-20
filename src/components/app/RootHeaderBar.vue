@@ -17,7 +17,9 @@ export default {
             return this.$store.getters.me
         },
     },
-    methods: {},
+    methods: {
+        openMyPage() {},
+    },
 }
 </script>
 

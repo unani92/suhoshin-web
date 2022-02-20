@@ -31,19 +31,7 @@ export const Shortcuts = {
         }
 
         Vue.prototype.$isRootRoute = () =>
-            [
-                'FrontPage',
-                'ChatsPage',
-                'MyDatingPage',
-                'MyPage',
-                'SystemMaintenanceNoticePage',
-                'TodayMeetingPage',
-                'RealFriendMeetingPage',
-                'CommunicationPage',
-                'SchedulePage',
-                // 'InvitePage',
-                'InvitationFriendPage',
-            ].indexOf(router.currentRoute.name) !== -1
+            ['FrontPage', 'VotePage', 'IntroducePage'].indexOf(router.currentRoute.name) !== -1
 
         Vue.prototype.$loading = payload => {
             $store.commit('setLoading', payload)
