@@ -4,7 +4,7 @@
             <img @click="$router.push('/')" :src="require('@/assets/images/suhoshin.jpeg')" alt="" />
         </div>
         <div class="right">
-            <img :src="me.thumbnail" alt="" />
+            <img @click="openMyPage" :src="me.thumbnail" alt="" />
         </div>
     </div>
 </template>
@@ -18,7 +18,11 @@ export default {
         },
     },
     methods: {
-        openMyPage() {},
+        openMyPage() {
+            this.$modal.custom({
+                component: 'ModalMyPage',
+            })
+        },
     },
 }
 </script>

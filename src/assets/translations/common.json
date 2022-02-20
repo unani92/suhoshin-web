@@ -16,5 +16,14 @@
   },
   "VOTE_BOARD": {
     "kr": "투표 게시판"
+  },
+  "USER_STATUS_0": {
+    "kr": "준회원"
+  },
+  "USER_STATUS_1": {
+    "kr": "정회원"
+  },
+  "USER_STATUS_2": {
+    "kr": "운영진"
   }
 }

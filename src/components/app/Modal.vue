@@ -30,6 +30,7 @@ export default {
         ModalDatePicker: () => import('@/components/modals/ModalDatePicker'),
         ModalTextArea: () => import('@/components/modals/ModalTextArea'),
         ModalIntroduceGroup: () => import('@/components/modals/ModalIntroduceGroup'),
+        ModalMyPage: () => import('@/components/modals/ModalMyPage'),
     },
     created() {
         document.addEventListener('keydown', this.onKeydown)
