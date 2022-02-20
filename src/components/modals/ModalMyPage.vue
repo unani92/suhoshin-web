@@ -25,8 +25,20 @@
                     <div class="user-status">
                         <span class="m-r-4">회원등급: </span>
                         <span :class="`badge user-${me.user_status}`" v-html="userStatus" />
+                        <i
+                            @click="clickDeclinedReason"
+                            v-if="(request || {}).confirmed === -1"
+                            class="material-icons f-16 m-l-8"
+                            >info</i
+                        >
                     </div>
-                    <div @click="statusUpdate" class="btn btn-black">정회원 인증하기</div>
+                    <div
+                        @click="statusUpdate"
+                        :class="{ disabled: request.confirmed === 0 || me.user_status >= 1 }"
+                        class="btn btn-black"
+                    >
+                        {{ me.user_status >= 1 ? `인증 완료` : `정회원 인증하기` }}
+                    </div>
                 </div>
             </div>
             <div class="menus">
@@ -49,20 +61,35 @@
 </template>
 
 <script>
+import userStatusService from '@/services/userStatus'
+
 export default {
     name: 'ModalMyPage',
+    async mounted() {
+        const { data } = await userStatusService.getByUserId(this.me.id)
+        if (data.length) this.request = data[0]
+    },
+    data: () => ({
+        request: {},
+    }),
     computed: {
         me() {
             return this.$store.getters.me
         },
         userStatus() {
             const status = this.me.user_status
+            const pending = this.request.confirmed === 0
 
+            if (pending) return '심사중'
             return this.$translate(`USER_STATUS_${status}`)
         },
     },
     methods: {
         statusUpdate() {
+            if (this.request.confirmed === 0 || this.me.user_status >= 1) {
+                return
+            }
+
             this.$emit('close')
             setTimeout(() => {
                 this.$stackRouter.push({
@@ -75,6 +102,9 @@ export default {
             setTimeout(() => {
                 this.$router.push('/admin')
             }, 100)
+        },
+        clickDeclinedReason() {
+            this.$toast.success(this.request.declined_reason, null, 4000)
         },
     },
 }
@@ -120,14 +150,26 @@ export default {
                 height: 32px;
                 font-size: 14px;
                 cursor: pointer;
+
+                &.disabled {
+                    background: $grey-04;
+                    color: $grey-09;
+                }
             }
             .badge {
                 @include spoqa-f-bold;
                 font-size: 12px;
-                padding: 2px;
+                padding: 2px 4px;
                 border-radius: 4px;
                 color: white;
                 background: $grey-06;
+
+                &.user-1 {
+                    background: $suhoshin-red;
+                }
+                &.user-2 {
+                    background: $yellow-kakao;
+                }
             }
         }
         .menus {

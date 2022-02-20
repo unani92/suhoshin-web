@@ -44,9 +44,21 @@ export default {
             })
         },
         async onClickHandle(item, status) {
-            const { data } = await userStatusService.handleRequest(item.id, { user_id: item.user.id, status })
+            let reason
+            if (!status) {
+                reason = await this.$modal.custom({
+                    component: 'ModalInput',
+                })
+            }
+            const payload = {
+                user_id: item.user.id,
+                status,
+            }
+            if (reason) payload.declined_reason = reason
+            const { data } = await userStatusService.handleRequest(item.id, payload)
 
-            console.log(data)
+            this.list = this.list.filter(l => l.id !== item.id)
+            this.$toast.success(data.msg)
         },
     },
 }

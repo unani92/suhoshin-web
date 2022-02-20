@@ -29,6 +29,7 @@ export default {
         ModalCropper: () => import('@/components/modals/ModalCropper'),
         ModalDatePicker: () => import('@/components/modals/ModalDatePicker'),
         ModalTextArea: () => import('@/components/modals/ModalTextArea'),
+        ModalInput: () => import('@/components/modals/ModalInput'),
         ModalIntroduceGroup: () => import('@/components/modals/ModalIntroduceGroup'),
         ModalMyPage: () => import('@/components/modals/ModalMyPage'),
         ModalImages: () => import('@/components/modals/ModalImages'),
