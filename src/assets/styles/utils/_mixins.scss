@@ -154,3 +154,32 @@
         @include center;
     }
 }
+
+@mixin default-create-layout {
+    padding-bottom: 120px;
+
+    .container {
+        padding: 16px;
+
+        .title {
+            font-size: 18px;
+            text-align: center;
+            color: black;
+            margin-bottom: 24px;
+            @include spoqa-f-bold;
+        }
+
+        .section {
+            .section-title {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+            .item {
+                margin-bottom: 32px;
+            }
+            .between {
+                @include between;
+            }
+        }
+    }
+}

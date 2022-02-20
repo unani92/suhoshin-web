@@ -80,7 +80,7 @@ export default {
         confirm() {
             const blobToFile = blob => new File([blob], this.options.imgFile.name, { type: 'image/jpeg' })
 
-            this.cropper.getCroppedCanvas().toBlob(blob => this.$emit('close', blobToFile(blob)))
+            this.cropper.getCroppedCanvas().toBlob(blob => this.$emit('close', blobToFile(blob)), 'image/jpeg', 0.7)
         },
     },
 }

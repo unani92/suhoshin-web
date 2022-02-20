@@ -26,7 +26,7 @@
                         <span class="m-r-4">회원등급: </span>
                         <span :class="`badge user-${me.user_status}`" v-html="userStatus" />
                     </div>
-                    <div class="btn btn-black">정회원 인증하기</div>
+                    <div @click="statusUpdate" class="btn btn-black">정회원 인증하기</div>
                 </div>
             </div>
             <div class="menus"></div>
@@ -53,6 +53,16 @@ export default {
             const status = this.me.user_status
 
             return this.$translate(`USER_STATUS_${status}`)
+        },
+    },
+    methods: {
+        statusUpdate() {
+            this.$emit('close')
+            setTimeout(() => {
+                this.$stackRouter.push({
+                    name: 'StatusUpdatePage',
+                })
+            }, 100)
         },
     },
 }
@@ -97,6 +107,7 @@ export default {
                 margin-top: 12px;
                 height: 32px;
                 font-size: 14px;
+                cursor: pointer;
             }
             .badge {
                 @include spoqa-f-bold;

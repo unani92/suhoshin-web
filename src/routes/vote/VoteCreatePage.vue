@@ -32,6 +32,7 @@
                     </div>
                 </div>
                 <div class="item">
+                    <div class="section-title">사진(선택)</div>
                     <PhotoInputArea
                         mode="full-screen"
                         :isOption="true"
@@ -126,42 +127,18 @@ export default {
 
 <style scoped lang="scss">
 .vote-create {
-    padding-bottom: 120px;
+    @include default-create-layout;
 
-    .content {
-        padding: 16px;
-
-        .title {
-            font-size: 18px;
-            text-align: center;
-            color: black;
-            margin-bottom: 24px;
-            @include spoqa-f-bold;
-        }
-
-        .section {
-            .section-title {
+    .vote-items {
+        .vote-item {
+            display: flex;
+            align-items: center;
+            i {
+                font-size: 16px;
+                margin-right: 8px;
+            }
+            span {
                 font-size: 14px;
-                margin-bottom: 8px;
-            }
-            .item {
-                margin-bottom: 32px;
-            }
-            .between {
-                @include between;
-            }
-            .vote-items {
-                .vote-item {
-                    display: flex;
-                    align-items: center;
-                    i {
-                        font-size: 16px;
-                        margin-right: 8px;
-                    }
-                    span {
-                        font-size: 14px;
-                    }
-                }
             }
         }
     }

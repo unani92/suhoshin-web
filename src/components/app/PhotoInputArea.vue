@@ -1,9 +1,5 @@
 <template>
     <div class="photo-input">
-        <div class="m-b-12">
-            <span class="section-title f-14">사진</span>
-            <span class="f-14">{{ this.from === 'group' ? '' : ' (선택)' }}</span>
-        </div>
         <div class="photo center" :class="from === 'dating-review' ? 'white' : ''" @click="onClickPhoto">
             <div class="img-container" v-if="customPhoto.url">
                 <i @click.stop="onClickClear" class="material-icons">clear</i>
@@ -11,10 +7,6 @@
             </div>
             <div v-else class="flex center">
                 <i class="material-icons f-36 m-b-10">photo</i>
-                <div v-if="from === 'todaymeeting'">
-                    <p class="text-center f-14 c-text-dark m-b-30" v-html="$translate('AUTO_PHOTO_GENERATED')" />
-                    <div class="btn btn-primary" v-html="$translate('UPLOAD_PHOTO')" />
-                </div>
             </div>
         </div>
         <input
@@ -90,7 +82,7 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
-
+    @include center;
     i {
         border-radius: 50%;
         padding: 4px;
@@ -103,7 +95,7 @@ export default {
     }
 
     img {
-        width: 100%;
+        width: auto;
         height: 100%;
         border-radius: 10px;
     }
