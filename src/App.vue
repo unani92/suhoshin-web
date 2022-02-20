@@ -1,10 +1,11 @@
 <template>
     <div id="app">
         <div class="flex">
-            <RootHeaderBar v-if="!noheader && me" />
-            <ControlPanel />
+            <div v-if="!noheader && me">
+                <RootHeaderBar />
+                <ControlPanel />
+            </div>
             <RouterView class="route" :class="{ root: $isRootRoute(), noheader: noheader, nonav: !$isRootRoute() }" />
-            <ControlPanel v-if="$isRootRoute()" class="flex-wrap" />
         </div>
         <StackRouterView />
         <Toast />
@@ -32,7 +33,7 @@ export default {
     computed: {
         // 단순히 헤더가 정말로 필요 없거나, 커스텀 헤더를 쓰는 페이지들
         noheader() {
-            return ['FrontPage'].indexOf(this.$route.name) !== -1
+            return ['FrontPage', 'AdminPage'].indexOf(this.$route.name) !== -1
         },
         me() {
             return this.$store.getters.me

@@ -25,5 +25,14 @@
   },
   "USER_STATUS_2": {
     "kr": "운영진"
+  },
+  "ADMIN_PAGE": {
+    "kr": "관리자 메뉴"
+  },
+  "STATUS_UPDATE": {
+    "kr": "정회원 인증심사"
+  },
+  "CHECK_NOTE": {
+    "kr": "쪽지 확인"
   }
 }

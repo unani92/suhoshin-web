@@ -1,7 +1,8 @@
 <template>
     <div class="header-bar flex-row">
         <div @click="onClickLeftButton" class="left flex-row flex-wrap center">
-            <div class="title f-medium center" v-html="$translate(hideTitle ? '' : title)" />
+            <i class="material-icons m-r-16">chevron_left</i>
+            <div class="title f-medium center" v-html="$translate(title)" />
         </div>
         <div class="right flex-wrap"></div>
     </div>
@@ -11,7 +12,7 @@
 export default {
     name: 'HeaderBar',
     data: () => ({
-        title: 'VANILLABRIDGE',
+        title: 'ADMIN',
         customTitle: null,
     }),
     watch: {
@@ -41,20 +42,10 @@ export default {
     },
     methods: {
         initTitle() {
-            if (this.onboardTempSignup) {
-                this.title = '상담정보'
-                return
-            }
             this.title = this.customTitle || this.$case.toSnake(this.$route.name).toUpperCase()
             this.customTitle = ''
         },
         onClickLeftButton() {
-            // 여기에 직접 로직이 들어가는게 좀 그렇긴 하지만 다른 방법이...?
-            if (this.$route.name === 'PreferencesIntroPage') {
-                this.$router.push({ name: 'HomePage' })
-                return
-            }
-
             this.$router.go(-1)
         },
     },
@@ -89,6 +80,8 @@ export default {
     .left,
     .right {
         //width: 60px;
+        display: flex;
+        align-content: center;
         transition: none;
     }
 

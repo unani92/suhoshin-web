@@ -6,6 +6,7 @@ import HomePage from '@/routes/HomePage'
 import FrontPage from '@/routes/front/FrontPage'
 import VotePage from '@/routes/vote/VotePage'
 import IntroducePage from '@/routes/introduce/IntroducePage'
+import AdminPage from '@/routes/my-page/AdminPage'
 
 Vue.use(Router)
 
@@ -29,6 +30,11 @@ const routes = [
         path: '/intro',
         name: 'IntroducePage',
         component: IntroducePage,
+    },
+    {
+        path: '/admin',
+        name: 'AdminPage',
+        component: AdminPage,
     },
     {
         path: '/not-found',
@@ -60,7 +66,6 @@ router.beforeEach((to, from, next) => {
             $store.commit('popModal')
             return next(false)
         }
-        console.log('1')
 
         if ($store.getters.pageStack.length > 0) {
             $store.dispatch('stackRouterPop')

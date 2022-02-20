@@ -29,8 +29,14 @@
                     <div @click="statusUpdate" class="btn btn-black">정회원 인증하기</div>
                 </div>
             </div>
-            <div class="menus"></div>
+            <div class="menus">
+                <div class="item" @click="routeAdmin" v-if="me.user_status === 2">
+                    <span>운영진 메뉴</span>
+                    <i class="material-icons">chevron_right</i>
+                </div>
+            </div>
         </div>
+
         <div class="ticket-deco">
             <div class="deco-container">
                 <div class="red bar" />
@@ -62,6 +68,12 @@ export default {
                 this.$stackRouter.push({
                     name: 'StatusUpdatePage',
                 })
+            }, 100)
+        },
+        routeAdmin() {
+            this.$emit('close')
+            setTimeout(() => {
+                this.$router.push('/admin')
             }, 100)
         },
     },
@@ -119,6 +131,11 @@ export default {
             }
         }
         .menus {
+            margin-top: 32px;
+
+            .item {
+                @include between;
+            }
         }
     }
 }

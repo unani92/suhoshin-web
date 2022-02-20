@@ -15,6 +15,21 @@ export default {
         }
     },
     methods: {
+        async testLogin() {
+            const {
+                data: { jwtToken, me },
+            } = await userService.testLogin({
+                uuid: 1111,
+                nickname: '테스터',
+                email: 'unani9922@naver.com',
+                thumbnail: 'http://k.kakaocdn.net/dn/FehL4/btrjcAI6D68/vzKSRj3PnS6dL7mB9K3wO1/img_110x110.jpg',
+            })
+            const header = { Authorization: `Bearer ${jwtToken}` }
+            this.$store.commit('setHeader', header)
+            this.$store.commit('setMe', me)
+
+            this.$router.push({ name: 'HomePage' })
+        },
         login() {
             window.Kakao.Auth.login({
                 success: this.getKaKaoInfo,
