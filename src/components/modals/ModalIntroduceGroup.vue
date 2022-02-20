@@ -4,16 +4,16 @@
             <i @click="$emit('close')" class="material-icons">close</i>
         </div>
         <div class="container">
-            <div class="left">
+            <div class="top">
                 <div class="logo">
                     <div class="img-container" v-lazy:background-image="options.logo_img" />
                 </div>
-            </div>
-            <div class="right">
-                <div class="top">
+                <div class="name-intro">
                     <div class="name c-black f-16 m-b-8" v-html="options.name" />
                     <div class="intro-shorten c-grey-07 f-12" v-html="options.intro_shorten || '소개를 입력해주세요'" />
                 </div>
+            </div>
+            <div class="bottom">
                 <div class="bottom" v-if="options.intro">
                     <p v-html="options.intro.split(/\n/).join('<br>')" />
                     <div class="sns-link">
@@ -62,31 +62,26 @@ export default {
     }
 
     .container {
-        display: flex;
-    }
-
-    .left {
-        .logo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-
-            .img-container {
-                width: 70%;
-                height: 70%;
-                border-radius: 50%;
-                border: 2px solid #111111;
-                background-size: cover;
-                background-position: center center;
-            }
-        }
-    }
-    .right {
         .top {
+            display: flex;
+            align-items: center;
             padding-bottom: 12px;
-            border-bottom: 1px solid $grey-06;
-            height: fit-content;
-            line-height: 16px;
+            border-bottom: 1px solid $grey-03;
+
+            .logo {
+                border-radius: 50%;
+                margin-right: 12px;
+                @include between;
+
+                .img-container {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                    border: 2px solid #111111;
+                    background-size: cover;
+                    background-position: center center;
+                }
+            }
         }
         .bottom {
             padding-top: 16px;
