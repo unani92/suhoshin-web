@@ -40,6 +40,7 @@
 <script>
 import PhotoInputArea from '@/components/app/PhotoInputArea'
 import SelectInput from '@/components/app/SelectInput'
+import userStatusService from '@/services/userStatus'
 
 export default {
     name: 'StatusUpdatePage',
@@ -55,7 +56,35 @@ export default {
         },
     },
     methods: {
-        async submit() {},
+        preparePayload(payload) {
+            const formData = new FormData()
+            Object.entries(payload).forEach(([key, value]) => {
+                formData.append(key, value)
+            })
+
+            return formData
+        },
+        async submit() {
+            try {
+                this.$loading(true)
+                let payload = {
+                    content: this.content,
+                    group_id: this.selectedGroup.id,
+                }
+                if (this.thumbnail) payload.thumbnail = this.thumbnail.blob
+                payload = this.preparePayload(payload)
+
+                const {
+                    data: { msg },
+                } = await userStatusService.createVerify(payload)
+                this.$toast.success(msg)
+                this.$stackRouter.pop()
+            } catch (e) {
+                console.log(e)
+            } finally {
+                this.$loading(false)
+            }
+        },
         updatePhoto(photo) {
             this.thumbnail = photo
         },
