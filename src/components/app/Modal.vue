@@ -31,6 +31,7 @@ export default {
         ModalTextArea: () => import('@/components/modals/ModalTextArea'),
         ModalIntroduceGroup: () => import('@/components/modals/ModalIntroduceGroup'),
         ModalMyPage: () => import('@/components/modals/ModalMyPage'),
+        ModalImages: () => import('@/components/modals/ModalImages'),
     },
     created() {
         document.addEventListener('keydown', this.onKeydown)

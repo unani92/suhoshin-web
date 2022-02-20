@@ -4,7 +4,7 @@
         <div class="content">
             <ul class="menu">
                 <li class="item" v-for="item in upper" :key="item.key" @click="onClickMenu(item)">
-                    <i class="material-icons-outlined icon" v-if="item.icon">{item.icon}</i>
+                    <i class="material-icons-outlined icon" v-if="item.icon">{{ item.icon }}</i>
                     <span class="key" v-html="$translate(item.key)" />
                 </li>
             </ul>
@@ -17,17 +17,22 @@ import HeaderBar from '@/components/control-panel/HeaderBar'
 export default {
     name: 'AdminPage',
     components: { HeaderBar },
+    mounted() {
+        if (this.$store.getters.me.user_status !== 2) this.$router.push('/')
+    },
     computed: {
         upper() {
             return [
                 {
                     key: 'STATUS_UPDATE',
-                    route: 'pgTest',
+                    route: 'StatusUpdateAdminPage',
+                    icon: 'account_circle',
                     show: true,
                 },
                 {
                     key: 'CHECK_NOTE',
                     route: 'BlockUserPage',
+                    icon: 'mail_outline',
                     show: false,
                 },
             ]

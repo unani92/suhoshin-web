@@ -246,6 +246,15 @@
     @include modal-fullscreen;
     padding-bottom: 0 !important;
     background-color: black !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .close {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
 
     .icon-wrapper {
         position: absolute;

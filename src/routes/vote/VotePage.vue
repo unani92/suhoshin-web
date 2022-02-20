@@ -3,7 +3,7 @@
         <main class="main" @scroll="onScroll">
             <VoteItem @click.native="onClickDetail(vote)" :vote="vote" v-for="vote in votes" :key="vote.id" />
         </main>
-        <button class="btn" @click="onClickCreate">
+        <button v-if="$store.getters.me.user_status === 2" class="btn" @click="onClickCreate">
             <i class="material-icons">add</i>
         </button>
     </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="vote-create">
         <StackRouterHeaderBar />
-        <div class="content">
+        <div class="container">
             <div class="title">투표 생성</div>
             <div class="section">
                 <div class="item">
