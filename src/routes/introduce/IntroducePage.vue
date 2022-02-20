@@ -11,7 +11,11 @@
             <p class="f-12 c-grey-06">클릭 시 소개화면으로 넘어갑니다</p>
             <div class="grid-col">
                 <div class="item" v-for="group in groups" :key="group.id">
-                    <div @click="onClickGroupIntro(group)" class="img-circle" v-lazy:background-image="group.img" />
+                    <div
+                        @click="onClickGroupIntro(group)"
+                        class="img-circle"
+                        v-lazy:background-image="group.logo_img"
+                    />
                 </div>
             </div>
         </div>
@@ -31,18 +35,8 @@ export default {
     },
     computed: {
         groups() {
-            return [
-                {
-                    id: 1,
-                    name: '타나토스',
-                    img: require('@/assets/images/suhoshin-groups/tnts-logo.png'),
-                    intro_shorten: 'Gruppo THANATOS는 2008년 만들어진 FC서울의 지지자그룹입니다',
-                    intro:
-                        'GRUPPO THANATOS와 함께할 형제를 모집합니다.\n성산의 청춘을 함께 그려나갈, 전국 팔도에서 날뛸수있는, 서울을 사랑하는 남자라면\n언제든 문의바랍니다. 📢🥁',
-                    homepage: 'http://tnts08.com',
-                    sns: 'https://www.instagram.com/p/CZLWMFqvbs6/?utm_medium=copy_link',
-                },
-            ]
+            const allGroups = this.$store.getters.groups
+            return allGroups.filter(item => item.id)
         },
     },
 }
@@ -81,7 +75,7 @@ export default {
                     border-radius: 50%;
                     border: 2px solid #111111;
                     background-size: cover;
-                    background-position: center 8px;
+                    background-position: center center;
                 }
             }
         }

@@ -1,6 +1,6 @@
 <template>
     <transition name="modal">
-        <div class="modal" v-show="!transparent" v-if="!preventModal" @mousedown="closeOnMousedownMask">
+        <div class="modal" v-show="!transparent" @mousedown="closeOnMousedownMask">
             <div
                 :class="
                     modal.component === 'ModalBasic'

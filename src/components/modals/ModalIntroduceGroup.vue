@@ -6,20 +6,29 @@
         <div class="container">
             <div class="left">
                 <div class="logo">
-                    <div class="img-container" v-lazy:background-image="options.img" />
+                    <div class="img-container" v-lazy:background-image="options.logo_img" />
                 </div>
             </div>
             <div class="right">
                 <div class="top">
                     <div class="name c-black f-16 m-b-8" v-html="options.name" />
-                    <div class="intro-shorten c-grey-07 f-12" v-html="options.intro_shorten" />
+                    <div class="intro-shorten c-grey-07 f-12" v-html="options.intro_shorten || '소개를 입력해주세요'" />
                 </div>
-                <div class="bottom">
+                <div class="bottom" v-if="options.intro">
                     <p v-html="options.intro.split(/\n/).join('<br>')" />
                     <div class="sns-link">
                         <p class="m-r-8">SNS:</p>
-                        <img @click="onClickInsta" class="m-r-8" :src="require('@/assets/icons/icon-instagram.png')" />
-                        <img @click="onClickHomePage" :src="require('@/assets/icons/icon-homepage.png')" />
+                        <img
+                            v-if="options.sns"
+                            @click="onClickInsta"
+                            class="m-r-8"
+                            :src="require('@/assets/icons/icon-instagram.png')"
+                        />
+                        <img
+                            v-if="options.homepage"
+                            @click="onClickHomePage"
+                            :src="require('@/assets/icons/icon-homepage.png')"
+                        />
                     </div>
                 </div>
             </div>
@@ -68,7 +77,7 @@ export default {
                 border-radius: 50%;
                 border: 2px solid #111111;
                 background-size: cover;
-                background-position: center 8px;
+                background-position: center center;
             }
         }
     }

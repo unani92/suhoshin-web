@@ -1,3 +1,5 @@
+// import Vue from 'vue'
+
 // initial state
 const defaultState = () => ({
     toast: {
@@ -15,12 +17,8 @@ const defaultState = () => ({
         requested: false,
         cardRecommendations: false,
     },
-    buildNumberFrontend: null,
-    niceData: null,
-    deviceToken: null,
     isAppFirstLoaded: false,
-    contacts: [],
-    registeredContactsLength: 0,
+    groups: [],
 })
 
 const state = defaultState()
@@ -31,12 +29,8 @@ const getters = {
     modals: state => state.modals,
     loading: state => state.loading,
     global: state => state.global,
-    buildNumberFrontend: state => state.buildNumberFrontend,
-    niceData: state => state.niceData,
-    deviceToken: state => state.deviceToken,
     isAppFirstLoaded: state => state.isAppFirstLoaded,
-    contacts: state => state.contacts,
-    registeredContactsLength: state => state.registeredContactsLength,
+    groups: state => state.groups,
 }
 
 // actions
@@ -95,6 +89,9 @@ const mutations = {
     },
     popModal(state) {
         state.modals.pop()
+    },
+    setGroups(state, value) {
+        state.groups = value
     },
 }
 
