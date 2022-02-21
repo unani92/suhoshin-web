@@ -54,6 +54,15 @@ export default {
         groups() {
             return this.$store.getters.groups
         },
+        disabled() {
+            if (!this.selectedGroup) return true
+
+            if (this.selectedGroup.id === 0) {
+                return !(this.content && this.thumbnail)
+            }
+
+            return this.content
+        },
     },
     methods: {
         preparePayload(payload) {
