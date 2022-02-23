@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "serve-test": "vue-cli-service serve --mode test",
     "build-test": "vue-cli-service build --mode test",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build && cp ./robots.txt dist/",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

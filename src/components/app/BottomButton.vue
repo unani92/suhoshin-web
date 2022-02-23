@@ -96,7 +96,7 @@ export default {
         padding: 0;
         border: none !important;
     }
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;

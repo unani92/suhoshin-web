@@ -49,6 +49,7 @@ export default {
                 reason = await this.$modal.custom({
                     component: 'ModalInput',
                 })
+                if (!reason) return
             }
             const payload = {
                 user_id: item.user.id,
@@ -74,6 +75,7 @@ export default {
             padding: 8px;
             border: 1px solid $grey-04;
             border-radius: 8px;
+            margin-bottom: 8px;
 
             .left {
                 display: flex;
