@@ -1,7 +1,7 @@
 <template>
     <div class="textarea-with-x flex-column select-wrapper">
         <div class="flex-fill select flex-between" @click="expandOptions" :class="{ open: expand }">
-            <div v-html="isSelected.name || '선택'" />
+            <div v-html="isSelected.name || placeholder || '선택'" />
             <img
                 class="m-r-2"
                 :src="require(`@/assets/images/icons/${expand ? 'arrow_open' : 'arrow_closed'}.png`)"
@@ -26,7 +26,7 @@
 <script>
 export default {
     name: 'SelectInput',
-    props: ['options', 'alreadySelected', 'scrollFix', 'stage'],
+    props: ['options', 'alreadySelected', 'scrollFix', 'stage', 'placeholder'],
     data: () => ({
         expand: false,
         isSelected: {},
@@ -85,13 +85,14 @@ export default {
         align-items: center;
         padding: 2px 16px;
         &.open {
-            border: 1px solid #3da1ff;
+            border: 1px solid $suhoshin-red;
         }
     }
     .option-box {
+        z-index: 30;
         position: absolute;
         left: 0;
-        bottom: -180px;
+        bottom: -110px;
         margin: 4px 0px;
         border-radius: 8px;
         border: 1px solid #e9e9ed;

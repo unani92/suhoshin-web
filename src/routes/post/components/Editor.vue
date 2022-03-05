@@ -1,7 +1,7 @@
 <template>
     <div>
         <div ref="editor" id="editor" />
-        <BottomButton @click="save" />
+        <BottomButton :disabled="disabled" @click="save" />
     </div>
 </template>
 
@@ -12,6 +12,7 @@ import postService from '@/services/post'
 
 export default {
     name: 'Editor',
+    props: ['disabled'],
     data: () => ({
         imgData: null,
         imgNum: 0,
@@ -20,6 +21,7 @@ export default {
     methods: {
         save() {
             const data = this.editor.getHTML()
+            console.log(data)
             this.$emit('save', data)
         },
         preparePayload(payload) {
@@ -41,7 +43,7 @@ export default {
             el: document.getElementById('editor'),
             initialEditType: 'wysiwyg',
             hideModeSwitch: true,
-            height: 'calc(100vh - 250px)',
+            height: 'calc(100vh - 300px)',
             toolbarItems: [
                 ['heading', 'bold', 'italic', 'strike'],
                 ['image', 'link'],
