@@ -2,8 +2,6 @@
     <div class="home"></div>
 </template>
 <script>
-import commonService from '@/services/common'
-
 export default {
     name: 'HomePage',
     data: () => ({}),
@@ -17,10 +15,7 @@ export default {
         this.init()
     },
     methods: {
-        async init() {
-            const { data } = await commonService.loadGroups()
-            this.$store.commit('setGroups', data)
-        },
+        async init() {},
     },
 }
 </script>

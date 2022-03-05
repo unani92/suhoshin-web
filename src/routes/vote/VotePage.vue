@@ -3,7 +3,7 @@
         <main class="main" @scroll="onScroll">
             <VoteItem @click.native="onClickDetail(vote)" :vote="vote" v-for="vote in votes" :key="vote.id" />
         </main>
-        <button v-if="$store.getters.me.user_status === 2" class="btn" @click="onClickCreate">
+        <button v-if="$store.getters.me.user_status === 2" class="btn floating-btn" @click="onClickCreate">
             <i class="material-icons">add</i>
         </button>
     </div>
@@ -82,21 +82,5 @@ export default {
 <style scoped lang="scss">
 .vote {
     padding: 16px;
-}
-.btn {
-    position: absolute;
-    bottom: calc(#{$header-height} + 16px);
-    right: 16px;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    box-shadow: 1px 1px 12px 0 rgba(0, 0, 0, 0.1), 2px 2px 8px 0 rgba(0, 0, 0, 0.15);
-    //background-image: linear-gradient(135deg, $suhoshin-red, $pink-woman);
-    background: $suhoshin-red;
-
-    .material-icons {
-        font-size: 28px;
-    }
-    @include center;
 }
 </style>

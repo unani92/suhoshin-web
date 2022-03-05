@@ -26,6 +26,7 @@ import AdminUserComponent from '@/components/common/AdminUserComponent'
 // outer library
 import Calendar from 'v-calendar/lib/components/calendar.umd'
 import DatePicker from 'v-calendar/lib/components/date-picker.umd'
+import '@toast-ui/editor/dist/toastui-editor.css'
 
 Vue.use(VueClipboard)
 Vue.use(VueLazyLoad, {

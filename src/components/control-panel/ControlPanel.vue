@@ -42,9 +42,11 @@ export default {
                     selected: this.$route.name === 'IntroducePage',
                 },
                 {
-                    action: () => {},
+                    action: () => {
+                        this.navigate('PostPage')
+                    },
                     label: '커뮤니티',
-                    selected: this.$route.name === 'InvitationFriendPage',
+                    selected: this.$route.name === 'PostPage',
                 },
                 {
                     action: () => {

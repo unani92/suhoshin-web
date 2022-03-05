@@ -40,7 +40,16 @@ export default {
         },
     },
     methods: {
-        async init() {},
+        async init() {
+            try {
+                await this.$store.dispatch('loadAuthToken')
+                await this.$store.dispatch('afterAuthCallbacks')
+            } catch (e) {
+                if (e.status === 401) {
+                    this.$store.dispatch('signOut')
+                }
+            }
+        },
     },
     created() {
         this.init()

@@ -257,3 +257,19 @@ button {
 button {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
+
+.floating-btn {
+    position: absolute;
+    bottom: calc(#{$header-height} + 16px);
+    right: 16px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 12px 0 rgba(0, 0, 0, 0.1), 2px 2px 8px 0 rgba(0, 0, 0, 0.15);
+    background: $suhoshin-red;
+
+    .material-icons {
+        font-size: 28px;
+    }
+    @include center;
+}

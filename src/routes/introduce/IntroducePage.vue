@@ -1,5 +1,5 @@
 <template>
-    <div class="intro">
+    <div class="intro" v-if="groups">
         <div class="img-container">
             <img :src="require('@/assets/images/introduce.png')" alt="" />
         </div>

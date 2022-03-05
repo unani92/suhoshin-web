@@ -30,7 +30,6 @@ const getters = {
     loading: state => state.loading,
     global: state => state.global,
     isAppFirstLoaded: state => state.isAppFirstLoaded,
-    groups: state => state.groups,
 }
 
 // actions
@@ -38,6 +37,12 @@ const actions = {
     setToast({ commit }, payload) {
         payload.show = true
         commit('setToast', payload)
+    },
+    async afterAuthCallbacks({ dispatch }) {
+        try {
+            await dispatch('loadConstants')
+            await dispatch('loadMe')
+        } catch (e) {}
     },
 }
 
@@ -89,9 +94,6 @@ const mutations = {
     },
     popModal(state) {
         state.modals.pop()
-    },
-    setGroups(state, value) {
-        state.groups = value
     },
 }
 

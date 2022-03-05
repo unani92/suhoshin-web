@@ -7,6 +7,7 @@ import FrontPage from '@/routes/front/FrontPage'
 import VotePage from '@/routes/vote/VotePage'
 import IntroducePage from '@/routes/introduce/IntroducePage'
 import AdminPage from '@/routes/my-page/AdminPage'
+import PostPage from '@/routes/post/PostPage'
 
 Vue.use(Router)
 
@@ -37,6 +38,11 @@ const routes = [
         component: AdminPage,
     },
     {
+        path: '/post',
+        name: 'PostPage',
+        component: PostPage,
+    },
+    {
         path: '/not-found',
         name: 'NotFoundPage',
         component: NotFoundPage,
@@ -55,9 +61,6 @@ router.beforeEach((to, from, next) => {
     if (!found) {
         return next('/not-found')
     }
-    if (to.name !== 'FrontPage' && !$store.getters.me) {
-        return next('/front')
-    }
 
     window.onpopstate = () => {
         // If the dialog is opened,
@@ -67,9 +70,33 @@ router.beforeEach((to, from, next) => {
             return next(false)
         }
 
-        if ($store.getters.pageStack.length > 0) {
-            $store.dispatch('stackRouterPop')
-            return next(false)
+        const currentCustomBackHandler = Vue.prototype.$backHandlers[to.name]
+        if (currentCustomBackHandler) {
+            const allowBack = currentCustomBackHandler()
+
+            const needSomethingBeforeDestroy = () => {
+                if (!$store.getters.pageStack.length) return false
+
+                // 백버튼 동작 시 스택라우터 팝 이전에 특정 동작이 필요한 경우 페이지명 배열에 추가
+                const arr = ['PostCreatePage']
+
+                return arr.includes($store.getters.pageStack[$store.getters.pageStack.length - 1].name)
+            }
+
+            // 등록된 핸들러가 True여서 라우트 이동을 해야하는데, 스택라우트면 pop
+            if (!!allowBack && $store.getters.pageStack.length > 0) {
+                if (!needSomethingBeforeDestroy()) {
+                    $store.dispatch('stackRouterPop')
+                }
+                return next(false)
+            }
+
+            // 핸들러 동작 이후 스택라우터 팝된 상태에서 백버튼 동작 방지
+            if (!!allowBack && !needSomethingBeforeDestroy()) {
+                return next(false)
+            }
+
+            return next(!!allowBack)
         }
 
         // 스택 라우터에 등록되있으면

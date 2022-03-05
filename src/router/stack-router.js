@@ -3,6 +3,7 @@ export const stackRouterComponents = {
     VoteDetailPage: () => import('@/routes/vote/VoteDetailPage'),
     StatusUpdatePage: () => import('@/routes/my-page/StatusUpdatePage'),
     StatusUpdateAdminPage: () => import('@/routes/my-page/StatusUpdateAdminPage'),
+    PostCreatePage: () => import('@/routes/post/PostCreatePage'),
 }
 
 export function isStackRoute(name) {
