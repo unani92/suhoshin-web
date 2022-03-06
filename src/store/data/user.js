@@ -34,7 +34,7 @@ const actions = {
     },
     async loadMe({ commit }) {
         try {
-            const me = await userService.me()
+            const { data: me } = await userService.me()
             commit('setMe', me)
             if (me.is_dormant) {
                 // router.push({ name: 'DormantPage' })

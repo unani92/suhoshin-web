@@ -8,36 +8,6 @@ export const translate = key => {
     return ($store.getters.translation.texts[key] || {})[locale] || key
 }
 
-export const blindAge = age => {
-    const unitDigit = age % 10
-    const tensDigit = parseInt(age / 10)
-    let res
-
-    switch (unitDigit) {
-        case 0:
-        case 1:
-        case 2: {
-            res = `${tensDigit}0대 초반`
-            break
-        }
-        case 3:
-        case 4:
-        case 5:
-        case 6: {
-            res = `${tensDigit}0대 중반`
-            break
-        }
-        case 7:
-        case 8:
-        case 9: {
-            res = `${tensDigit}0대 후반`
-            break
-        }
-    }
-
-    return res
-}
-
 // formatDate: 'format' can be either
 // any format, 'chatList', 'community' or, neglectetimestamp.
 export const formatDate = (value, format) => {
@@ -189,50 +159,6 @@ export const school = (profile, considerGraduation) => {
     const schoolType = schoolTypes.find(s => s.id === profile.school_type_id)
     return wrap((schoolType || {}).name)
 }
-export const feedback = stage => {
-    const feedback = $store.getters.mannerFeedback || []
-
-    const feedbackSurveyAnswers = feedback.filter(f => f.step === stage)
-    return feedbackSurveyAnswers
-}
-
-export const company = profile => {
-    if (!profile) return
-
-    if (profile.is_student) {
-        if (!school(profile)) return
-
-        return school(profile) + ' 재학'
-    }
-
-    const jobCategories = $store.getters.jobCategories || []
-
-    if (profile.company_name && profile.company_name.trim()) {
-        return profile.company_name
-    }
-
-    const jobCategory = jobCategories.find(j => j.id === profile.job_category_id)
-    return (jobCategory || {}).name
-}
-
-export const noDetail = region => {
-    if (!region) return
-
-    const splitted = region.split('(')
-    if (splitted.length >= 1) return splitted[0]
-}
-
-export const hasProduct = (ptype, agentId) => {
-    if (!$store.getters.me || !$store.getters.me.products) return
-
-    if (ptype === 'premium') {
-        return $store.getters.me.products.find(p => p.ptype === 'premium' && p.agent_id === agentId)
-    }
-
-    return $store.getters.me.products.find(p => p.ptype === ptype)
-}
-
-export const numFriendsPlusSigned = num => `${[10, 20, 30, 50, 70, 100, 200].find(val => num < val) || 300}+`
 
 export const $case = {
     toSnake: function (str, delim) {
@@ -280,14 +206,6 @@ export const $case = {
         if (str.toLowerCase().endsWith('y')) return str.substr(0, str.length - 1) + 'ies'
         return str + 's'
     },
-}
-
-export const formatPhoneNumber = contact => {
-    if (!contact) return
-
-    const res = contact.substr(0, 3) + '-' + contact.substr(3, 4) + '-' + contact.substr(7)
-
-    return res
 }
 
 export const dateDiff = (start, end = new Date()) => {

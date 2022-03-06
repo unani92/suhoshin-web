@@ -24,6 +24,7 @@
     "core-js": "^2.6.11",
     "cropperjs": "^1.5.7",
     "dayjs": "^1.10.7",
+    "moment-timezone": "^0.5.34",
     "swiper": "^4.4.1",
     "tui-color-picker": "^2.2.7",
     "tui-font-size-picker": "^1.0.1",
