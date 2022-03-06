@@ -14,7 +14,7 @@
             </div>
         </nav>
         <main class="main">
-            <PostItem :post="item" v-for="item in currentTab" :key="item.id" />
+            <PostItem @click.native="onClickItem(item)" :post="item" v-for="item in currentTab" :key="item.id" />
         </main>
         <button class="btn floating-btn" @click="onClickCreate">
             <i class="material-icons">add</i>
@@ -83,6 +83,9 @@ export default {
             })
 
             this.selectedTab = item.type
+        },
+        onClickItem(post) {
+            this.$stackRouter.push({ name: 'PostDetailPage', props: { post } })
         },
     },
 }

@@ -30,5 +30,6 @@ module.exports = {
             properties: 'never',
         }],
         "no-new": 0,
+        "new-cap": 0,
     },
 }

@@ -12,7 +12,7 @@ import postService from '@/services/post'
 
 export default {
     name: 'Editor',
-    props: ['disabled'],
+    props: ['disabled', 'postId'],
     data: () => ({
         imgData: null,
         imgNum: 0,
@@ -63,6 +63,7 @@ export default {
                         data: { imgUrl },
                     } = await postService.uploadImage(
                         this.preparePayload({
+                            post_id: this.postId,
                             img_num: this.imgNum,
                             image: croppedFile,
                         })

@@ -50,7 +50,7 @@ export default {
             const minDiff = now.diff(createdAt, 'minutes')
 
             if (dateDiff > 0) return `${dateDiff}일 전`
-            if (hourDiff > 1) return `${hourDiff}시간 전`
+            if (hourDiff > 0) return `${hourDiff}시간 전`
             return `${minDiff}분 전`
         },
         showUserName() {
