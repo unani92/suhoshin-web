@@ -8,4 +8,5 @@ export default {
     getPosts: {
         all: (page, type) => $http.get(`/post?page=${page || 0}&post_type=${type}`),
     },
+    updateThumbs: postId => $http.post(`post/thumb/${postId}`),
 }
