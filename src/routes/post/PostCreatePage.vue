@@ -12,7 +12,7 @@
                     @selected="selectPostType"
                 />
             </div>
-            <Editor :postId="post.id" :disabled="disabled" @save="savePost" />
+            <Editor v-if="post" :postId="post.id" :disabled="disabled" @save="savePost" />
         </div>
     </div>
 </template>
