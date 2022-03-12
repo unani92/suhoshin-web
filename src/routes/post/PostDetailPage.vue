@@ -5,7 +5,7 @@
         <div class="content">
             <div id="editor" />
             <div class="thumb">
-                <div class="click-container" @click="clickThumb">
+                <div :class="{ clicked: thumb }" class="click-container" @click="clickThumb">
                     <i class="material-icons m-r-8">thumb_up_alt</i>
                     <span>공감</span>
                 </div>
@@ -24,6 +24,7 @@ export default {
     components: { PostContentHeader },
     data: () => ({
         editor: null,
+        thumb: false,
     }),
     props: {
         post: Object,
@@ -34,12 +35,17 @@ export default {
             viewer: true,
             initialValue: this.post.content,
         })
+        postService.getThumbInfo(this.post.id).then(({ data }) => {
+            this.thumb = data.msg
+        })
     },
     methods: {
         async clickThumb() {
             try {
                 const { data } = await postService.updateThumbs(this.post.id)
-                this.$toast.success(data.msg)
+                this.$set(this.post, 'thumbs', data.msg ? this.post.thumbs + 1 : this.post.thumbs - 1)
+                this.thumb = data.msg
+                this.$toast.success(data.msg ? '추천했어요' : '추천을 취소했어요')
             } catch (e) {
                 this.$toast.error(e.data.msg)
             }
@@ -63,6 +69,16 @@ export default {
         border-radius: 16px;
         padding: 16px;
         @include center;
+
+        &.clicked {
+            background: $suhoshin-red;
+            color: white;
+            border: none;
+
+            i {
+                color: white;
+            }
+        }
     }
 }
 </style>
