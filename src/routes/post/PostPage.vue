@@ -13,7 +13,7 @@
                 </div>
             </div>
         </nav>
-        <main class="main">
+        <main class="main" @scroll="onScroll">
             <PostItem @click.native="onClickItem(item)" :post="item" v-for="item in currentTab" :key="item.id" />
         </main>
         <button class="btn floating-btn" @click="onClickCreate">
@@ -42,12 +42,12 @@ export default {
             },
         ],
         selectedTab: 2,
+        loading: false,
+        pageNum: 0,
     }),
     mounted() {
-        if (this.free.length || this.notice.length) return
-
-        const free = this.$store.dispatch('getFreePosts', 0)
-        const notice = this.$store.dispatch('getNoticePosts', 0)
+        const free = this.$store.dispatch('getFreePosts', this.pageNum)
+        const notice = this.$store.dispatch('getNoticePosts', this.pageNum)
 
         Promise.all([free, notice])
     },
@@ -68,6 +68,36 @@ export default {
         },
     },
     methods: {
+        async onScroll({ target }) {
+            if (this.currentTab.length < 10 || this.loading) return
+
+            const { scrollHeight, clientHeight, scrollTop } = target
+
+            // 스크롤 방향이 upwards면 리턴
+            if (scrollTop < this.lastScrollTop) return
+
+            this.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop
+
+            if (scrollTop + clientHeight > scrollHeight - 100) {
+                this.loading = true
+                await this.loadMore()
+                this.loading = false
+            }
+        },
+        async loadMore() {
+            try {
+                this.$loading(true)
+                this.pageNum += 1
+                if (this.selectedTab === 1) {
+                    await this.$store.dispatch('getNoticePosts', this.pageNum)
+                } else if (this.selectedTab === 2) {
+                    await this.$store.dispatch('getFreePosts', this.pageNum)
+                }
+            } catch (e) {
+            } finally {
+                this.$loading(false)
+            }
+        },
         onClickCreate() {
             this.$stackRouter.push({
                 name: 'PostCreatePage',
@@ -94,7 +124,7 @@ export default {
 <style scoped lang="scss">
 .post-page {
     padding: 16px;
-    //position: relative;
+    overflow-y: hidden !important;
 
     .tabs {
         display: flex;
@@ -116,6 +146,8 @@ export default {
     }
     .main {
         padding: 16px 0;
+        height: calc(100% - 100px);
+        overflow-y: auto;
     }
 }
 </style>
