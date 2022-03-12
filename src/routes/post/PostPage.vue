@@ -94,6 +94,7 @@ export default {
                     await this.$store.dispatch('getFreePosts', this.pageNum)
                 }
             } catch (e) {
+                this.$toast.error(e.data.message)
             } finally {
                 this.$loading(false)
             }
