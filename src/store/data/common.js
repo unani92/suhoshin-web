@@ -1,32 +1,43 @@
 import commonService from '@/services/common'
+import gamesService from '@/services/games'
 
 const defaultState = () => ({
     groups: [],
+    games: [],
 })
 
 const state = defaultState()
 
 const getters = {
     groups: state => state.groups,
+    games: state => state.games,
 }
 
 const actions = {
-    async loadConstants({ commit }) {
+    async loadConstants({ commit, dispatch }) {
         try {
             const { data: groups } = await commonService.loadGroups()
-
+            const { data: games } = await dispatch('loadGames')
             commit('setConstants', {
                 groups,
             })
+            commit('setGames', games)
         } catch (e) {
             return Promise.reject(e)
         }
+    },
+    async loadGames({ commit }) {
+        const { data } = await gamesService.getAll()
+        commit('setGames', data)
     },
 }
 
 const mutations = {
     setConstants(state, constants) {
         state.groups = constants.groups
+    },
+    setGames(state, value) {
+        state.games = value
     },
 }
 
