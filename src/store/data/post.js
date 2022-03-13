@@ -3,6 +3,7 @@ import postService from '@/services/post'
 const defaultState = () => ({
     free: [],
     notice: [],
+    mainPosts: null,
 })
 
 const state = defaultState()
@@ -10,6 +11,7 @@ const state = defaultState()
 const getters = {
     free: state => state.free,
     notice: state => state.notice,
+    mainPosts: state => state.mainPosts,
 }
 
 const actions = {
@@ -21,6 +23,10 @@ const actions = {
         const { data } = await postService.getPosts.all(page, 1)
         commit('setNoticePosts', [...getters.notice, ...data])
     },
+    async getMainPosts({ commit }) {
+        const { data } = await postService.getPosts.getMain()
+        commit('setMainPosts', data)
+    },
 }
 
 const mutations = {
@@ -29,6 +35,9 @@ const mutations = {
     },
     setNoticePosts(state, value) {
         state.notice = value
+    },
+    setMainPosts(state, value) {
+        state.mainPosts = value
     },
 }
 

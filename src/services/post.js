@@ -8,6 +8,7 @@ export default {
     getPosts: {
         all: (page, type) => $http.get(`/post?page=${page || 0}&post_type=${type}`),
         getPostById: postId => $http.get(`post?/get-info?post_id${postId}`),
+        getMain: () => $http.get(`/post/hot`),
     },
     updateThumbs: postId => $http.post(`post/thumb/${postId}`),
     getThumbInfo: postId => $http.get(`post/thumb?post_id=${postId}`),

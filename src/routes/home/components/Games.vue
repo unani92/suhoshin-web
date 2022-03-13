@@ -32,7 +32,7 @@ export default {
         },
         swiperOptions() {
             return {
-                initialSlide: 3,
+                initialSlide: 4,
                 pagination: {
                     el: '.swiper-pagination',
                 },
@@ -43,15 +43,12 @@ export default {
             }
         },
     },
-    data: () => ({
-        initialPage: 0,
-    }),
 }
 </script>
 
 <style scoped lang="scss">
 .games {
-    padding: 16px;
+    padding: 0 16px;
     .swiper-slide {
         @include center;
     }
