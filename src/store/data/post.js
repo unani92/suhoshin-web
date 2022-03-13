@@ -27,6 +27,12 @@ const actions = {
         const { data } = await postService.getPosts.getMain()
         commit('setMainPosts', data)
     },
+    async refresh({ commit }) {
+        const { data: free } = await postService.getPosts.all(0, 2)
+        const { data: notice } = await postService.getPosts.all(0, 1)
+        commit('setFreePosts', free)
+        commit('setNoticePosts', notice)
+    },
 }
 
 const mutations = {

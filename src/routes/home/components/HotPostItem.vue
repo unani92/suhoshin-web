@@ -26,7 +26,7 @@ export default {
             return dateDiff === 0
         },
         timeStamp() {
-            const createdAt = moment(this.hotPost.created_at)
+            const createdAt = this.$moment(this.post.created_at).subtract(9, 'hours')
             const now = moment()
             const dateDiff = now.diff(createdAt, 'days')
             const hourDiff = now.diff(createdAt, 'hours')

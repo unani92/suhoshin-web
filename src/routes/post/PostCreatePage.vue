@@ -63,6 +63,7 @@ export default {
             if (!val) return
 
             try {
+                this.$loading(true)
                 const payload = {
                     id: this.post.id,
                     title: this.title,
@@ -71,10 +72,13 @@ export default {
                 }
 
                 const { data } = await postService.uploadPost(payload)
+                await this.$store.dispatch('refresh')
                 this.$toast.success(data.msg)
                 this.$stackRouter.pop()
             } catch (e) {
                 this.$toast.error(e.data.message)
+            } finally {
+                this.$loading(false)
             }
         },
         async backHandler() {

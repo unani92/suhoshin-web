@@ -100,6 +100,7 @@ export default {
             }
         },
         onClickCreate() {
+            this.pageNum = 0
             this.$stackRouter.push({
                 name: 'PostCreatePage',
             })

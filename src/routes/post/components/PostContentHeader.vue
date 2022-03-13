@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import moment from 'moment-timezone'
-
 export default {
     name: 'PostContentHeader',
     props: ['post'],
@@ -33,8 +31,8 @@ export default {
             return this.post.user
         },
         timeStamp() {
-            const createdAt = moment(this.post.created_at)
-            const now = moment()
+            const createdAt = this.$moment(this.post.created_at).subtract(9, 'hours')
+            const now = this.$moment()
             const dateDiff = now.diff(createdAt, 'days')
             const hourDiff = now.diff(createdAt, 'hours')
             const minDiff = now.diff(createdAt, 'minutes')
