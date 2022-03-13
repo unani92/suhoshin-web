@@ -75,7 +75,6 @@ export default {
 <style scoped lang="scss">
 .select-wrapper {
     position: relative;
-
     .select {
         height: 48px;
         width: 100%;
@@ -90,9 +89,9 @@ export default {
     }
     .option-box {
         z-index: 30;
-        position: absolute;
-        left: 0;
-        bottom: -110px;
+        //position: absolute;
+        //left: 0;
+        //bottom: -150px;
         margin: 4px 0px;
         border-radius: 8px;
         border: 1px solid #e9e9ed;

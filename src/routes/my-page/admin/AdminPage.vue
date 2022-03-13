@@ -18,7 +18,10 @@ export default {
     name: 'AdminPage',
     components: { HeaderBar },
     mounted() {
-        if (this.$store.getters.me.user_status !== 2) this.$router.push('/')
+        if (this.$store.getters.me.user_status !== 2) {
+            this.$toast.error('관리자만 접근 가능합니다.')
+            this.$router.push('/')
+        }
     },
     computed: {
         upper() {
@@ -27,6 +30,12 @@ export default {
                     key: 'STATUS_UPDATE',
                     route: 'StatusUpdateAdminPage',
                     icon: 'account_circle',
+                    show: true,
+                },
+                {
+                    key: 'UPDATE_GAMES',
+                    route: 'UpdateGamesPage',
+                    icon: 'sports_soccer',
                     show: true,
                 },
                 {

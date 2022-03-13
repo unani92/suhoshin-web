@@ -6,7 +6,7 @@ import HomePage from '@/routes/HomePage'
 import FrontPage from '@/routes/front/FrontPage'
 import VotePage from '@/routes/vote/VotePage'
 import IntroducePage from '@/routes/introduce/IntroducePage'
-import AdminPage from '@/routes/my-page/AdminPage'
+import AdminPage from '@/routes/my-page/admin/AdminPage'
 import PostPage from '@/routes/post/PostPage'
 
 Vue.use(Router)

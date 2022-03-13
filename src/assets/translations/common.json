@@ -35,6 +35,9 @@
   "STATUS_UPDATE": {
     "kr": "정회원 인증심사"
   },
+  "UPDATE_GAMES": {
+    "kr": "매치 수정"
+  },
   "CHECK_NOTE": {
     "kr": "쪽지 확인"
   },

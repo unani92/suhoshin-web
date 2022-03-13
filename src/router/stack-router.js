@@ -2,9 +2,11 @@ export const stackRouterComponents = {
     VoteCreatePage: () => import('@/routes/vote/VoteCreatePage'),
     VoteDetailPage: () => import('@/routes/vote/VoteDetailPage'),
     StatusUpdatePage: () => import('@/routes/my-page/StatusUpdatePage'),
-    StatusUpdateAdminPage: () => import('@/routes/my-page/StatusUpdateAdminPage'),
+    StatusUpdateAdminPage: () => import('@/routes/my-page/admin/StatusUpdateAdminPage'),
     PostCreatePage: () => import('@/routes/post/PostCreatePage'),
     PostDetailPage: () => import('@/routes/post/PostDetailPage'),
+    UpdateGamesPage: () => import('@/routes/my-page/admin/UpdateGamesPage'),
+    UpdateGamesCreatePage: () => import('@/routes/my-page/admin/UpdateGamesCreatePage'),
 }
 
 export function isStackRoute(name) {
