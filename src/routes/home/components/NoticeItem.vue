@@ -1,8 +1,8 @@
 <template>
-    <div class="notice-item">
+    <div class="notice-item" @click="onClickItem(notice)">
         <div class="left">
             <span class="spoqa-f-bold">공지사항</span>
-            <div v-if="isNew" class="new-badge">N</div>
+            <div v-if="isNew" class="new-badge m-l-4">N</div>
         </div>
         <div class="right">
             <span>{{ notice.title }}</span>
@@ -24,6 +24,11 @@ export default {
             return dateDiff === 0
         },
     },
+    methods: {
+        onClickItem(post) {
+            this.$stackRouter.push({ name: 'PostDetailPage', props: { post } })
+        },
+    },
 }
 </script>
 
@@ -43,16 +48,8 @@ export default {
     align-items: center;
     width: 100px;
 }
-.new-badge {
-    font-size: 10px;
-    background: $suhoshin-red;
-    color: white;
-    padding: 2px;
-    margin-left: 4px;
-    border-radius: 4px;
-    height: 12px;
-    width: 12px;
-    @include spoqa-f-medium;
-    @include center;
+.right {
+    width: calc(100% - 100px);
+    @include lines-1;
 }
 </style>

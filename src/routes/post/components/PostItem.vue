@@ -107,19 +107,6 @@ export default {
                     background: #111111;
                 }
             }
-
-            .new-badge {
-                font-size: 10px;
-                background: $suhoshin-red;
-                color: white;
-                padding: 2px;
-                margin-left: 8px;
-                border-radius: 4px;
-                height: 12px;
-                width: 12px;
-                @include spoqa-f-medium;
-                @include center;
-            }
         }
     }
 }
