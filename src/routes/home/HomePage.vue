@@ -1,7 +1,10 @@
 <template>
-    <div class="home"></div>
+    <div class="home">
+        <Games />
+    </div>
 </template>
 <script>
+import Games from '@/routes/home/components/Games'
 export default {
     name: 'HomePage',
     data: () => ({}),
@@ -9,8 +12,11 @@ export default {
         me() {
             return this.$store.getters.me
         },
+        games() {
+            return this.$store.getters.games
+        },
     },
-    components: {},
+    components: { Games },
     created() {
         this.init()
     },

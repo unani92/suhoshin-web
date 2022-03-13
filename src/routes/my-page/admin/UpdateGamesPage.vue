@@ -27,9 +27,6 @@
 <script>
 export default {
     name: 'UpdateGamesPage',
-    async mounted() {
-        await this.store.dispatch('loadGames')
-    },
     computed: {
         games() {
             return this.$store.getters.games

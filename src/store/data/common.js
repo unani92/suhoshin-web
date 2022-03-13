@@ -17,11 +17,10 @@ const actions = {
     async loadConstants({ commit, dispatch }) {
         try {
             const { data: groups } = await commonService.loadGroups()
-            const { data: games } = await dispatch('loadGames')
+            await dispatch('loadGames')
             commit('setConstants', {
                 groups,
             })
-            commit('setGames', games)
         } catch (e) {
             return Promise.reject(e)
         }
