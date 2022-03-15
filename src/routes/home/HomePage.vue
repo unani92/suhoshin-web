@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <Notices v-if="mainPosts.noti" />
-        <Games v-if="games" />
+        <Games v-if="games.length" />
         <HotPosts v-if="mainPosts.hot" />
     </div>
 </template>
@@ -25,6 +25,7 @@ export default {
     },
     async mounted() {
         await this.$store.dispatch('getMainPosts')
+        await this.$store.dispatch('afterAuthCallbacks')
     },
     components: { Games, Notices, HotPosts },
     created() {

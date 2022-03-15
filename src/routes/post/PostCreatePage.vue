@@ -31,11 +31,14 @@ export default {
         selectedPostType: null,
     }),
     computed: {
+        me() {
+            return this.$store.getters.me
+        },
         disabled() {
             return !(this.title && this.selectedPostType)
         },
         postType() {
-            return [
+            const selectors = [
                 {
                     id: 1,
                     name: '공지사항',
@@ -45,6 +48,8 @@ export default {
                     name: '자유게시판',
                 },
             ]
+
+            return this.me.user_status === 2 ? selectors : selectors.filter(item => item.id === 2)
         },
     },
     async mounted() {

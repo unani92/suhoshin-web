@@ -86,27 +86,27 @@ export default {
     },
     methods: {
         statusUpdate() {
-            // if (this.request.confirmed === 0 || this.me.user_status >= 1) {
-            //     return
-            // }
+            if (this.request.confirmed === 0 || this.me.user_status >= 1) {
+                return
+            }
 
-            this.$modal.basic({
-                title: '공사 중',
-                body: '아직 사이트가 런칭되지 않아 정회원 인증이 진행되지 않습니다.<br>런칭 후 뵙겠습니다☺️',
-                buttons: [
-                    {
-                        label: 'CONFIRM',
-                        class: 'btn-primary',
-                    },
-                ],
-            })
+            // this.$modal.basic({
+            //     title: '공사 중',
+            //     body: '아직 사이트가 런칭되지 않아 정회원 인증이 진행되지 않습니다.<br>런칭 후 뵙겠습니다☺️',
+            //     buttons: [
+            //         {
+            //             label: 'CONFIRM',
+            //             class: 'btn-primary',
+            //         },
+            //     ],
+            // })
 
-            // this.$emit('close')
-            // setTimeout(() => {
-            //     this.$stackRouter.push({
-            //         name: 'StatusUpdatePage',
-            //     })
-            // }, 100)
+            this.$emit('close')
+            setTimeout(() => {
+                this.$stackRouter.push({
+                    name: 'StatusUpdatePage',
+                })
+            }, 100)
         },
         routeAdmin() {
             this.$emit('close')

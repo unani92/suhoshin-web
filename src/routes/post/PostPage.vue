@@ -51,6 +51,10 @@ export default {
 
         Promise.all([free, notice])
     },
+    beforeDestroy() {
+        this.$store.commit('setFreePosts', [])
+        this.$store.commit('setNoticePosts', [])
+    },
     computed: {
         me() {
             return this.$store.getters.me
@@ -100,6 +104,10 @@ export default {
             }
         },
         onClickCreate() {
+            if (!this.me.user_status) {
+                this.$toast.error('정회원 인증 후 게시글 작성이 가능합니다.')
+                return
+            }
             this.pageNum = 0
             this.$stackRouter.push({
                 name: 'PostCreatePage',

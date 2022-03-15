@@ -9,7 +9,7 @@
                 <div class="badge">{{ matchType }}</div>
             </div>
         </div>
-        <div class="right">
+        <div class="right" v-if="game.score_us !== null">
             <div class="match-result">
                 <div class="win-lose" :class="parseWinLose">{{ parseWinLose }}</div>
                 <span class="m-r-4 spoqa-f-bold f-16">{{ game.score_us }} - {{ game.score_other }}</span>
