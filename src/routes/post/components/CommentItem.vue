@@ -3,17 +3,33 @@
         <div class="top">
             <div class="user-info">
                 <span class="name">{{ user.user_status === 2 ? '관리자' : user.nickname }}</span>
-                <i @click="clickAddMenus" v-if="user.id === me.id" class="material-icons f-14 m-l-8">more_horiz</i>
+                <i @click="clickAddMenus" class="material-icons f-14 m-l-8">more_horiz</i>
             </div>
             <div class="timestamp">{{ timeStamp }}</div>
         </div>
         <div class="bottom">
-            <p v-if="!editMode" class="content" v-text="comment.content" />
-            <div v-else class="edit-mode">
-                <TextareaWithX v-model="commentContent" />
+            <div class="content">
+                <i v-if="comment.secret" class="material-icons f-14 m-r-4">lock</i>
+                <p v-if="!editMode" class="content" v-text="$translate(comment.content)" />
+                <div v-else class="edit-mode">
+                    <TextareaWithX v-model="commentContent" />
+                    <div class="btns">
+                        <div @click="cancelEditMode" class="btn btn-brd">취소</div>
+                        <div @click="editComment" class="btn btn-brd m-r-8">수정</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="replies-container">
+            <div v-if="replyMode" class="reply-textarea">
+                <TextareaWithX v-model="replyContent" />
                 <div class="btns">
-                    <div @click="cancelEditMode" class="btn btn-brd">취소</div>
-                    <div @click="editComment" class="btn btn-brd m-r-8">수정</div>
+                    <div @click="cancelReplyMode" class="btn btn-brd">취소</div>
+                    <div @click="submitReply" class="btn btn-brd m-r-8">작성</div>
+                    <div class="check-box" @click="secretReply = !secretReply">
+                        <i class="material-icons f-18">{{ `check_box${secretReply ? '' : '_outline_blank'}` }}</i>
+                        <span class="f-14">비밀댓글</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,7 +44,10 @@ export default {
     props: ['comment', 'postId'],
     data: () => ({
         editMode: false,
+        replyMode: false,
         commentContent: null,
+        replyContent: null,
+        secretReply: false,
     }),
     computed: {
         me() {
@@ -51,11 +70,72 @@ export default {
             if (hourDiff > 0) return `${hourDiff}시간 전`
             return `${minDiff}분 전`
         },
+        buttons() {
+            const btns = [
+                {
+                    label: '수정하기',
+                    handler: () => {
+                        this.editMode = true
+                        this.commentContent = this.comment.content
+                    },
+                },
+                {
+                    label: '삭제하기',
+                    handler: () => {
+                        setTimeout(async () => {
+                            const idx = await this.$modal.basic({
+                                body: '정말 삭제하시겠습니까?',
+                                buttons: [
+                                    {
+                                        label: 'CANCEL',
+                                        class: 'btn-default',
+                                    },
+                                    {
+                                        label: '삭제',
+                                        class: 'btn-primary',
+                                    },
+                                ],
+                            })
+                            if (idx) {
+                                const { data } = await commentsService.comment.deleteComment(this.comment.id)
+                                await this.$store.dispatch('getCurrentPostComments', this.postId)
+
+                                this.$toast.success(data.msg)
+                            }
+                        }, 200)
+                    },
+                },
+                {
+                    label: '답글달기',
+                    handler: () => {
+                        this.replyMode = true
+                    },
+                },
+            ]
+
+            return this.me.id === this.user.id ? btns : btns.slice(2, btns.length)
+        },
     },
     methods: {
         cancelEditMode() {
             this.editMode = false
             this.commentContent = null
+        },
+        cancelReplyMode() {
+            this.replyMode = false
+            this.replyContent = null
+        },
+        async submitReply() {
+            if (!this.replyContent) return
+
+            const { data } = await commentsService.reply.createReply({
+                secret: this.secretReply,
+                content: this.replyContent,
+                comment_id: this.comment.id,
+            })
+            this.$toast.success(data.msg)
+            await this.$store.dispatch('getCurrentPostComments', this.postId)
+            this.cancelReplyMode()
         },
         async editComment() {
             const { data } = await commentsService.comment.fixComment(this.comment.id, {
@@ -68,43 +148,7 @@ export default {
         clickAddMenus() {
             if (this.editMode) return
 
-            this.$actionSheet({
-                buttons: [
-                    {
-                        label: '수정하기',
-                        handler: () => {
-                            this.editMode = true
-                            this.commentContent = this.comment.content
-                        },
-                    },
-                    {
-                        label: '삭제하기',
-                        handler: () => {
-                            setTimeout(async () => {
-                                const idx = await this.$modal.basic({
-                                    body: '정말 삭제하시겠습니까?',
-                                    buttons: [
-                                        {
-                                            label: 'CANCEL',
-                                            class: 'btn-default',
-                                        },
-                                        {
-                                            label: '삭제',
-                                            class: 'btn-primary',
-                                        },
-                                    ],
-                                })
-                                if (idx) {
-                                    const { data } = await commentsService.comment.deleteComment(this.comment.id)
-                                    await this.$store.dispatch('getCurrentPostComments', this.postId)
-
-                                    this.$toast.success(data.msg)
-                                }
-                            }, 200)
-                        },
-                    },
-                ],
-            })
+            this.$actionSheet({ buttons: this.buttons })
         },
     },
 }
@@ -114,6 +158,7 @@ export default {
 .comment-item {
     padding: 8px 0;
     border-bottom: 1px solid $grey-01;
+
     .top {
         @include between;
         font-size: 12px;
@@ -127,21 +172,35 @@ export default {
         margin-top: 8px;
 
         .content {
-            white-space: pre-line;
-            line-height: 16px;
-            font-size: 14px;
-        }
-        .btns {
             display: flex;
             align-items: center;
-            flex-direction: row-reverse;
-            margin-top: 8px;
-
-            .btn {
-                width: fit-content !important;
-                height: fit-content !important;
-                padding: 4px 8px !important;
+            p {
+                white-space: pre-line;
+                line-height: 16px;
+                font-size: 14px;
             }
+        }
+    }
+    .btns {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        margin-top: 8px;
+
+        .btn {
+            width: fit-content !important;
+            height: fit-content !important;
+            padding: 4px 8px !important;
+        }
+    }
+    .replies-container {
+        margin-top: 8px;
+        padding-left: 16px;
+
+        .check-box {
+            display: flex;
+            align-items: center;
+            margin-right: 8px;
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="front-page" v-lazy:background-image="require('@/assets/images/suhoshin-front.png')">
-        <BottomButton @click="login" :label="$translate('START_WITH_KAKAO')" />
+        <BottomButton @click="testLogin" :label="$translate('START_WITH_KAKAO')" />
     </div>
 </template>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
