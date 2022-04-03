@@ -1,6 +1,6 @@
 <template>
     <div class="replies-items">
-        <ReplyItem :postId="postId" :reply="item" v-for="item in replies" :key="item.id" />
+        <ReplyItem :post="post" :reply="item" v-for="item in replies" :key="item.id" />
     </div>
 </template>
 
@@ -8,7 +8,7 @@
 import ReplyItem from '@/routes/post/components/ReplyItem'
 export default {
     name: 'Replies',
-    props: ['replies', 'postId'],
+    props: ['replies', 'post'],
     components: { ReplyItem },
 }
 </script>

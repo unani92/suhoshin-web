@@ -28,7 +28,7 @@ import commentsService from '@/services/comments'
 
 export default {
     name: 'ReplyItem',
-    props: ['reply', 'postId'],
+    props: ['reply', 'post'],
     data: () => ({
         editMode: false,
         replyContent: null,
@@ -80,7 +80,7 @@ export default {
                             if (idx) {
                                 try {
                                     const { data } = await commentsService.reply.deleteReply(this.reply.id)
-                                    await this.$store.dispatch('getCurrentPostComments', this.postId)
+                                    await this.$store.dispatch('getCurrentPostComments', this.post.id)
 
                                     this.$toast.success(data.msg)
                                 } catch (e) {
@@ -110,7 +110,7 @@ export default {
                 const { data } = await commentsService.reply.fixReply(this.reply.id, {
                     content: this.replyContent,
                 })
-                await this.$store.dispatch('getCurrentPostComments', this.postId)
+                await this.$store.dispatch('getCurrentPostComments', this.post.id)
                 this.cancelEditMode()
                 this.$toast.success(data.msg)
             } catch (e) {

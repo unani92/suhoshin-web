@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <Comments v-if="comments" :postId="post.id" :comments="comments" />
+        <Comments v-if="comments" :post="post" :comments="comments" />
     </div>
 </template>
 

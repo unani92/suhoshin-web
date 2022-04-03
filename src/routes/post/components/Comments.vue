@@ -14,7 +14,7 @@
             <TextareaWithX v-model="content" />
         </div>
         <div class="comments-items m-t-8">
-            <CommentItem :postId="postId" :comment="item" v-for="item in commentItems" :key="item.id" />
+            <CommentItem :post="post" :comment="item" v-for="item in commentItems" :key="item.id" />
         </div>
     </div>
 </template>
@@ -25,7 +25,7 @@ import CommentItem from '@/routes/post/components/CommentItem'
 
 export default {
     name: 'Comments',
-    props: ['comments', 'postId'],
+    props: ['comments', 'post'],
     components: { CommentItem },
     data: () => ({
         secret: false,
@@ -43,12 +43,13 @@ export default {
             const { data } = await commentService.comment.createComment({
                 secret: this.secret,
                 content: this.content,
-                post_id: this.postId,
+                post_id: this.post.id,
             })
+            this.$set(this.post, 'comments', this.post.comments + 1)
             this.secret = false
             this.content = null
             this.$toast.success(data.msg)
-            this.$store.dispatch('getCurrentPostComments', this.postId)
+            this.$store.dispatch('getCurrentPostComments', this.post.id)
         },
     },
 }

@@ -32,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            <Replies :postId="postId" :replies="replies" v-if="replies.length" />
+            <Replies :post="post" :replies="replies" v-if="replies.length" />
         </div>
     </div>
 </template>
@@ -43,7 +43,7 @@ import Replies from '@/routes/post/components/Replies'
 
 export default {
     name: 'CommentItem',
-    props: ['comment', 'postId'],
+    props: ['comment', 'post'],
     components: { Replies },
     data: () => ({
         editMode: false,
@@ -101,7 +101,7 @@ export default {
                             })
                             if (idx) {
                                 const { data } = await commentsService.comment.deleteComment(this.comment.id)
-                                await this.$store.dispatch('getCurrentPostComments', this.postId)
+                                await this.$store.dispatch('getCurrentPostComments', this.post.id)
 
                                 this.$toast.success(data.msg)
                             }
@@ -136,15 +136,16 @@ export default {
                 content: this.replyContent,
                 comment_id: this.comment.id,
             })
+            this.$set(this.post, 'comments', this.post.comments + 1)
             this.$toast.success(data.msg)
-            await this.$store.dispatch('getCurrentPostComments', this.postId)
+            await this.$store.dispatch('getCurrentPostComments', this.post.id)
             this.cancelReplyMode()
         },
         async editComment() {
             const { data } = await commentsService.comment.fixComment(this.comment.id, {
                 content: this.commentContent,
             })
-            await this.$store.dispatch('getCurrentPostComments', this.postId)
+            await this.$store.dispatch('getCurrentPostComments', this.post.id)
             this.cancelEditMode()
             this.$toast.success(data.msg)
         },
