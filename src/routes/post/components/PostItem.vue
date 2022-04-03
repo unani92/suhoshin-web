@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="comment"></div>
+        <div class="comments">{{ post.comments }}</div>
     </div>
 </template>
 
@@ -108,6 +108,13 @@ export default {
                 }
             }
         }
+    }
+    .comments {
+        font-size: 14px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid $suhoshin-red;
+        color: $suhoshin-red;
     }
 }
 </style>
