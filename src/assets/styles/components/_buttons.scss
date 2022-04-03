@@ -47,6 +47,13 @@ button {
         color: #fff;
     }
 
+    &.disabled {
+        background: $grey-02;
+        box-shadow: none;
+        color: $grey-05;
+        @include f-medium;
+    }
+
     img {
         pointer-events: none;
     }

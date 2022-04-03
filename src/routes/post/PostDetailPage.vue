@@ -11,17 +11,19 @@
                 </div>
             </div>
         </div>
+        <Comments v-if="comments" :postId="post.id" :comments="comments" />
     </div>
 </template>
 
 <script>
 import { Editor } from '@toast-ui/editor'
 import PostContentHeader from '@/routes/post/components/PostContentHeader'
+import Comments from '@/routes/post/components/Comments'
 import postService from '@/services/post'
 
 export default {
     name: 'PostDetailPage',
-    components: { PostContentHeader },
+    components: { PostContentHeader, Comments },
     data: () => ({
         editor: null,
         thumb: false,
@@ -38,6 +40,15 @@ export default {
         postService.getThumbInfo(this.post.id).then(({ data }) => {
             this.thumb = data.msg
         })
+        this.$store.dispatch('getCurrentPostComments', this.post.id)
+    },
+    beforeDestroy() {
+        this.$store.commit('setCurrentPostComments', null)
+    },
+    computed: {
+        comments() {
+            return this.$store.getters.currentPostComments
+        },
     },
     methods: {
         async clickThumb() {

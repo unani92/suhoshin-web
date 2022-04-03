@@ -1,9 +1,11 @@
 import postService from '@/services/post'
+import commentsService from '@/services/comments'
 
 const defaultState = () => ({
     free: [],
     notice: [],
     mainPosts: null,
+    currentPostComments: null,
 })
 
 const state = defaultState()
@@ -12,6 +14,7 @@ const getters = {
     free: state => state.free,
     notice: state => state.notice,
     mainPosts: state => state.mainPosts,
+    currentPostComments: state => state.currentPostComments,
 }
 
 const actions = {
@@ -33,6 +36,10 @@ const actions = {
         commit('setFreePosts', free)
         commit('setNoticePosts', notice)
     },
+    async getCurrentPostComments({ commit }, postId) {
+        const { data: comments } = await commentsService.comment.getAllComments(postId)
+        commit('setCurrentPostComments', comments)
+    },
 }
 
 const mutations = {
@@ -44,6 +51,9 @@ const mutations = {
     },
     setMainPosts(state, value) {
         state.mainPosts = value
+    },
+    setCurrentPostComments(state, value) {
+        state.currentPostComments = value
     },
 }
 

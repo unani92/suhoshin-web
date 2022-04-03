@@ -32,7 +32,7 @@ export default {
         },
         swiperOptions() {
             return {
-                initialSlide: 4,
+                initialSlide: 5,
                 pagination: {
                     el: '.swiper-pagination',
                 },
