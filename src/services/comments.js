@@ -10,6 +10,6 @@ export default {
     reply: {
         createReply: payload => $http.post(`/comments/create_reply`, payload),
         fixReply: (replyId, payload) => $http.put(`/comments/fix_reply/${replyId}`, payload),
-        deleteReply: replyId => $http.delete(`/comments/delete/${replyId}`),
+        deleteReply: replyId => $http.delete(`/comments/delete_reply/${replyId}`),
     },
 }
