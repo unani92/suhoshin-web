@@ -50,14 +50,25 @@ export default {
                 },
                 {
                     action: () => {
-                        this.navigate('VotePage')
+                        this.navigate('AwayPage')
                     },
-                    label: '투표 게시판',
-                    selected: this.$route.name === 'VotePage',
+                    label: '원정신청',
+                    selected: this.$route.name === 'AwayPage',
                 },
                 {
-                    action: () => {},
-                    label: '머테리얼',
+                    action: () => {
+                        const img = require('@/assets/images/temp.png')
+                        this.$modal.basic({
+                            body: `<img width="80%" height="auto" src="${img}">`,
+                            buttons: [
+                                {
+                                    label: 'CONFIRM',
+                                    class: 'btn-primary',
+                                },
+                            ],
+                        })
+                    },
+                    label: '수호신 상품 구매',
                     selected: this.$route.name === 'MyPage',
                 },
             ]

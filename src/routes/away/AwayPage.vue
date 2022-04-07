@@ -1,20 +1,7 @@
 <template>
     <div class="post-page">
-        <nav class="tabs">
-            <div
-                class="tab"
-                :class="{ selected: item.selected }"
-                v-for="item in tabItems"
-                :key="item.label"
-                @click="onClickTab(item)"
-            >
-                <div class="content">
-                    <p class="label" v-html="$translate(item.label)" />
-                </div>
-            </div>
-        </nav>
         <main class="main" @scroll="onScroll">
-            <PostItem @click.native="onClickItem(item)" :post="item" v-for="item in currentTab" :key="item.id" />
+            <PostItem @click.native="onClickItem(item)" :post="item" v-for="item in away" :key="item.id" />
         </main>
         <button v-if="showEditBtn" class="btn floating-btn" @click="onClickCreate">
             <i class="material-icons">add</i>
@@ -24,57 +11,27 @@
 
 <script>
 import PostItem from '@/routes/post/components/PostItem'
-
 export default {
-    name: 'PostPage',
-    components: { PostItem },
+    name: 'AwayPage',
     data: () => ({
-        tabItems: [
-            {
-                type: 2,
-                label: 'FREE',
-                selected: true,
-            },
-            {
-                type: 1,
-                label: 'NOTICE',
-                selected: false,
-            },
-        ],
-        selectedTab: 2,
-        loading: false,
         pageNum: 0,
     }),
-    mounted() {
-        const free = this.$store.dispatch('getFreePosts', this.pageNum)
-        const notice = this.$store.dispatch('getNoticePosts', this.pageNum)
-
-        Promise.all([free, notice])
+    components: { PostItem },
+    async mounted() {
+        await this.$store.dispatch('getSubmitAwayPosts', this.pageNum)
     },
     beforeDestroy() {
-        this.$store.commit('setFreePosts', [])
-        this.$store.commit('setNoticePosts', [])
         this.$store.commit('setSubmitAwayPosts', [])
     },
     computed: {
-        showEditBtn() {
-            if (this.me.user_status === 2) return true
-
-            return this.selectedTab === 2
+        away() {
+            return this.$store.getters.awayPost
         },
         me() {
             return this.$store.getters.me
         },
-        free() {
-            return this.$store.getters.free
-        },
-        notice() {
-            return this.$store.getters.notice
-        },
-        currentTab() {
-            if (!this.selectedTab) return []
-
-            return this.selectedTab === 1 ? this.notice : this.selectedTab === 2 ? this.free : this.away
+        showEditBtn() {
+            return this.me.user_status === 2
         },
     },
     methods: {
@@ -98,16 +55,15 @@ export default {
             try {
                 this.$loading(true)
                 this.pageNum += 1
-                if (this.selectedTab === 1) {
-                    await this.$store.dispatch('getNoticePosts', this.pageNum)
-                } else if (this.selectedTab === 2) {
-                    await this.$store.dispatch('getFreePosts', this.pageNum)
-                }
+                await this.$store.dispatch('getSubmitAwayPosts', this.pageNum)
             } catch (e) {
                 this.$toast.error(e.data.message)
             } finally {
                 this.$loading(false)
             }
+        },
+        onClickItem(post) {
+            this.$stackRouter.push({ name: 'PostDetailPage', props: { post } })
         },
         onClickCreate() {
             // if (!this.me.user_status) {
@@ -118,20 +74,6 @@ export default {
             this.$stackRouter.push({
                 name: 'PostCreatePage',
             })
-        },
-        onClickTab(item) {
-            item.selected = true
-
-            this.tabItems.forEach(tab => {
-                if (tab.type !== item.type) {
-                    tab.selected = false
-                }
-            })
-
-            this.selectedTab = item.type
-        },
-        onClickItem(post) {
-            this.$stackRouter.push({ name: 'PostDetailPage', props: { post } })
         },
     },
 }

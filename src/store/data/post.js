@@ -39,8 +39,10 @@ const actions = {
     async refresh({ commit }) {
         const { data: free } = await postService.getPosts.all(0, 2)
         const { data: notice } = await postService.getPosts.all(0, 1)
+        const { data: away } = await postService.getPosts.all(0, 3)
         commit('setFreePosts', free)
         commit('setNoticePosts', notice)
+        commit('setSubmitAwayPosts', away)
     },
     async getCurrentPostComments({ commit }, postId) {
         const { data: comments } = await commentsService.comment.getAllComments(postId)

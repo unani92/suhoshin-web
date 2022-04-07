@@ -10,7 +10,7 @@
                 <div @click="submitComment" :class="{ disabled: !content }" class="btn btn-primary">등록</div>
             </div>
         </div>
-        <div class="away-comment-info m-b-8 f-14 spoqa-f-bold">
+        <div v-if="post.post_type === 3" class="away-comment-info m-b-8 f-14 spoqa-f-bold">
             <p>* 원정 신청 댓글은 운영자만 확인 가능합니다.</p>
         </div>
         <div class="text-area">

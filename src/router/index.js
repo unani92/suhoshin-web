@@ -8,6 +8,7 @@ import VotePage from '@/routes/vote/VotePage'
 import IntroducePage from '@/routes/introduce/IntroducePage'
 import AdminPage from '@/routes/my-page/admin/AdminPage'
 import PostPage from '@/routes/post/PostPage'
+import AwayPage from '@/routes/away/AwayPage'
 
 Vue.use(Router)
 
@@ -26,6 +27,11 @@ const routes = [
         path: '/vote',
         name: 'VotePage',
         component: VotePage,
+    },
+    {
+        path: '/away',
+        name: 'AwayPage',
+        component: AwayPage,
     },
     {
         path: '/intro',
