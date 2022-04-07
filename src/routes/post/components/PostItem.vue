@@ -7,7 +7,7 @@
                     :class="`post-type-${post.post_type}`"
                     v-html="$translate(`POST_TYPE_${post.post_type}`)"
                 />
-                <div class="post-title" v-html="post.title" />
+                <div class="post-title lines-2" v-html="post.title" />
                 <div v-if="isNew" class="new-badge">N</div>
             </div>
             <div class="bottom">
@@ -70,7 +70,7 @@ export default {
     border-bottom: 1px solid $grey-03;
 
     .left {
-        width: 70%;
+        width: 85%;
 
         .bottom {
             font-size: 12px;
@@ -92,6 +92,10 @@ export default {
         .top {
             display: flex;
             align-items: center;
+
+            .post-title {
+                max-width: 85%;
+            }
 
             .post-type {
                 font-size: 11px;
