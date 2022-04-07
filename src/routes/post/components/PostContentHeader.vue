@@ -9,7 +9,7 @@
                         <i class="material-icons">visibility</i>
                         <span v-html="post.hits" />
                     </div>
-                    <div class="thumb item">
+                    <div v-show="post.post_type !== 3" class="thumb item">
                         <i class="material-icons">thumb_up_alt</i>
                         <span v-html="post.thumbs" />
                     </div>

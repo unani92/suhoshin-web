@@ -12,4 +12,5 @@ export default {
     },
     updateThumbs: postId => $http.post(`post/thumb/${postId}`),
     getThumbInfo: postId => $http.get(`post/thumb?post_id=${postId}`),
+    updateHits: postId => $http.put(`post/update_hit/${postId}`),
 }

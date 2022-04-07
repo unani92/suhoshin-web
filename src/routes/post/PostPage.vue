@@ -16,7 +16,7 @@
         <main class="main" @scroll="onScroll">
             <PostItem @click.native="onClickItem(item)" :post="item" v-for="item in currentTab" :key="item.id" />
         </main>
-        <button class="btn floating-btn" @click="onClickCreate">
+        <button v-if="showEditBtn" class="btn floating-btn" @click="onClickCreate">
             <i class="material-icons">add</i>
         </button>
     </div>
@@ -40,6 +40,11 @@ export default {
                 label: 'NOTICE',
                 selected: false,
             },
+            {
+                type: 3,
+                label: 'SUBMIT_AWAY',
+                selected: false,
+            },
         ],
         selectedTab: 2,
         loading: false,
@@ -48,14 +53,21 @@ export default {
     mounted() {
         const free = this.$store.dispatch('getFreePosts', this.pageNum)
         const notice = this.$store.dispatch('getNoticePosts', this.pageNum)
+        const away = this.$store.dispatch('getSubmitAwayPosts', this.pageNum)
 
-        Promise.all([free, notice])
+        Promise.all([free, notice, away])
     },
     beforeDestroy() {
         this.$store.commit('setFreePosts', [])
         this.$store.commit('setNoticePosts', [])
+        this.$store.commit('setSubmitAwayPosts', [])
     },
     computed: {
+        showEditBtn() {
+            if (this.me.user_status === 2) return true
+
+            return this.selectedTab === 2
+        },
         me() {
             return this.$store.getters.me
         },
@@ -65,10 +77,13 @@ export default {
         notice() {
             return this.$store.getters.notice
         },
+        away() {
+            return this.$store.getters.awayPost
+        },
         currentTab() {
             if (!this.selectedTab) return []
 
-            return this.selectedTab === 1 ? this.notice : this.free
+            return this.selectedTab === 1 ? this.notice : this.selectedTab === 2 ? this.free : this.away
         },
     },
     methods: {

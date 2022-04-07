@@ -47,6 +47,10 @@ export default {
                     id: 2,
                     name: '자유게시판',
                 },
+                {
+                    id: 3,
+                    name: '원정신청',
+                },
             ]
 
             return this.me.user_status === 2 ? selectors : selectors.filter(item => item.id === 2)

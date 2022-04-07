@@ -26,7 +26,7 @@
                 <div class="btns">
                     <div @click="cancelReplyMode" class="btn btn-brd">취소</div>
                     <div @click="submitReply" class="btn btn-brd m-r-8">작성</div>
-                    <div class="check-box" @click="secretReply = !secretReply">
+                    <div class="check-box" @click="toggleReply">
                         <i class="material-icons f-18">{{ `check_box${secretReply ? '' : '_outline_blank'}` }}</i>
                         <span class="f-14">비밀댓글</span>
                     </div>
@@ -52,6 +52,9 @@ export default {
         replyContent: null,
         secretReply: false,
     }),
+    mounted() {
+        this.secretReply = this.comment.secret
+    },
     computed: {
         me() {
             return this.$store.getters.me
@@ -120,6 +123,11 @@ export default {
         },
     },
     methods: {
+        toggleReply() {
+            if (this.comment.secret) return
+
+            this.secretReply = !this.secretReply
+        },
         cancelEditMode() {
             this.editMode = false
             this.commentContent = null

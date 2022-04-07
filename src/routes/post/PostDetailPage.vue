@@ -4,7 +4,7 @@
         <PostContentHeader :post="post" />
         <div class="content">
             <div id="editor" />
-            <div class="thumb">
+            <div class="thumb" v-if="post.post_type !== 3">
                 <div :class="{ clicked: thumb }" class="click-container" @click="clickThumb">
                     <i class="material-icons m-r-8">thumb_up_alt</i>
                     <span>공감</span>
@@ -32,6 +32,14 @@ export default {
         post: Object,
     },
     mounted() {
+        const hits = JSON.parse(sessionStorage.getItem('hits')) || []
+        if (!hits.includes(this.post.id)) {
+            postService.updateHits(this.post.id).then(() => {
+                hits.push(this.post.id)
+                sessionStorage.setItem('hits', JSON.stringify(hits))
+                this.$set(this.post, 'hits', this.post.hits + 1)
+            })
+        }
         this.editor = new Editor.factory({
             el: document.getElementById('editor'),
             viewer: true,

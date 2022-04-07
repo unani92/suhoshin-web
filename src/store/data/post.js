@@ -2,6 +2,7 @@ import postService from '@/services/post'
 import commentsService from '@/services/comments'
 
 const defaultState = () => ({
+    awayPost: [],
     free: [],
     notice: [],
     mainPosts: null,
@@ -11,6 +12,7 @@ const defaultState = () => ({
 const state = defaultState()
 
 const getters = {
+    awayPost: state => state.awayPost,
     free: state => state.free,
     notice: state => state.notice,
     mainPosts: state => state.mainPosts,
@@ -18,6 +20,10 @@ const getters = {
 }
 
 const actions = {
+    async getSubmitAwayPosts({ commit, getters }, page = 0) {
+        const { data } = await postService.getPosts.all(page, 3)
+        commit('setSubmitAwayPosts', [...getters.awayPost, ...data])
+    },
     async getFreePosts({ commit, getters }, page = 0) {
         const { data } = await postService.getPosts.all(page, 2)
         commit('setFreePosts', [...getters.free, ...data])
@@ -43,6 +49,9 @@ const actions = {
 }
 
 const mutations = {
+    setSubmitAwayPosts(state, value) {
+        state.awayPost = value
+    },
     setFreePosts(state, value) {
         state.free = value
     },
