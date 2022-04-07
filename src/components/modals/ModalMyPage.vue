@@ -19,8 +19,15 @@
                 </div>
                 <div class="right">
                     <div class="nickname m-b-8">
-                        <span v-html="me.nickname" />
-                        <i class="m-l-8 f-16 material-icons">edit</i>
+                        <TextareaWithX v-if="editNicknameMode" v-model="nick" :is-input-mode="true" />
+                        <span v-else v-text="me.nickname" />
+                        <div class="icn-container" v-if="editNicknameMode">
+                            <i @click="editNickname" class="m-l-8 f-16 material-icons">check</i>
+                            <i @click="editNicknameMode = !editNicknameMode" class="m-l-8 f-16 material-icons">close</i>
+                        </div>
+                        <div class="icn-container" v-else>
+                            <i @click="editNicknameMode = !editNicknameMode" class="m-l-8 f-16 material-icons">edit</i>
+                        </div>
                     </div>
                     <div class="user-status">
                         <span class="m-r-4">회원등급: </span>
@@ -62,6 +69,7 @@
 
 <script>
 import userStatusService from '@/services/userStatus'
+import userService from '@/services/user'
 
 export default {
     name: 'ModalMyPage',
@@ -71,6 +79,8 @@ export default {
     },
     data: () => ({
         request: {},
+        editNicknameMode: false,
+        nick: null,
     }),
     computed: {
         me() {
@@ -85,6 +95,34 @@ export default {
         },
     },
     methods: {
+        async editNickname() {
+            try {
+                if (!this.nick) {
+                    this.$toast.error('닉네임을 입력하세요')
+                    return
+                }
+
+                const {
+                    data: { jwtToken, me },
+                } = await userService.editNickname({ nickname: this.nick })
+                const header = { Authorization: `Bearer ${jwtToken}` }
+                this.$store.commit('setHeader', header)
+                this.$store.commit('setMe', me)
+                await this.$store.dispatch('loadMe')
+
+                this.$toast.success('닉네임을 바꿨어요')
+                this.editNicknameMode = false
+                this.nick = null
+            } catch ({
+                response: {
+                    data: { message },
+                },
+            }) {
+                if (message === 'already_submit') {
+                    this.$toast.error('이미 존재하는 닉네임이에요')
+                }
+            }
+        },
         statusUpdate() {
             if (this.request.confirmed === 0 || this.me.user_status >= 1) {
                 return
@@ -136,6 +174,11 @@ export default {
     margin: 0;
     padding: 0 20px;
     position: relative;
+
+    ::v-deep .textarea-with-x {
+        height: 40px;
+        width: 70%;
+    }
 
     .top-bar {
         float: right;
