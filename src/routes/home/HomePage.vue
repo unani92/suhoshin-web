@@ -9,6 +9,7 @@
 import Games from '@/routes/home/components/Games'
 import Notices from '@/routes/home/components/Notices'
 import HotPosts from '@/routes/home/components/HotPosts'
+import img from '@/assets/images/temp.png'
 export default {
     name: 'HomePage',
     data: () => ({}),
@@ -24,6 +25,20 @@ export default {
         },
     },
     async mounted() {
+        const bannerTemp = localStorage.getItem('bannerTemp')
+        if (!bannerTemp) {
+            localStorage.setItem('bannerTemp', true)
+            // const img = require('@/assets/images/temp.png')
+            this.$modal.basic({
+                body: `<img width="80%" height="auto" src="${img}">`,
+                buttons: [
+                    {
+                        label: 'CONFIRM',
+                        class: 'btn-primary',
+                    },
+                ],
+            })
+        }
         await this.$store.dispatch('getMainPosts')
         await this.$store.dispatch('afterAuthCallbacks')
     },

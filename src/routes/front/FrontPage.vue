@@ -39,14 +39,19 @@ export default {
             })
         },
         async getKaKaoInfo(authInfo) {
-            const {
-                data: { jwtToken, me },
-            } = await userService.kakaoLogin(authInfo.access_token)
-            const header = { Authorization: `Bearer ${jwtToken}` }
-            this.$store.commit('setHeader', header)
-            this.$store.commit('setMe', me)
+            try {
+                const {
+                    data: { jwtToken, me },
+                } = await userService.kakaoLogin(authInfo.access_token)
+                const header = { Authorization: `Bearer ${jwtToken}` }
+                this.$store.commit('setHeader', header)
+                this.$store.commit('setMe', me)
 
-            this.$router.push({ name: 'HomePage' })
+                this.$router.push({ name: 'HomePage' })
+            } catch (e) {
+                this.$toast.error('로그인 에러 발생')
+                console.log(e)
+            }
         },
     },
 }
