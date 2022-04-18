@@ -1,6 +1,11 @@
 <template>
     <div class="post-detail">
-        <StackRouterHeaderBar :show-title="true" :title="post.title" />
+        <StackRouterHeaderBar
+            :show-title="true"
+            :title="post.title"
+            :right-button="`more_horiz`"
+            :right-button-handler="rightBtnHandler"
+        />
         <PostContentHeader :post="post" />
         <div class="content">
             <div id="editor" />
@@ -57,6 +62,39 @@ export default {
         comments() {
             return this.$store.getters.currentPostComments
         },
+        buttons() {
+            const btns = [
+                {
+                    label: '삭제하기',
+                    handler: () => {
+                        setTimeout(async () => {
+                            const idx = await this.$modal.basic({
+                                body: '정말 삭제하시겠습니까?',
+                                buttons: [
+                                    {
+                                        label: 'CANCEL',
+                                        class: 'btn-default',
+                                    },
+                                    {
+                                        label: '삭제',
+                                        class: 'btn-primary',
+                                    },
+                                ],
+                            })
+                            if (idx) {
+                                const { data } = await postService.toggleEnabled(this.post.id)
+                                await this.$store.dispatch('getCurrentPostComments', this.post.id)
+                                await this.$store.dispatch('refresh')
+                                this.$toast.success(data.msg)
+                                this.$stackRouter.pop()
+                            }
+                        }, 200)
+                    },
+                },
+            ]
+
+            return this.post.user.id === this.$store.getters.me.id ? btns : btns.slice(1, btns.length)
+        },
     },
     methods: {
         async clickThumb() {
@@ -68,6 +106,9 @@ export default {
             } catch (e) {
                 this.$toast.error(e.data.msg)
             }
+        },
+        rightBtnHandler() {
+            this.$actionSheet({ buttons: this.buttons })
         },
     },
 }

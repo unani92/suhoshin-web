@@ -8,7 +8,7 @@
                 <div class="title" v-html="$translate(title)" />
             </div>
         </transition>
-        <div class="right-btn flex-wrap">
+        <div @click="onClickRightBtn" class="right-btn flex-wrap">
             <i v-show="showRightButton" class="material-icons">{{ rightButtonIcon }}</i>
         </div>
     </div>

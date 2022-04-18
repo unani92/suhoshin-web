@@ -52,7 +52,7 @@ export default {
                     action: () => {
                         this.navigate('AwayPage')
                     },
-                    label: '원정신청',
+                    label: '배너&원정신청',
                     selected: this.$route.name === 'AwayPage',
                 },
                 {

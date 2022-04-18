@@ -91,24 +91,7 @@ export default {
             }
         },
         async backHandler() {
-            const res = await this.$modal.basic({
-                body: '저장하지 않은 게시글은 삭제됩니다. 저장 시 임시글에 저장됩니다.',
-                buttons: [
-                    {
-                        label: '삭제하기',
-                        class: 'btn-default',
-                    },
-                    {
-                        label: 'SAVE',
-                        class: 'btn-primary',
-                    },
-                ],
-            })
-
-            if (!res) {
-                await postService.deletePost(this.post.id)
-            }
-
+            await postService.deletePost(this.post.id)
             this.$stackRouter.pop()
         },
     },
