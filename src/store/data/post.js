@@ -5,6 +5,7 @@ const defaultState = () => ({
     awayPost: [],
     free: [],
     notice: [],
+    suggest: [],
     mainPosts: null,
     currentPostComments: null,
 })
@@ -15,11 +16,16 @@ const getters = {
     awayPost: state => state.awayPost,
     free: state => state.free,
     notice: state => state.notice,
+    suggest: state => state.suggest,
     mainPosts: state => state.mainPosts,
     currentPostComments: state => state.currentPostComments,
 }
 
 const actions = {
+    async getSuggestPosts({ commit, getters }, page = 0) {
+        const { data } = await postService.getPosts.all(page, 4)
+        commit('setSuggestPosts', [...getters.suggest, ...data])
+    },
     async getSubmitAwayPosts({ commit, getters }, page = 0) {
         const { data } = await postService.getPosts.all(page, 3)
         commit('setSubmitAwayPosts', [...getters.awayPost, ...data])
@@ -37,12 +43,14 @@ const actions = {
         commit('setMainPosts', data)
     },
     async refresh({ commit }) {
-        const { data: free } = await postService.getPosts.all(0, 2)
         const { data: notice } = await postService.getPosts.all(0, 1)
+        const { data: free } = await postService.getPosts.all(0, 2)
         const { data: away } = await postService.getPosts.all(0, 3)
+        const { data: suggest } = await postService.getPosts.all(0, 4)
         commit('setFreePosts', free)
         commit('setNoticePosts', notice)
         commit('setSubmitAwayPosts', away)
+        commit('setSuggestPosts', suggest)
     },
     async getCurrentPostComments({ commit }, postId) {
         const { data: comments } = await commentsService.comment.getAllComments(postId)
@@ -51,6 +59,9 @@ const actions = {
 }
 
 const mutations = {
+    setSuggestPosts(state, value) {
+        state.suggest = value
+    },
     setSubmitAwayPosts(state, value) {
         state.awayPost = value
     },

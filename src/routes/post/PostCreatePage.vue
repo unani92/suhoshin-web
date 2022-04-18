@@ -42,18 +42,28 @@ export default {
                 {
                     id: 1,
                     name: '공지사항',
+                    userStatus: [2],
                 },
                 {
                     id: 2,
                     name: '자유게시판',
+                    userStatus: [0, 1, 2],
                 },
                 {
                     id: 3,
                     name: '원정신청',
+                    userStatus: [2],
+                },
+                {
+                    id: 4,
+                    name: '건의사항',
+                    userStatus: [1, 2],
                 },
             ]
 
-            return this.me.user_status === 2 ? selectors : selectors.filter(item => item.id === 2)
+            return this.me.user_status === 2
+                ? selectors
+                : selectors.filter(item => item.userStatus.includes(this.me.user_status))
         },
     },
     async mounted() {

@@ -40,6 +40,11 @@ export default {
                 label: 'NOTICE',
                 selected: false,
             },
+            {
+                type: 4,
+                label: 'SUGGEST',
+                selected: false,
+            },
         ],
         selectedTab: 2,
         loading: false,
@@ -48,19 +53,21 @@ export default {
     mounted() {
         const free = this.$store.dispatch('getFreePosts', this.pageNum)
         const notice = this.$store.dispatch('getNoticePosts', this.pageNum)
+        const suggest = this.$store.dispatch('getSuggestPosts', this.pageNum)
 
-        Promise.all([free, notice])
+        Promise.all([free, notice, suggest])
     },
     beforeDestroy() {
         this.$store.commit('setFreePosts', [])
         this.$store.commit('setNoticePosts', [])
         this.$store.commit('setSubmitAwayPosts', [])
+        this.$store.commit('setSuggestPosts', [])
     },
     computed: {
         showEditBtn() {
             if (this.me.user_status === 2) return true
 
-            return this.selectedTab === 2
+            return this.selectedTab === 2 ? true : this.selectedTab === 4 && this.me.user_status === 1
         },
         me() {
             return this.$store.getters.me
@@ -71,10 +78,19 @@ export default {
         notice() {
             return this.$store.getters.notice
         },
+        suggest() {
+            return this.$store.getters.suggest
+        },
         currentTab() {
             if (!this.selectedTab) return []
 
-            return this.selectedTab === 1 ? this.notice : this.selectedTab === 2 ? this.free : this.away
+            return this.selectedTab === 1
+                ? this.notice
+                : this.selectedTab === 2
+                ? this.free
+                : this.selectedTab === 4
+                ? this.suggest
+                : this.away
         },
     },
     methods: {
@@ -120,6 +136,32 @@ export default {
             })
         },
         onClickTab(item) {
+            if (item.type === 4 && ![1, 2].includes(this.me.user_status)) {
+                this.$modal
+                    .basic({
+                        body: '정회원부터 이용 가능합니다',
+                        buttons: [
+                            {
+                                label: 'CANCEL',
+                                class: 'btn-default',
+                            },
+                            {
+                                label: '정회원 인증하기',
+                                class: 'btn-primary',
+                            },
+                        ],
+                    })
+                    .then(res => {
+                        if (res) {
+                            setTimeout(() => {
+                                this.$stackRouter.push({
+                                    name: 'StatusUpdatePage',
+                                })
+                            }, 100)
+                        }
+                    })
+                return
+            }
             item.selected = true
 
             this.tabItems.forEach(tab => {

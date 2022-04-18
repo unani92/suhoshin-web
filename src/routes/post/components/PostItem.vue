@@ -94,7 +94,7 @@ export default {
             align-items: center;
 
             .post-title {
-                max-width: 85%;
+                max-width: 75%;
             }
 
             .post-type {
