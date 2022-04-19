@@ -2,7 +2,7 @@
     <div class="comment-item">
         <div class="top">
             <div class="user-info">
-                <span class="name">{{ user.user_status === 2 ? '관리자' : user.nickname }}</span>
+                <span class="name">{{ user.nickname }}</span>
                 <i @click="clickAddMenus" class="material-icons f-14 m-l-8">more_horiz</i>
             </div>
             <div class="timestamp">{{ timeStamp }}</div>
