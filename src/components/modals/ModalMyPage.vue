@@ -31,7 +31,7 @@
                     </div>
                     <div class="user-status">
                         <span class="m-r-4">회원등급: </span>
-                        <span :class="`badge user-${me.user_status}`" v-html="userStatus" />
+                        <span @click="test" :class="`badge user-${me.user_status}`" v-html="userStatus" />
                         <i
                             @click="clickDeclinedReason"
                             v-if="(request || {}).confirmed === -1"
@@ -95,6 +95,10 @@ export default {
         },
     },
     methods: {
+        test() {
+            console.log(this.me.id)
+            this.$toast.success(`${this.me.id}`)
+        },
         async editNickname() {
             try {
                 if (!this.nick) {

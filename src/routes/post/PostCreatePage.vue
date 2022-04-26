@@ -29,6 +29,7 @@ export default {
         post: null,
         title: null,
         selectedPostType: null,
+        save: false,
     }),
     computed: {
         me() {
@@ -83,6 +84,7 @@ export default {
 
             try {
                 this.$loading(true)
+                this.save = true
                 const payload = {
                     id: this.post.id,
                     title: this.title,
@@ -101,7 +103,9 @@ export default {
             }
         },
         async backHandler() {
-            await postService.deletePost(this.post.id)
+            if (!this.save) {
+                await postService.deletePost(this.post.id)
+            }
             this.$stackRouter.pop()
         },
     },
