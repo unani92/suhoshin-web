@@ -70,16 +70,16 @@ export default {
             return this.selectedTab === 2 ? true : this.selectedTab === 4 && this.me.user_status === 1
         },
         me() {
-            return this.$store.getters.me
+            return this.$store.getters.me || {}
         },
         free() {
-            return this.$store.getters.free
+            return this.$store.getters.free || []
         },
         notice() {
-            return this.$store.getters.notice
+            return this.$store.getters.notice || []
         },
         suggest() {
-            return this.$store.getters.suggest
+            return this.$store.getters.suggest || []
         },
         currentTab() {
             if (!this.selectedTab) return []
