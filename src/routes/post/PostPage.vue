@@ -178,34 +178,3 @@ export default {
     },
 }
 </script>
-
-<style scoped lang="scss">
-.post-page {
-    padding: 16px;
-    overflow-y: hidden !important;
-
-    .tabs {
-        display: flex;
-
-        .tab {
-            margin-right: 8px;
-            padding: 6px 18px;
-            border: 1px solid black;
-            border-radius: 100px;
-            font-size: 14px;
-            @include center;
-
-            &.selected {
-                background: $suhoshin-red;
-                color: white;
-                border: 1px solid $suhoshin-red;
-            }
-        }
-    }
-    .main {
-        padding: 16px 0;
-        height: calc(100% - 100px);
-        overflow-y: auto;
-    }
-}
-</style>

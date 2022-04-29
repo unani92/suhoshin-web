@@ -1,7 +1,7 @@
 <template>
     <div class="post-page">
         <main class="main" @scroll="onScroll">
-            <PostItem @click.native="onClickItem(item)" :post="item" v-for="item in away" :key="item.id" />
+            <PostItem @click.native="onClickItem(item)" :post="item" v-for="item in material" :key="item.id" />
         </main>
         <button v-if="showEditBtn" class="btn floating-btn" @click="onClickCreate">
             <i class="material-icons">add</i>
@@ -11,22 +11,23 @@
 
 <script>
 import PostItem from '@/routes/post/components/PostItem'
+
 export default {
-    name: 'AwayPage',
+    name: 'MaterialPage',
     data: () => ({
         pageNum: 0,
         loading: false,
     }),
     components: { PostItem },
     async mounted() {
-        await this.$store.dispatch('getSubmitAwayPosts', this.pageNum)
+        await this.$store.dispatch('getMaterialPosts', this.pageNum)
     },
     beforeDestroy() {
-        this.$store.commit('setSubmitAwayPosts', [])
+        this.$store.commit('setMaterialPosts', [])
     },
     computed: {
-        away() {
-            return this.$store.getters.awayPost
+        material() {
+            return this.$store.getters.materialPost
         },
         me() {
             return this.$store.getters.me || {}
@@ -56,7 +57,7 @@ export default {
             try {
                 this.$loading(true)
                 this.pageNum += 1
-                await this.$store.dispatch('getSubmitAwayPosts', this.pageNum)
+                await this.$store.dispatch('getMaterialPosts', this.pageNum)
             } catch (e) {
                 this.$toast.error(e.data.message)
             } finally {
@@ -67,10 +68,6 @@ export default {
             this.$stackRouter.push({ name: 'PostDetailPage', props: { post } })
         },
         onClickCreate() {
-            // if (!this.me.user_status) {
-            //     this.$toast.error('정회원 인증 후 게시글 작성이 가능합니다.')
-            //     return
-            // }
             this.pageNum = 0
             this.$stackRouter.push({
                 name: 'PostCreatePage',

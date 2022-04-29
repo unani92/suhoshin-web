@@ -60,6 +60,11 @@ export default {
                     name: '건의사항',
                     userStatus: [1, 2],
                 },
+                {
+                    id: 5,
+                    name: '수호신 상품 구매',
+                    userStatus: [2],
+                },
             ]
 
             return this.me.user_status === 2

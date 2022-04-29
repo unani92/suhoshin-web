@@ -6,6 +6,7 @@ const defaultState = () => ({
     free: [],
     notice: [],
     suggest: [],
+    materialPost: [],
     mainPosts: null,
     currentPostComments: null,
 })
@@ -13,6 +14,7 @@ const defaultState = () => ({
 const state = defaultState()
 
 const getters = {
+    materialPost: state => state.materialPost,
     awayPost: state => state.awayPost,
     free: state => state.free,
     notice: state => state.notice,
@@ -22,6 +24,10 @@ const getters = {
 }
 
 const actions = {
+    async getMaterialPosts({ commit, getters }, page = 0) {
+        const { data } = await postService.getPosts.all(page, 5)
+        commit('setMaterialPosts', [...getters.materialPost, ...data])
+    },
     async getSuggestPosts({ commit, getters }, page = 0) {
         const { data } = await postService.getPosts.all(page, 4)
         commit('setSuggestPosts', [...getters.suggest, ...data])
@@ -47,10 +53,12 @@ const actions = {
         const { data: free } = await postService.getPosts.all(0, 2)
         const { data: away } = await postService.getPosts.all(0, 3)
         const { data: suggest } = await postService.getPosts.all(0, 4)
+        const { data: materialPost } = await postService.getPosts.all(0, 5)
         commit('setFreePosts', free)
         commit('setNoticePosts', notice)
         commit('setSubmitAwayPosts', away)
         commit('setSuggestPosts', suggest)
+        commit('setMaterialPosts', materialPost)
     },
     async getCurrentPostComments({ commit }, postId) {
         const { data: comments } = await commentsService.comment.getAllComments(postId)
@@ -59,6 +67,9 @@ const actions = {
 }
 
 const mutations = {
+    setMaterialPosts(state, value) {
+        state.materialPost = value
+    },
     setSuggestPosts(state, value) {
         state.suggest = value
     },

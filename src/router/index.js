@@ -9,6 +9,7 @@ import IntroducePage from '@/routes/introduce/IntroducePage'
 import AdminPage from '@/routes/my-page/admin/AdminPage'
 import PostPage from '@/routes/post/PostPage'
 import AwayPage from '@/routes/away/AwayPage'
+import MaterialPage from '@/routes/material/MaterialPage'
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ const routes = [
         path: '/post',
         name: 'PostPage',
         component: PostPage,
+    },
+    {
+        path: '/material',
+        name: 'MaterialPage',
+        component: MaterialPage,
     },
     {
         path: '/not-found',

@@ -17,6 +17,7 @@
 
 <script>
 import MenuButton from './MenuButton'
+// import img from "@/assets/images/temp.png";
 
 export default {
     components: {
@@ -33,6 +34,16 @@ export default {
             return this.$options.filters.asAge(this.$store.getters.me.profile.birthday)
         },
         buttons() {
+            // const img = require('@/assets/images/temp.png')
+            // this.$modal.basic({
+            //     body: `<img width="80%" height="auto" src="${img}">`,
+            //     buttons: [
+            //         {
+            //             label: 'CONFIRM',
+            //             class: 'btn-primary',
+            //         },
+            //     ],
+            // })
             const btns = [
                 {
                     action: () => {
@@ -57,19 +68,10 @@ export default {
                 },
                 {
                     action: () => {
-                        const img = require('@/assets/images/temp.png')
-                        this.$modal.basic({
-                            body: `<img width="80%" height="auto" src="${img}">`,
-                            buttons: [
-                                {
-                                    label: 'CONFIRM',
-                                    class: 'btn-primary',
-                                },
-                            ],
-                        })
+                        this.navigate('MaterialPage')
                     },
                     label: '수호신 상품 구매',
-                    selected: this.$route.name === 'MyPage',
+                    selected: this.$route.name === 'MaterialPage',
                 },
             ]
 
