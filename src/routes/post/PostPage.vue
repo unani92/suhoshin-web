@@ -51,6 +51,7 @@ export default {
         pageNum: 0,
     }),
     mounted() {
+        this.$store.commit('setViewPort', window.innerWidth)
         const free = this.$store.dispatch('getFreePosts', this.pageNum)
         const notice = this.$store.dispatch('getNoticePosts', this.pageNum)
         const suggest = this.$store.dispatch('getSuggestPosts', this.pageNum)

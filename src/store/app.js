@@ -19,6 +19,7 @@ const defaultState = () => ({
     },
     isAppFirstLoaded: false,
     groups: [],
+    viewPort: 'mobile',
 })
 
 const state = defaultState()
@@ -30,6 +31,7 @@ const getters = {
     loading: state => state.loading,
     global: state => state.global,
     isAppFirstLoaded: state => state.isAppFirstLoaded,
+    viewPort: state => state.viewPort,
 }
 
 // actions
@@ -48,6 +50,9 @@ const actions = {
 
 // mutations
 const mutations = {
+    setViewPort(state, value) {
+        state.viewPort = value <= 500 ? 'mobile' : 'pc'
+    },
     setToast(state, payload) {
         if (!payload) {
             state.toast = {

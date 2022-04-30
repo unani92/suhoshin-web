@@ -54,6 +54,11 @@ export default {
     created() {
         this.init()
     },
+    mounted() {
+        window.addEventListener('resize', e => {
+            this.$store.commit('setViewPort', window.innerWidth)
+        })
+    },
 }
 </script>
 
