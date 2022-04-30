@@ -78,7 +78,7 @@ export default {
         this.$registerBackHandler(this.backHandler)
     },
     beforeDestroy() {
-        this.$unregisterBackHandler(this.backHandler)
+        this.$unregisterBackHandler()
     },
     methods: {
         selectPostType(val) {
@@ -90,6 +90,7 @@ export default {
             try {
                 this.$loading(true)
                 this.save = true
+                this.$unregisterBackHandler()
                 const payload = {
                     id: this.post.id,
                     title: this.title,
@@ -111,6 +112,7 @@ export default {
             if (!this.save) {
                 await postService.deletePost(this.post.id)
             }
+            this.$unregisterBackHandler()
             this.$stackRouter.pop()
         },
     },

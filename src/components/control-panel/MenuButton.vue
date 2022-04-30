@@ -28,6 +28,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    cursor: pointer;
 
     &.selected {
         border-bottom: 2px solid $suhoshin-red;
