@@ -65,6 +65,20 @@ export default {
         buttons() {
             const btns = [
                 {
+                    label: '수정하기',
+                    handler: () => {
+                        this.$stackRouter.pop()
+                        setTimeout(() => {
+                            this.$stackRouter.push({
+                                name: 'PostCreatePage',
+                                props: {
+                                    editPost: this.post,
+                                },
+                            })
+                        }, 200)
+                    },
+                },
+                {
                     label: '삭제하기',
                     handler: () => {
                         setTimeout(async () => {

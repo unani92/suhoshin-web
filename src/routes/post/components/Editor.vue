@@ -48,7 +48,7 @@ export default {
         this.editor = new Editor({
             el: document.getElementById('editor'),
             initialEditType: 'wysiwyg',
-            initialValue: this.initialValue,
+            initialValue: this.initialValue || '',
             hideModeSwitch: true,
             height: 'calc(100vh - 300px)',
             toolbarItems: [
