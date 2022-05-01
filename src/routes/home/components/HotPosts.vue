@@ -19,7 +19,8 @@ export default {
     components: { HotPostItem },
     computed: {
         hotPosts() {
-            return (this.$store.getters.mainPosts || {}).hot || []
+            const hot = (this.$store.getters.mainPosts || {}).hot || []
+            return hot.sort((a, b) => b.id - a.id)
         },
     },
 }
