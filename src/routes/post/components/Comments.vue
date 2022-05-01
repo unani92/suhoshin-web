@@ -51,7 +51,7 @@ export default {
             return this.comments.comments
         },
         blockComment() {
-            return this.post.block_comment && this.$store.getters.me.user_status !== 2
+            return this.post.block_comment && this.$store.getters.me.user_status < 1
         },
     },
     methods: {
