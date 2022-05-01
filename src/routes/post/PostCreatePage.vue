@@ -95,7 +95,7 @@ export default {
             this.title = this.editPost.title
             this.selectedPostType = this.editPost.post_type
             this.alreadySelectedPostType = this.postType.find(p => p.id === this.selectedPostType).id
-            this.isMain = !!this.editPost.isMain
+            this.isMain = !!this.editPost.is_main
             this.blockComment = !!this.editPost.block_comment
         } else {
             const { data } = await postService.tempUpload()
