@@ -151,7 +151,7 @@ export default {
         routeMyPost() {
             this.$emit('close')
             setTimeout(() => {
-                this.$router.push({ name: 'MyPostPage' })
+                this.$stackRouter.push({ name: 'MyPostPage' })
             }, 100)
         },
         clickDeclinedReason() {

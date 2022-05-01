@@ -9,6 +9,7 @@ const defaultState = () => ({
     materialPost: [],
     mainPosts: null,
     currentPostComments: null,
+    myPost: [],
 })
 
 const state = defaultState()
@@ -21,9 +22,14 @@ const getters = {
     suggest: state => state.suggest,
     mainPosts: state => state.mainPosts,
     currentPostComments: state => state.currentPostComments,
+    myPost: state => state.myPost,
 }
 
 const actions = {
+    async getMyPost({ commit, getters }, { postType = -1, page }) {
+        const { data } = await postService.getPosts.getPostByMe(page, postType)
+        commit('setMyPost', [...getters.myPost, ...data])
+    },
     async getMaterialPosts({ commit, getters }, page = 0) {
         const { data } = await postService.getPosts.all(page, 5)
         commit('setMaterialPosts', [...getters.materialPost, ...data])
@@ -67,6 +73,9 @@ const actions = {
 }
 
 const mutations = {
+    setMyPost(state, value) {
+        state.myPost = value
+    },
     setMaterialPosts(state, value) {
         state.materialPost = value
     },
