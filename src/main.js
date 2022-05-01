@@ -14,6 +14,7 @@ import * as Global from '@/plugins/global'
 import * as directives from '@/directives'
 import { store } from '@/store'
 
+import CheckBox from '@/components/app/CheckBox'
 import Loading from '@/components/app/Loading'
 import Snackbar from '@/components/app/Snackbar'
 import BottomButton from '@/components/app/BottomButton'
@@ -57,6 +58,7 @@ Vue.component('Loading', Loading)
 Vue.component('Calendar', Calendar)
 Vue.component('DatePicker', DatePicker)
 Vue.component('AdminUserComponent', AdminUserComponent)
+Vue.component('CheckBox', CheckBox)
 
 require('@/assets/styles/index.scss')
 

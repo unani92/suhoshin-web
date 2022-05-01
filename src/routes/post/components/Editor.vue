@@ -12,7 +12,14 @@ import postService from '@/services/post'
 
 export default {
     name: 'Editor',
-    props: ['disabled', 'postId'],
+    props: {
+        disabled: Boolean,
+        postId: Number,
+        initialValue: {
+            type: String,
+            default: null,
+        },
+    },
     data: () => ({
         imgData: null,
         imgNum: 0,
@@ -21,7 +28,6 @@ export default {
     methods: {
         save() {
             const data = this.editor.getHTML()
-            console.log(data)
             this.$emit('save', data)
         },
         preparePayload(payload) {
@@ -42,6 +48,7 @@ export default {
         this.editor = new Editor({
             el: document.getElementById('editor'),
             initialEditType: 'wysiwyg',
+            initialValue: this.initialValue || '',
             hideModeSwitch: true,
             height: 'calc(100vh - 300px)',
             toolbarItems: [

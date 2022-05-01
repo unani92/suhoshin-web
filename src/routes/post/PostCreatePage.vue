@@ -9,10 +9,21 @@
                     :scroll-fix="true"
                     :options="postType"
                     :placeholder="'분류'"
+                    :already-selected="editPost ? alreadySelectedPostType : null"
                     @selected="selectPostType"
                 />
+                <div class="check-list m-t-8" v-if="me.user_status === 2">
+                    <div class="check-item m-r-16">
+                        <CheckBox class="m-r-8" v-model="isMain" />
+                        <span>메인으로 올리기</span>
+                    </div>
+                    <div class="check-item">
+                        <CheckBox class="m-r-8" v-model="blockComment" />
+                        <span>인증 사용자만 댓글 허용</span>
+                    </div>
+                </div>
             </div>
-            <Editor v-if="post" :postId="post.id" :disabled="disabled" @save="savePost" />
+            <Editor :initial-value="post.content" v-if="post" :postId="post.id" :disabled="disabled" @save="savePost" />
         </div>
     </div>
 </template>
@@ -29,8 +40,14 @@ export default {
         post: null,
         title: null,
         selectedPostType: null,
+        alreadySelectedPostType: null,
         save: false,
+        isMain: false,
+        blockComment: false,
     }),
+    props: {
+        editPost: Object,
+    },
     computed: {
         me() {
             return this.$store.getters.me
@@ -73,8 +90,18 @@ export default {
         },
     },
     async mounted() {
-        const { data } = await postService.tempUpload()
-        this.post = data
+        if (this.editPost) {
+            this.post = this.editPost
+            this.title = this.editPost.title
+            this.selectedPostType = this.editPost.post_type
+            this.alreadySelectedPostType = this.postType.find(p => p.id === this.selectedPostType).id
+            this.isMain = !!this.editPost.is_main
+            this.blockComment = !!this.editPost.block_comment
+        } else {
+            const { data } = await postService.tempUpload()
+            this.post = data
+        }
+
         this.$registerBackHandler(this.backHandler)
     },
     beforeDestroy() {
@@ -96,6 +123,8 @@ export default {
                     title: this.title,
                     content: val,
                     post_type: this.selectedPostType.id,
+                    is_main: this.isMain ? 1 : 0,
+                    block_comment: this.blockComment ? 1 : 0,
                 }
 
                 const { data } = await postService.uploadPost(payload)
@@ -109,7 +138,7 @@ export default {
             }
         },
         async backHandler() {
-            if (!this.save) {
+            if (!this.editPost) {
                 await postService.deletePost(this.post.id)
             }
             this.$unregisterBackHandler()
@@ -123,6 +152,15 @@ export default {
 .post-create {
     .container {
         padding: 16px;
+    }
+    .check-list {
+        display: flex;
+        align-items: center;
+
+        .check-item {
+            display: flex;
+            align-items: center;
+        }
     }
 }
 </style>

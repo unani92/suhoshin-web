@@ -13,6 +13,10 @@ export default {
             $http.get(
                 `/post?page=${page || 0}&post_type=${type}&len=${$store.getters.viewPort === 'mobile' ? 10 : 30}`
             ),
+        getPostByMe: (page, postType = -1) =>
+            $http.get(
+                `/post/me?page=${page || 0}&post_type=${postType}&len=${$store.getters.viewPort === 'mobile' ? 10 : 50}`
+            ),
         getPostById: postId => $http.get(`post?/get-info?post_id${postId}`),
         getMain: () => $http.get(`/post/hot`),
     },

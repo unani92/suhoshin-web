@@ -32,7 +32,9 @@ export default {
         isSelected: {},
     }),
     mounted() {
-        this.init()
+        setTimeout(() => {
+            this.init()
+        }, 50)
     },
     watch: {
         stage: {

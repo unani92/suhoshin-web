@@ -10,12 +10,14 @@
             @focus="onFocus"
             @blur="onBlur"
             @input="onKeyUp"
+            :readonly="disabled"
         />
         <textarea
             v-else
             ref="textarea"
             v-model="text"
             class="flex-fill"
+            :readonly="disabled"
             :rows="textareaRows"
             :placeholder="placeholder"
             @focus="onFocus"
@@ -37,7 +39,7 @@ import debounce from '@/modules/debounce'
 
 export default {
     name: 'TextareaWithX',
-    props: ['type', 'value', 'placeholder', 'from', 'isInputMode', 'textareaRows'],
+    props: ['type', 'value', 'placeholder', 'from', 'isInputMode', 'textareaRows', 'disabled'],
     data: () => ({
         text: '',
         focus: false,

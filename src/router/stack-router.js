@@ -7,6 +7,7 @@ export const stackRouterComponents = {
     PostDetailPage: () => import('@/routes/post/PostDetailPage'),
     UpdateGamesPage: () => import('@/routes/my-page/admin/UpdateGamesPage'),
     UpdateGamesCreatePage: () => import('@/routes/my-page/admin/UpdateGamesCreatePage'),
+    MyPostPage: () => import('@/routes/my-page/my-post/MyPostPage'),
 }
 
 export function isStackRoute(name) {

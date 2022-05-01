@@ -43,7 +43,7 @@ import Replies from '@/routes/post/components/Replies'
 
 export default {
     name: 'CommentItem',
-    props: ['comment', 'post'],
+    props: ['comment', 'post', 'disabled'],
     components: { Replies },
     data: () => ({
         editMode: false,
@@ -114,6 +114,10 @@ export default {
                 {
                     label: '답글달기',
                     handler: () => {
+                        if (this.disabled) {
+                            this.$toast.error('인증회원만 댓글작성이 가능합니다')
+                            return
+                        }
                         this.replyMode = true
                     },
                 },

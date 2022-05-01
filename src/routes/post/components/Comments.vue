@@ -13,11 +13,20 @@
         <div v-if="[3, 5].includes(post.post_type)" class="away-comment-info m-b-8 f-14 spoqa-f-bold">
             <p>* 댓글은 운영자만 확인 가능합니다.</p>
         </div>
-        <div class="text-area">
+        <div v-if="post.block_comment" class="away-comment-info m-b-8 f-14 spoqa-f-bold">
+            <p>* 인증된 회원만 댓글 작성이 허용됩니다</p>
+        </div>
+        <div class="text-area" v-if="!blockComment">
             <TextareaWithX v-model="content" />
         </div>
         <div class="comments-items m-t-8">
-            <CommentItem :post="post" :comment="item" v-for="item in commentItems" :key="item.id" />
+            <CommentItem
+                :disabled="blockComment"
+                :post="post"
+                :comment="item"
+                v-for="item in commentItems"
+                :key="item.id"
+            />
         </div>
     </div>
 </template>
@@ -40,6 +49,9 @@ export default {
     computed: {
         commentItems() {
             return this.comments.comments
+        },
+        blockComment() {
+            return this.post.block_comment && this.$store.getters.me.user_status < 1
         },
     },
     methods: {
