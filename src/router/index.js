@@ -10,6 +10,7 @@ import AdminPage from '@/routes/my-page/admin/AdminPage'
 import PostPage from '@/routes/post/PostPage'
 import AwayPage from '@/routes/away/AwayPage'
 import MaterialPage from '@/routes/material/MaterialPage'
+import MyPostPage from '@/routes/my-page/my-post/MyPostPage'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ const routes = [
         path: '/material',
         name: 'MaterialPage',
         component: MaterialPage,
+    },
+    {
+        path: '/my-post',
+        name: 'MyPostPage',
+        component: MyPostPage,
     },
     {
         path: '/not-found',

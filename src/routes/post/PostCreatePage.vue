@@ -12,7 +12,7 @@
                     @selected="selectPostType"
                 />
             </div>
-            <Editor v-if="post" :postId="post.id" :disabled="disabled" @save="savePost" />
+            <Editor :initial-value="post.content" v-if="post" :postId="post.id" :disabled="disabled" @save="savePost" />
         </div>
     </div>
 </template>
@@ -31,6 +31,9 @@ export default {
         selectedPostType: null,
         save: false,
     }),
+    props: {
+        editPost: Object,
+    },
     computed: {
         me() {
             return this.$store.getters.me
@@ -73,8 +76,15 @@ export default {
         },
     },
     async mounted() {
-        const { data } = await postService.tempUpload()
-        this.post = data
+        if (this.editPost) {
+            this.post = this.editPost
+            this.title = this.editPost.title
+            this.selectedPostType = this.editPost.post_type
+        } else {
+            const { data } = await postService.tempUpload()
+            this.post = data
+        }
+
         this.$registerBackHandler(this.backHandler)
     },
     beforeDestroy() {
