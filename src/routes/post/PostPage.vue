@@ -134,6 +134,7 @@ export default {
             this.pageNum = 0
             this.$stackRouter.push({
                 name: 'PostCreatePage',
+                props: { pType: this.selectedTab },
             })
         },
         onClickTab(item) {

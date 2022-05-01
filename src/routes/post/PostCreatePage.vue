@@ -47,6 +47,7 @@ export default {
     }),
     props: {
         editPost: Object,
+        pType: Number,
     },
     computed: {
         me() {
@@ -82,7 +83,14 @@ export default {
                     name: '수호신 상품 구매',
                     userStatus: [2],
                 },
+                {
+                    id: 6,
+                    name: '배너',
+                    userStatus: [0, 1, 2],
+                },
             ]
+            if (this.pType)
+                return selectors.filter(item => item.userStatus.includes(this.me.user_status) && item.id === this.pType)
 
             return this.me.user_status === 2
                 ? selectors

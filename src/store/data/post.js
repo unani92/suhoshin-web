@@ -7,6 +7,7 @@ const defaultState = () => ({
     notice: [],
     suggest: [],
     materialPost: [],
+    bannerPost: [],
     mainPosts: null,
     currentPostComments: null,
     myPost: [],
@@ -15,6 +16,7 @@ const defaultState = () => ({
 const state = defaultState()
 
 const getters = {
+    bannerPost: state => state.bannerPost,
     materialPost: state => state.materialPost,
     awayPost: state => state.awayPost,
     free: state => state.free,
@@ -26,9 +28,9 @@ const getters = {
 }
 
 const actions = {
-    async getMyPost({ commit, getters }, { postType = -1, page }) {
-        const { data } = await postService.getPosts.getPostByMe(page, postType)
-        commit('setMyPost', [...getters.myPost, ...data])
+    async getBannerPosts({ commit, getters }, page = 0) {
+        const { data } = await postService.getPosts.all(page, 6)
+        commit('setBannerPosts', [...getters.bannerPost, ...data])
     },
     async getMaterialPosts({ commit, getters }, page = 0) {
         const { data } = await postService.getPosts.all(page, 5)
@@ -50,6 +52,10 @@ const actions = {
         const { data } = await postService.getPosts.all(page, 1)
         commit('setNoticePosts', [...getters.notice, ...data])
     },
+    async getMyPost({ commit, getters }, { postType = -1, page }) {
+        const { data } = await postService.getPosts.getPostByMe(page, postType)
+        commit('setMyPost', [...getters.myPost, ...data])
+    },
     async getMainPosts({ commit }) {
         const { data } = await postService.getPosts.getMain()
         commit('setMainPosts', data)
@@ -60,11 +66,13 @@ const actions = {
         const { data: away } = await postService.getPosts.all(0, 3)
         const { data: suggest } = await postService.getPosts.all(0, 4)
         const { data: materialPost } = await postService.getPosts.all(0, 5)
+        const { data: bannerPost } = await postService.getPosts.all(0, 6)
         commit('setFreePosts', free)
         commit('setNoticePosts', notice)
         commit('setSubmitAwayPosts', away)
         commit('setSuggestPosts', suggest)
         commit('setMaterialPosts', materialPost)
+        commit('setBannerPosts', bannerPost)
     },
     async getCurrentPostComments({ commit }, postId) {
         const { data: comments } = await commentsService.comment.getAllComments(postId)
@@ -73,8 +81,8 @@ const actions = {
 }
 
 const mutations = {
-    setMyPost(state, value) {
-        state.myPost = value
+    setBannerPosts(state, value) {
+        state.bannerPost = value
     },
     setMaterialPosts(state, value) {
         state.materialPost = value
@@ -93,6 +101,9 @@ const mutations = {
     },
     setMainPosts(state, value) {
         state.mainPosts = value
+    },
+    setMyPost(state, value) {
+        state.myPost = value
     },
     setCurrentPostComments(state, value) {
         state.currentPostComments = value
