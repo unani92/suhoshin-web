@@ -107,7 +107,7 @@ export default {
                 },
             ]
 
-            return this.post.user.id === this.$store.getters.me.id ? btns : btns.slice(1, btns.length)
+            return this.post.user.id === this.$store.getters.me.id ? btns : btns.slice(2, btns.length)
         },
     },
     methods: {
