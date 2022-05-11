@@ -1,7 +1,6 @@
 <template>
     <div>
         <div ref="editor" id="editor" />
-        <BottomButton :disabled="disabled" @click="save" />
     </div>
 </template>
 
@@ -13,7 +12,6 @@ import postService from '@/services/post'
 export default {
     name: 'Editor',
     props: {
-        disabled: Boolean,
         postId: Number,
         initialValue: {
             type: String,
@@ -50,7 +48,7 @@ export default {
             initialEditType: 'wysiwyg',
             initialValue: this.initialValue || '',
             hideModeSwitch: true,
-            height: 'calc(100vh - 300px)',
+            height: 'calc(100vh - 260px)',
             toolbarItems: [
                 ['heading', 'bold', 'italic', 'strike'],
                 ['image', 'link'],

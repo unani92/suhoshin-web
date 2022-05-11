@@ -53,9 +53,30 @@ export default {
             }
             reader.readAsDataURL(this.options.imgFile)
         },
-        initCropper() {
+        async initCropper() {
             const image = document.getElementById('cropping-image')
             if (!image) return
+
+            const loadImage = () => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image()
+                    img.src = image.src
+                    img.onload = () => resolve(img)
+                    img.onerror = e => {
+                        console.log(e)
+                        reject(e)
+                    }
+                })
+            }
+            const img = await loadImage()
+
+            const canvas = document.createElement('canvas')
+            canvas.width = image.offsetWidth
+            canvas.height = image.offsetHeight
+
+            const ctx = canvas.getContext('2d')
+            ctx.drawImage(img, 0, 0, image.offsetWidth, image.offsetHeight)
+            image.src = canvas.toDataURL('image/jpg')
 
             const options = {
                 viewMode: 1,

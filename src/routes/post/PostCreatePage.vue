@@ -4,14 +4,17 @@
         <div class="container">
             <div class="item m-b-16">
                 <TextareaWithX placeholder="제목" v-model="title" :is-input-mode="true" />
-                <SelectInput
-                    class="m-t-8"
-                    :scroll-fix="true"
-                    :options="postType"
-                    :placeholder="'분류'"
-                    :already-selected="editPost ? alreadySelectedPostType : null"
-                    @selected="selectPostType"
-                />
+                <div class="select-post">
+                    <SelectInput
+                        :scroll-fix="true"
+                        :options="postType"
+                        :placeholder="'분류'"
+                        :already-selected="editPost ? alreadySelectedPostType : null"
+                        @selected="selectPostType"
+                    />
+                    <div @click="savePost" class="btn btn-primary">작성</div>
+                </div>
+
                 <div class="check-list m-t-8" v-if="me.user_status === 2">
                     <div class="check-item m-r-16">
                         <CheckBox class="m-r-8" v-model="isMain" />
@@ -23,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            <Editor :initial-value="post.content" v-if="post" :postId="post.id" :disabled="disabled" @save="savePost" />
+            <Editor :initial-value="post.content" v-if="post" :postId="post.id" />
         </div>
     </div>
 </template>
@@ -120,7 +123,10 @@ export default {
             this.selectedPostType = val
         },
         async savePost(val) {
-            if (!val) return
+            if (!val) {
+                this.$toast.error('내용을 입력하세요')
+                return
+            }
 
             try {
                 this.$loading(true)
@@ -160,6 +166,19 @@ export default {
 .post-create {
     .container {
         padding: 16px;
+    }
+    .select-post {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 8px;
+
+        ::v-deep .select-wrapper {
+            width: 75%;
+        }
+        .btn {
+            height: 40px;
+        }
     }
     .check-list {
         display: flex;
