@@ -28,6 +28,8 @@ import AdminUserComponent from '@/components/common/AdminUserComponent'
 import Calendar from 'v-calendar/lib/components/calendar.umd'
 import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 import '@toast-ui/editor/dist/toastui-editor.css'
+import PostItem from '@/routes/post/components/PostItem'
+import HeaderBar from '@/components/control-panel/HeaderBar'
 
 Vue.use(VueClipboard)
 Vue.use(VueLazyLoad, {
@@ -59,6 +61,8 @@ Vue.component('Calendar', Calendar)
 Vue.component('DatePicker', DatePicker)
 Vue.component('AdminUserComponent', AdminUserComponent)
 Vue.component('CheckBox', CheckBox)
+Vue.component('PostItem', PostItem)
+Vue.component('HeaderBar', HeaderBar)
 
 require('@/assets/styles/index.scss')
 

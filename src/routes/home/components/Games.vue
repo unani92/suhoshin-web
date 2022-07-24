@@ -32,7 +32,7 @@ export default {
         },
         swiperOptions() {
             return {
-                initialSlide: 9,
+                initialSlide: this.games.length - 1,
                 pagination: {
                     el: '.swiper-pagination',
                 },

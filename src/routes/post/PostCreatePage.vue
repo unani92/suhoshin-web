@@ -1,6 +1,6 @@
 <template>
     <div class="post-create">
-        <StackRouterHeaderBar :left-button-handler="backHandler" :show-title="true" title="자유게시판" />
+        <StackRouterHeaderBar :left-button-handler="backHandler" :show-title="true" title="게시글 작성" />
         <div class="container">
             <div class="item m-b-16">
                 <TextareaWithX placeholder="제목" v-model="title" :is-input-mode="true" />
@@ -87,6 +87,11 @@ export default {
                     id: 6,
                     name: '배너',
                     userStatus: [0, 1, 2],
+                },
+                {
+                    id: 7,
+                    name: '수호신 회의록',
+                    userStatus: [2],
                 },
             ]
             if (this.pType)

@@ -39,10 +39,10 @@ export default {
                     show: true,
                 },
                 {
-                    key: 'CHECK_NOTE',
-                    route: 'BlockUserPage',
+                    key: 'MEETING_LOGS',
+                    route: 'MeetingLogsPage',
                     icon: 'mail_outline',
-                    show: false,
+                    show: true,
                 },
             ]
         },

@@ -38,6 +38,9 @@
   "UPDATE_GAMES": {
     "kr": "매치 수정"
   },
+  "MEETING_LOGS": {
+    "kr": "회의록"
+  },
   "CHECK_NOTE": {
     "kr": "쪽지 확인"
   },

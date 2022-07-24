@@ -11,11 +11,13 @@ const defaultState = () => ({
     mainPosts: null,
     currentPostComments: null,
     myPost: [],
+    meetingLogs: [],
 })
 
 const state = defaultState()
 
 const getters = {
+    meetingLogs: state => state.meetingLogs,
     bannerPost: state => state.bannerPost,
     materialPost: state => state.materialPost,
     awayPost: state => state.awayPost,
@@ -28,6 +30,10 @@ const getters = {
 }
 
 const actions = {
+    async getMeetingLogPosts({ commit, getters }, page = 0) {
+        const { data } = await postService.getPosts.all(page, 7)
+        commit('setMeetingLogPosts', [...getters.meetingLogs, ...data])
+    },
     async getBannerPosts({ commit, getters }, page = 0) {
         const { data } = await postService.getPosts.all(page, 6)
         commit('setBannerPosts', [...getters.bannerPost, ...data])
@@ -67,12 +73,14 @@ const actions = {
         const { data: suggest } = await postService.getPosts.all(0, 4)
         const { data: materialPost } = await postService.getPosts.all(0, 5)
         const { data: bannerPost } = await postService.getPosts.all(0, 6)
+        const { data: meetingLog } = await postService.getPosts.all(0, 7)
         commit('setFreePosts', free)
         commit('setNoticePosts', notice)
         commit('setSubmitAwayPosts', away)
         commit('setSuggestPosts', suggest)
         commit('setMaterialPosts', materialPost)
         commit('setBannerPosts', bannerPost)
+        commit('setMeetingLogPosts', meetingLog)
     },
     async getCurrentPostComments({ commit }, postId) {
         const { data: comments } = await commentsService.comment.getAllComments(postId)
@@ -81,6 +89,9 @@ const actions = {
 }
 
 const mutations = {
+    setMeetingLogPosts(state, value) {
+        state.meetingLogs = value
+    },
     setBannerPosts(state, value) {
         state.bannerPost = value
     },
