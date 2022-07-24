@@ -45,7 +45,7 @@ const createInvalidation = async () => {
   print('\n\n4. Invalidating previous cache...')
 
   const params = {
-    DistributionId: 'EGX9DS7ODOKSH', // user.vanillabridge.com dist ID(cloudfront 콘솔 페이지에서 직접 확인)
+    DistributionId: 'EQ12YR5KEP45H', // user.vanillabridge.com dist ID(cloudfront 콘솔 페이지에서 직접 확인)
     InvalidationBatch: {
       CallerReference: String(new Date().getTime()), // 무조건 string으로 들어와야 하고 중복되면 안됨
       Paths: {
@@ -150,10 +150,10 @@ const deletePreviousDistribution = async (bucketName) => {
 
   print('\n\n2. Started deleting previous distribution from S3...')
 
-  // let rmResult = await exec('aws s3 rm s3://' + bucketName + ' --recursive')
-  // if (rmResult.stderr) {
-  //   return Promise.reject(help())
-  // }
+  let rmResult = await exec('aws s3 rm s3://' + bucketName + ' --recursive')
+  if (rmResult.stderr) {
+    return Promise.reject(help())
+  }
   s3.listObjectsV2({ Bucket: bucketName }, (err, data) => {
     const contents = data.Contents
     contents.forEach(content => {
@@ -173,7 +173,7 @@ const deploy = async (env) => {
     await uploadToS3(o.bucketName, o.uploadTargetDirectory, o.cacheMaxAgeZero)
 
     // 리얼 배포 시에만 cloudFront cache invalidate 실행
-    if (!o.cacheMaxAgeZero) await createInvalidation()
+    // if (!o.cacheMaxAgeZero) await createInvalidation()
     success('\n\nDeploy finished!')
   } catch (e) {
     failed(e)

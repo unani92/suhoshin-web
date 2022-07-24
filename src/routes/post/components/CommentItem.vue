@@ -123,7 +123,7 @@ export default {
                 },
             ]
 
-            return this.me.id === this.user.id ? btns : btns.slice(2, btns.length)
+            return this.me.user_status === 2 || this.me.id === this.user.id ? btns : btns.slice(2, btns.length)
         },
     },
     methods: {
