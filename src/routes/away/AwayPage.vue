@@ -14,6 +14,7 @@
             </div>
         </nav>
         <main class="main" @scroll="onScroll">
+            <NoticeItem :notice="item" :mode="'PINNED'" v-for="item in pinnedPosts" :key="item.id" />
             <PostItem @click.native="onClickItem(item)" :post="item" v-for="item in currentTab" :key="item.id" />
         </main>
         <button v-if="showEditBtn" class="btn floating-btn" @click="onClickCreate">
@@ -24,6 +25,7 @@
 
 <script>
 import PostItem from '@/routes/post/components/PostItem'
+import NoticeItem from '@/routes/home/components/NoticeItem'
 export default {
     name: 'AwayPage',
     data: () => ({
@@ -43,7 +45,7 @@ export default {
         ],
         selectedTab: 3,
     }),
-    components: { PostItem },
+    components: { PostItem, NoticeItem },
     async mounted() {
         this.$store.commit('setViewPort', window.innerWidth)
         await this.$store.dispatch('getSubmitAwayPosts', this.pageNum)
@@ -70,6 +72,9 @@ export default {
             if (!this.selectedTab) return []
 
             return this.selectedTab === 3 ? this.away : this.banner
+        },
+        pinnedPosts() {
+            return this.currentTab.filter(item => item.is_main)
         },
     },
     methods: {

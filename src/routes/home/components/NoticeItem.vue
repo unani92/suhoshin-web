@@ -1,7 +1,7 @@
 <template>
     <div class="notice-item" @click="onClickItem(notice)">
         <div class="left">
-            <span class="spoqa-f-bold">공지사항</span>
+            <span class="spoqa-f-bold">{{ $translate(mode) }}</span>
             <div v-if="isNew" class="new-badge m-l-4">N</div>
         </div>
         <div class="right">
@@ -14,6 +14,11 @@
 export default {
     name: 'NoticeItem',
     props: {
+        mode: {
+            type: String,
+            required: false,
+            default: 'NOTICE',
+        },
         notice: Object,
     },
     computed: {
