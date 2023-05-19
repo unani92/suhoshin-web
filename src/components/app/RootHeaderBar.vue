@@ -1,10 +1,10 @@
 <template>
     <div class="root-header-bar">
         <div class="left">
-            <img @click="$router.push('/')" :src="require('@/assets/images/suhoshin.jpeg')" alt="" />
+            <i @click="$router.push('/')" class="material-icons-outlined icon">home</i>
         </div>
         <div class="right">
-            <img @click="openMyPage" :src="me.thumbnail" alt="" />
+            <img @click="openMyPage" :src="require('@/assets/images/suhoshin.jpeg')" alt="" />
         </div>
     </div>
 </template>
@@ -33,12 +33,12 @@ export default {
     padding: 16px;
     display: flex;
     justify-content: space-between;
-
+    align-items: center;
     .left {
-        img {
-            width: 40px;
-            height: auto;
+        .icon {
+            font-size: 32px;
             cursor: pointer;
+            color: #7f7e83;
         }
     }
     .right {
