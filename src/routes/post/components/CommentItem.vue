@@ -3,14 +3,19 @@
         <div class="top">
             <div class="user-info">
                 <span class="name">{{ user.nickname }}</span>
-                <i @click="clickAddMenus" class="material-icons f-14 m-l-8">more_horiz</i>
+                <i v-if="comment.enabled" @click="clickAddMenus" class="material-icons f-14 m-l-8">more_horiz</i>
             </div>
             <div class="timestamp">{{ timeStamp }}</div>
         </div>
         <div class="bottom">
             <div class="content">
                 <i v-if="comment.secret && !editMode" class="material-icons f-14 m-r-4">lock</i>
-                <p v-if="!editMode" class="content" v-text="$translate(comment.content)" />
+                <p
+                    v-if="!editMode"
+                    class="content"
+                    :class="{ disabled: !comment.enabled }"
+                    v-text="$translate(comment.content)"
+                />
                 <div v-else class="w-100">
                     <TextareaWithX v-model="commentContent" />
                     <div class="btns">
@@ -123,7 +128,11 @@ export default {
                 },
             ]
 
-            return this.me.user_status === 2 || this.me.id === this.user.id ? btns : btns.slice(2, btns.length)
+            return this.me.id === this.user.id
+                ? btns
+                : this.me.user_status === 2
+                ? btns.slice(1, btns.length)
+                : btns.slice(2, btns.length)
         },
     },
     methods: {
@@ -154,17 +163,20 @@ export default {
             this.cancelReplyMode()
         },
         async editComment() {
-            const { data } = await commentsService.comment.fixComment(this.comment.id, {
-                content: this.commentContent,
-            })
-            await this.$store.dispatch('getCurrentPostComments', this.post.id)
+            if (this.comment.enabled === 1) {
+                const { data } = await commentsService.comment.fixComment(this.comment.id, {
+                    content: this.commentContent,
+                })
+                await this.$store.dispatch('getCurrentPostComments', this.post.id)
+                this.$toast.success(data.msg)
+            }
             this.cancelEditMode()
-            this.$toast.success(data.msg)
         },
         clickAddMenus() {
             if (this.editMode) return
-
-            this.$actionSheet({ buttons: this.buttons })
+            if (this.comment.enabled) {
+                this.$actionSheet({ buttons: this.buttons })
+            }
         },
     },
 }
@@ -194,6 +206,9 @@ export default {
                 white-space: pre-line;
                 line-height: 16px;
                 font-size: 14px;
+            }
+            .disabled {
+                color: $grey-06;
             }
         }
     }

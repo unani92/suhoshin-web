@@ -169,7 +169,7 @@ const deploy = async (env) => {
 
   try {
     await build(o.buildOpt)
-    await deletePreviousDistribution(o.bucketName)
+    // await deletePreviousDistribution(o.bucketName)
     await uploadToS3(o.bucketName, o.uploadTargetDirectory, o.cacheMaxAgeZero)
 
     // 리얼 배포 시에만 cloudFront cache invalidate 실행

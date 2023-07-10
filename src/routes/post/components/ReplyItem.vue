@@ -3,14 +3,21 @@
         <div class="top">
             <div class="user-info">
                 <span class="name">{{ user.nickname }}</span>
-                <i v-if="user.id === me.id" @click="clickAddMenus" class="material-icons f-14 m-l-8">more_horiz</i>
+                <i v-if="user.id === me.id && reply.enabled" @click="clickAddMenus" class="material-icons f-14 m-l-8"
+                    >more_horiz</i
+                >
             </div>
             <div class="timestamp">{{ timeStamp }}</div>
         </div>
         <div class="bottom">
             <div class="content">
                 <i v-if="reply.secret && !editMode" class="material-icons f-14 m-r-4">lock</i>
-                <p v-if="!editMode" class="content" v-text="$translate(reply.content)" />
+                <p
+                    v-if="!editMode"
+                    class="content"
+                    :class="{ disabled: !reply.enabled }"
+                    v-text="$translate(reply.content)"
+                />
                 <div v-else class="edit-mode w-100">
                     <TextareaWithX v-model="replyContent" />
                     <div class="btns">
@@ -92,7 +99,11 @@ export default {
                 },
             ]
 
-            return this.me.id === this.user.id ? btns : btns.slice(2, btns.length)
+            return this.me.id === this.user.id
+                ? btns
+                : this.me.user_status === 2
+                ? btns.slice(1, btns.length)
+                : btns.slice(2, btns.length)
         },
     },
     methods: {
@@ -145,6 +156,9 @@ export default {
                 white-space: pre-line;
                 line-height: 16px;
                 font-size: 14px;
+            }
+            .disabled {
+                color: $grey-06;
             }
         }
     }
