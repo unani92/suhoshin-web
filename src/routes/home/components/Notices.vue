@@ -1,6 +1,11 @@
 <template>
     <div class="notice" v-if="mainNoti.length">
-        <NoticeItem :notice="notice" v-for="notice in mainNoti" :key="notice.id" />
+        <NoticeItem
+            :mode="notice.post_type === 1 ? 'NOTICE' : 'MATERIAL'"
+            :notice="notice"
+            v-for="notice in mainNoti"
+            :key="notice.id"
+        />
     </div>
 </template>
 
