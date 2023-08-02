@@ -29,10 +29,7 @@ export default {
     methods: {
         save() {
             const data = this.editor.getHTML()
-            // const data = this.editor.getMarkdown()
-            // console.log(this.editor)
-            console.log(data)
-            // this.$emit('save', data)
+            this.$emit('save', data)
         },
         preparePayload(payload) {
             const formData = new FormData()
@@ -70,9 +67,9 @@ export default {
                     /https:\/\/www.youtube.com\/watch\?v=.{11,}/.test(e.target.value)
                 ) {
                     const str =
-                        '<iframe style="overflow:hidden" src="https://www.youtube-nocookie.com/embed/' +
+                        '<div class="video-container"><iframe src="https://www.youtube-nocookie.com/embed/' +
                         e.target.value.slice(-11) +
-                        '" title="YouTube video player" frameborder="0" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen; background;" allowfullscreen></iframe>'
+                        '" title="YouTube video player" frameborder="0" allow="clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen; background;" allowfullscreen></iframe></div>'
 
                     // 마크다운 모드에서 iframe 태그 삽입 후, 팝업을 닫고 위지윅 모드로 변환
                     this.editor.changeMode('markdown')
@@ -134,19 +131,26 @@ export default {
             },
             customHTMLRenderer: {
                 htmlBlock: {
-                    iframe(node, context) {
-                        console.log('iframe', node.literal)
-                        console.log(2, context)
+                    iframe(node) {
                         return [
-                            {
-                                type: 'openTag',
-                                tagName: 'iframe',
-                                outerNewLine: true,
-                                attributes: node.attrs,
-                            },
-                            // { type: 'html', content: node.childrenHTML },
+                            { type: 'openTag', tagName: 'iframe', outerNewLine: true, attributes: node.attrs },
+                            { type: 'html', content: node.childrenHTML ? node.childrenHTML : '' },
                             { type: 'closeTag', tagName: 'iframe', outerNewLine: true },
                         ]
+                    },
+                    div(node) {
+                        return [
+                            { type: 'openTag', tagName: 'div', outerNewLine: true, attributes: node.attrs },
+                            { type: 'html', content: node.childrenHTML ? node.childrenHTML : '' },
+                            { type: 'closeTag', tagName: 'div', outerNewLine: true },
+                        ]
+                    },
+                },
+                htmlInline: {
+                    big(node, { entering }) {
+                        return entering
+                            ? { type: 'openTag', tagName: 'big', attributes: node.attrs }
+                            : { type: 'closeTag', tagName: 'big' }
                     },
                 },
             },

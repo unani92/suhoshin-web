@@ -81,5 +81,23 @@ export default {
             //height: calc(100vh - (#{$root-header-height} + #{$control-panel-height}));
         }
     }
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        outline: none !important;
+    }
+
+    .video-container iframe,
+    .video-container object,
+    .video-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
 }
 </style>
