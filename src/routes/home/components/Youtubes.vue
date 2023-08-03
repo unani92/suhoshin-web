@@ -3,8 +3,8 @@
         <swiper :options="swiperOptions" :navigation="true" ref="mySwiper">
             <swiper-slide v-for="youtubeId in youtubeIds" :key="youtubeId">
                 <iframe
-                    width="560"
-                    height="315"
+                    :width="isMobile ? '70%' : 560"
+                    :height="isMobile ? 'auto' : 315"
                     :src="`https://www.youtube-nocookie.com/embed/${youtubeId}`"
                     title="YouTube video player"
                     frameborder="0"
