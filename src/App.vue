@@ -5,7 +5,8 @@
                 <RootHeaderBar />
                 <ControlPanel />
             </div>
-            <RouterView class="route" :class="{ root: $isRootRoute(), noheader: noheader, nonav: !$isRootRoute() }" />
+            <!--            <RouterView class="route" :class="{ root: $isRootRoute(), noheader: noheader, nonav: !$isRootRoute() }" />-->
+            <RouterView class="route" :class="{ noheader: noheader }" />
         </div>
         <StackRouterView />
         <Toast />
@@ -65,7 +66,7 @@ export default {
 <style lang="scss" scoped>
 #app {
     .route {
-        height: calc(100vh - #{$header-height} * 2);
+        height: calc(100vh - 102px);
         overflow-y: auto;
 
         &.nonav.noheader {

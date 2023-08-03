@@ -100,7 +100,7 @@ export default {
                         el: myCustomEl,
                         popup: {
                             body: container,
-                            style: { width: 'auto', left: '50% !important' },
+                            style: { width: 'auto', left: '150px' },
                         },
                     },
                 ],
