@@ -49,6 +49,31 @@ export default {
             el: document.getElementById('editor'),
             viewer: true,
             initialValue: this.post.content,
+            customHTMLRenderer: {
+                htmlBlock: {
+                    iframe(node) {
+                        return [
+                            { type: 'openTag', tagName: 'iframe', outerNewLine: true, attributes: node.attrs },
+                            { type: 'html', content: node.childrenHTML ? node.childrenHTML : '' },
+                            { type: 'closeTag', tagName: 'iframe', outerNewLine: true },
+                        ]
+                    },
+                    div(node) {
+                        return [
+                            { type: 'openTag', tagName: 'div', outerNewLine: true, attributes: node.attrs },
+                            { type: 'html', content: node.childrenHTML ? node.childrenHTML : '' },
+                            { type: 'closeTag', tagName: 'div', outerNewLine: true },
+                        ]
+                    },
+                },
+                htmlInline: {
+                    big(node, { entering }) {
+                        return entering
+                            ? { type: 'openTag', tagName: 'big', attributes: node.attrs }
+                            : { type: 'closeTag', tagName: 'big' }
+                    },
+                },
+            },
         })
         postService.getThumbInfo(this.post.id).then(({ data }) => {
             this.thumb = data.msg

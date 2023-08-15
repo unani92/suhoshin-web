@@ -1,6 +1,6 @@
 <template>
     <div class="front-page" v-lazy:background-image="require('@/assets/images/suhoshin-front.png')">
-        <BottomButton @click="login" :label="$translate('START_WITH_KAKAO')" />
+        <BottomButton @click="testLogin" :label="$translate('START_WITH_KAKAO')" />
     </div>
 </template>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
@@ -16,19 +16,23 @@ export default {
     },
     methods: {
         async testLogin() {
-            const {
-                data: { jwtToken, me },
-            } = await userService.testLogin({
-                uuid: 1111,
-                nickname: '테스터',
-                email: 'unani9922@naver.com',
-                thumbnail: 'http://k.kakaocdn.net/dn/FehL4/btrjcAI6D68/vzKSRj3PnS6dL7mB9K3wO1/img_110x110.jpg',
-            })
-            const header = { Authorization: `Bearer ${jwtToken}` }
-            this.$store.commit('setHeader', header)
-            this.$store.commit('setMe', me)
+            try {
+                const {
+                    data: { jwtToken, me },
+                } = await userService.testLogin({
+                    uuid: 1111,
+                    nickname: '테스터',
+                    email: 'unani9922@naver.com',
+                    thumbnail: 'http://k.kakaocdn.net/dn/FehL4/btrjcAI6D68/vzKSRj3PnS6dL7mB9K3wO1/img_110x110.jpg',
+                })
+                const header = { Authorization: `Bearer ${jwtToken}` }
+                this.$store.commit('setHeader', header)
+                this.$store.commit('setMe', me)
 
-            this.$router.push({ name: 'HomePage' })
+                this.$router.push({ name: 'HomePage' })
+            } catch (e) {
+                alert(e)
+            }
         },
         login() {
             window.Kakao.Auth.login({
