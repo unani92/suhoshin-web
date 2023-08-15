@@ -37,7 +37,7 @@ export default {
             return this.$store.getters.viewPort === 'mobile'
         },
         youtubeIds() {
-            return ['6DU_SZzPuLE', 'i5zmbUIhzoE', 'FhKh5xIda-c']
+            return ['aaQYIpw3OaA']
         },
         swiperOptions() {
             return {
