@@ -9,9 +9,13 @@ import userService from '@/services/user'
 
 export default {
     name: 'Frontpage',
-    mounted() {
+    async mounted() {
         if (!window.Kakao.isInitialized()) {
             Kakao.init(process.env.VUE_APP_KAKAO_APP_KEY)
+            const { code } = this.$router.history.current.query
+            if (code) {
+                await this.getKaKaoInfo(code)
+            }
         }
     },
     methods: {
@@ -35,18 +39,15 @@ export default {
             }
         },
         login() {
-            window.Kakao.Auth.login({
-                success: this.getKaKaoInfo,
-                fail: function (error) {
-                    console.log(error)
-                },
+            window.Kakao.Auth.authorize({
+                redirectUri: window.location.href,
             })
         },
-        async getKaKaoInfo(authInfo) {
+        async getKaKaoInfo(accessCode) {
             try {
                 const {
                     data: { jwtToken, me },
-                } = await userService.kakaoLogin(authInfo.access_token)
+                } = await userService.kakaoLogin(accessCode)
                 const header = { Authorization: `Bearer ${jwtToken}` }
                 this.$store.commit('setHeader', header)
                 this.$store.commit('setMe', me)
