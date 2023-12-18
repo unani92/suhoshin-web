@@ -33,12 +33,7 @@
                 </div>
                 <div class="item">
                     <div class="section-title">사진(선택)</div>
-                    <PhotoInputArea
-                        mode="full-screen"
-                        :isOption="true"
-                        @submitPhoto="updatePhoto"
-                        @clearPhoto="clearPhoto"
-                    />
+                    <PhotoInputArea :isOption="true" @submitPhoto="updatePhoto" @clearPhoto="clearPhoto" />
                 </div>
             </div>
         </div>

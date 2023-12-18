@@ -25,23 +25,7 @@ export default {
     mounted() {
         this.init()
     },
-    computed: {
-        modeFullScreen() {
-            if (this.options.mode === 'full-screen') {
-                return {
-                    viewMode: 1,
-                    dragMode: 'move',
-                    cropBoxMovable: false,
-                    autoCropArea: 1,
-                    toggleDragModeOnDblclick: false,
-                    background: false,
-                    guides: false,
-                    center: false,
-                    minContainerWidth: window.innerWidth,
-                }
-            } else return {}
-        },
-    },
+    computed: {},
     methods: {
         init() {
             if (!this.options || !this.options.imgFile) return
@@ -71,16 +55,23 @@ export default {
             }
 
             if (!this.options.allowFreeAspectRatio) options.aspectRatio = 1
-            if (this.options.mode === 'full-screen') {
-                this.cropper = new Cropper(image, this.modeFullScreen)
-            } else {
-                this.cropper = new Cropper(image, options)
-            }
+            this.cropper = new Cropper(image, {
+                viewMode: 1,
+                dragMode: 'move',
+                cropBoxMovable: true,
+                autoCropArea: 1,
+                toggleDragModeOnDblclick: false,
+                background: false,
+                guides: false,
+                center: false,
+                minContainerWidth: window.innerWidth,
+            })
+            // this.cropper = new Cropper(image)
         },
         confirm() {
-            const blobToFile = blob => new File([blob], this.options.imgFile.name, { type: 'image/jpeg' })
+            const blobToFile = blob => new File([blob], this.options.imgFile.name, { type: 'image/webp' })
 
-            this.cropper.getCroppedCanvas().toBlob(blob => this.$emit('close', blobToFile(blob)), 'image/jpeg', 0.5)
+            this.cropper.getCroppedCanvas().toBlob(blob => this.$emit('close', blobToFile(blob)), 'image/webp', 0.5)
         },
     },
 }

@@ -14,12 +14,7 @@
                 </div>
                 <div class="item" v-if="(selectedGroup || {}).id === 0">
                     <div class="section-title">인증사진</div>
-                    <PhotoInputArea
-                        mode="full-screen"
-                        :isOption="true"
-                        @submitPhoto="updatePhoto"
-                        @clearPhoto="clearPhoto"
-                    />
+                    <PhotoInputArea :isOption="true" @submitPhoto="updatePhoto" @clearPhoto="clearPhoto" />
                 </div>
                 <div class="item" v-else>
                     <div class="section-title c-pink-deep">* 주의사항</div>

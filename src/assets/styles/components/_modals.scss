@@ -116,7 +116,6 @@
         font-size: 16px;
         line-height: 1.38;
 
-
         > div {
             max-width: 280px;
             //@include lines-1;
@@ -128,7 +127,6 @@
 
             .i-right {
                 color: $blue-primary;
-
             }
         }
 
@@ -226,7 +224,6 @@
         }
     }
     .buttons-action {
-
         :last-child {
             margin-top: 8px;
         }
@@ -522,8 +519,8 @@
     @include modal-fullscreen;
     @include center;
     background: black !important;
-
     .cropper {
+        max-height: 80vh;
         img {
             max-width: 100%;
         }
@@ -559,7 +556,8 @@
         left: 0;
         right: 0;
 
-        .head, .body {
+        .head,
+        .body {
             padding: 16px;
             background-color: white;
         }
@@ -570,9 +568,6 @@
             color: $grey-09;
             border-bottom: solid 1px $grey-02;
             @include f-medium;
-        }
-
-        .body {
         }
 
         .coupon-list {
@@ -692,7 +687,9 @@
             &.selected {
                 color: $blue-primary;
 
-                .material-icons { color: $blue-primary; }
+                .material-icons {
+                    color: $blue-primary;
+                }
             }
         }
     }
